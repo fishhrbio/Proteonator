@@ -80,13 +80,20 @@ try{
     await page.locator('#mapping-editor').fill('3 103\n3 103\n4 104');await page.locator('#validate-mapping').click();await status('one-to-one');
     await page.locator('#mapping-editor').fill('3 103\n4 104\n999 1099');await page.locator('#validate-mapping').click();await status('missing or inactive');
     const pdb=await readFile(path.join(root,'fixtures/structures/1BRS.pdb'),'utf8');const nums=[...new Set(pdb.split(/\r?\n/).filter(l=>l.startsWith('ATOM')&&l[21]==='A'&&l.slice(12,16).trim()==='CA').map(l=>Number(l.slice(22,26))))];
-    await page.locator('#mapping-editor').fill(nums.map(n=>`${n} ${n+100}`).join('\n'));await page.locator('#validate-mapping').click();assert.match(await page.locator('#mapping-summary').innerText(),/108 one-to-one Cα pairs/);assert.equal(await page.locator('#align').isDisabled(),true);
+    await page.evaluate(()=>{globalThis.proviewMappingInputEvents=0;document.querySelector('#mapping-editor').addEventListener('input',()=>{globalThis.proviewMappingInputEvents++;});});
+    const pasteStarted=performance.now();await page.locator('#mapping-editor').fill(nums.map(n=>`${n} ${n+100}`).join('\n'));report.mappingPaste={milliseconds:performance.now()-pasteStarted,inputEvents:await page.evaluate(()=>globalThis.proviewMappingInputEvents)};
+    await page.locator('#validate-mapping').click();assert.match(await page.locator('#mapping-summary').innerText(),/108 one-to-one Cα pairs/);assert.equal(await page.locator('#align').isDisabled(),true);
   });
   await check('Reviewed alignment computes nonzero fitted displacement and an overlay',async()=>{
     await page.locator('#mapping-confirm').check();await page.locator('#align').click();await page.waitForFunction(()=>document.querySelector('#alignment-output').textContent.includes('Proper rigid fit'));
     assert.match(await page.locator('#alignment-output').innerText(),/108 Cα atoms/);assert.doesNotMatch(await page.locator('#alignment-output').innerText(),/RMSD 0\.0000/);
     await page.locator('#show-overlay').uncheck();await page.locator('#show-overlay').check();
     await save(alignmentFile);await page.locator('#export-alignment').click();await status('Exported alignment');const out=JSON.parse(await readFile(alignmentFile,'utf8'));assert.equal(out.result.matchedAtomCount,108);assert.ok(out.result.rmsdAngstrom>0);report.alignment={rmsdAngstrom:out.result.rmsdAngstrom,matched:108,residues:out.result.residueDisplacements.length};
+  });
+  await check('Pasting an edited mapping invalidates the fit and requires a reviewed refit',async()=>{
+    const editor=page.locator('#mapping-editor'),mapping=await editor.inputValue();await editor.fill(mapping+'\n');
+    assert.equal(await page.locator('#mapping-confirm').isChecked(),false);assert.equal(await page.locator('#export-alignment').isDisabled(),true);assert.equal(await page.locator('#alignment-output').innerText(),'');
+    await page.locator('#validate-mapping').click();await page.locator('#mapping-confirm').check();await page.locator('#align').click();await page.waitForFunction(()=>document.querySelector('#alignment-output').textContent.includes('Proper rigid fit'));assert.match(await page.locator('#alignment-output').innerText(),/108 Cα atoms/);
   });
   await page.locator('#viewer').scrollIntoViewIfNeeded();await capture(path.join(evidence,`${name}-alignment.png`));
   if(name==='source')await copyFile(path.join(evidence,`${name}-alignment.png`),path.join(screens,'alignment.png'));

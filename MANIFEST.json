@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "contractVersion": "1.0.0",
   "projectVersion": "2.0.0",
-  "createdAtUtc": "2026-11-12T05:03:27.056586+00:00",
+  "createdAtUtc": "2026-11-12T05:11:30.227942+00:00",
   "files": [
     {
       "path": ".gitattributes",
@@ -647,8 +647,8 @@
     },
     {
       "path": "scripts/verify-release.mjs",
-      "bytes": 26213,
-      "sha256": "d3eb2f52af85f3d8a0008ef7afaac84f4b6805ce15cd126c100b2a48ba3049e1"
+      "bytes": 27359,
+      "sha256": "7b09caf36401c85e5bd902afd8658cfb9541400ca75a71ff2aff4b51b84b7545"
     },
     {
       "path": "src/contracts/index.ts",
@@ -727,8 +727,8 @@
     },
     {
       "path": "src/renderer/app.ts",
-      "bytes": 36647,
-      "sha256": "db2dc08a9777bc8104d53d9549d2cb4a4dd090fb46fa89a8426ceb420b1e53ae"
+      "bytes": 36922,
+      "sha256": "ce6b80a8856182708f57b3113eb36715879f64b5af7290689ebe3658cf3acecb"
     },
     {
       "path": "src/renderer/desktop-client.ts",

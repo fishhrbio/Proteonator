@@ -276,9 +276,14 @@ async function exportPng() {
   } catch(e) {fail(e);}
 }
 function invalidateMapping() {
+  const hadAlignment=alignmentResult!==null;
   reviewedMapping=null;alignmentResult=null;$<HTMLInputElement>('mapping-confirm').checked=false;
   text('mapping-summary',mobile?'Choose chain/model and review the proposed Cα pairs.':'Load a mobile structure to prepare a mapping.');
-  text('alignment-output','');if(viewer&&structure)renderMolecule();busyState();
+  text('alignment-output','');
+  // Text input can emit a separate event for every pasted line. Rebuild only
+  // when an existing fit must be removed, retaining the user's camera.
+  if(hadAlignment&&viewer&&structure){const camera=viewer.getView();renderMolecule();viewer.setView(camera);}
+  busyState();
 }
 function fillMobileChains() {
   if(!mobile)return;
