@@ -8,8 +8,10 @@ Portable projects use schema 2.0.0. Legacy `.ptmw` schema 1.0.0 geometry project
 
 The Windows installer is unsigned. No signing credential was supplied or configured. macOS, Linux, Windows ARM64 and Windows 10 were not tested and are not supported claims for this release. There is no notarization claim. Public release files should be obtained from the repository's release page and checked against the accompanying SHA-256 file.
 
-Validation includes 40 unit tests, 37 source desktop checks and 37 installed desktop checks, plus current-user installation, same-version reinstallation and uninstallation. The final direct interactive installer/uninstaller rerun was interrupted and is not claimed passed. The owner approved this launch with that limitation documented.
+Validation includes 40 unit tests, 38 source desktop checks and 38 installed desktop checks, plus current-user installation, same-version reinstallation and uninstallation. The final direct interactive installer/uninstaller rerun was interrupted and is not claimed passed. The owner approved this launch with that limitation documented.
 
 Scientific results describe supplied static coordinates and reviewed correspondences. They do not establish PTM effects, biological causality, binding affinity or clinical significance. Waters, ligands, unsupported modified residues and non-protein polymers are preserved in input data but hidden from the protein viewport and excluded from interface geometry. See the user guide for supported format semantics and resource limits.
 
 Original code and icon: MIT license, Robert Waite. Third-party software and coordinate credits remain in `THIRD_PARTY_NOTICES.md` and the installed notice files. This is an independent project without institutional endorsement.
+
+Full residue-correspondence lists can be pasted without rebuilding the molecular scene for each input event. Editing a fitted mapping clears its result and requires review before fitting again. The Windows cloud build and all 38 packaged checks passed.

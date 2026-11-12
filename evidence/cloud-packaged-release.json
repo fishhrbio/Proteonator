@@ -1,0 +1,282 @@
+{
+  "name": "packaged",
+  "status": "passed",
+  "startedAt": "2026-11-12T05:12:55.942Z",
+  "environment": {
+    "platform": "win32",
+    "release": "10.0.26100",
+    "arch": "x64",
+    "node": "v24.22.1",
+    "cpu": "AMD EPYC 9V45 96-Core Processor                "
+  },
+  "executable": "<project>\\release\\win-unpacked\\ProView.exe",
+  "checks": [
+    "Standalone window loads bundled 1BRS offline",
+    "Skip link retains trusted local IPC and unsafe resources/navigation are refused",
+    "Residue selection is linked to the identity inspector",
+    "Annotation add, edit, empty-label recovery and remove",
+    "Scientific geometry reaches the interface through the real worker",
+    "Closest-pair visualization, fit and three representations",
+    "Clipping, reduced motion and keyboard view controls",
+    "Automated WCAG 2.1 A/AA audit of main workspace",
+    "Geometry JSON export contains real units, source hash and counts",
+    "Mobile coordinates import through native-file IPC",
+    "Different numbering requires explicit review; duplicate and missing pairs reject",
+    "Reviewed alignment computes nonzero fitted displacement and an overlay",
+    "Pasting an edited mapping invalidates the fit and requires a reviewed refit",
+    "Automated WCAG audit of expanded comparison controls",
+    "Captioned PNG export has a real viewport and readable caption region",
+    "Project save embeds two sources, annotation, geometry and alignment",
+    "Second save replaces an existing file safely",
+    "Save failure preserves loaded project and recovers on next save",
+    "Small example loads offline; single-chain interface is disabled",
+    "Project reopen restores comparison, annotation, geometry, clipping and camera",
+    "Tampered project is rejected without replacing the current workspace",
+    "Cancelled file dialogs leave the loaded workspace intact",
+    "Local mmCIF imports with conservative source evidence",
+    "UTF-8 BOM source imports with exact embedded bytes and source hash",
+    "Missing and malformed coordinate inputs preserve the current structure",
+    "Invalid UTF-8 source bytes reject without coordinate replacement",
+    "5 MiB desktop limit rejects oversize without changing the workspace",
+    "25,000-atom desktop limit rejects a larger valid PDB and recovers",
+    "Insertion code and occupancy-selected conformer reach the inspector",
+    "Malformed IPC, oversized mapping and stale requests reject",
+    "Offline retrieval gives a recoverable error and keeps local inputs usable",
+    "Cancellation emits one terminal state and next job succeeds",
+    "Renderer isolation and offline local help are intact",
+    "960×720, 1280×800 and 1600×1000 layouts remain accessible without page-width overflow",
+    "Native close confirmation preserves unsaved work when cancelled",
+    "External navigation is blocked by the native window",
+    "No renderer errors or background network activity",
+    "Discard changes closes the native window and application normally"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "mainRequests": [
+    "https://files.rcsb.org/download/1CRN.cif"
+  ],
+  "appVersion": "1.0.0",
+  "geometry": {
+    "minimumDistance": 2.497,
+    "contacts": 165,
+    "residuePairs": 36,
+    "overlaps": 1
+  },
+  "accessibility": {
+    "engine": {
+      "name": "axe-core",
+      "version": "4.14.0"
+    },
+    "violations": [],
+    "incomplete": [
+      {
+        "id": "color-contrast",
+        "impact": "serious",
+        "nodes": [
+          [
+            ".viewer-heading > div > .eyebrow"
+          ],
+          [
+            "#view-title"
+          ],
+          [
+            ".motion"
+          ],
+          [
+            "label[for=\"clip\"]"
+          ],
+          [
+            "#clip-value"
+          ],
+          [
+            ".clip-tools > label:nth-child(4)"
+          ],
+          [
+            "#visible-count"
+          ],
+          [
+            ".view-caption > span:nth-child(2)"
+          ],
+          [
+            "b:nth-child(2)"
+          ]
+        ]
+      },
+      {
+        "id": "label-content-name-mismatch",
+        "impact": "serious",
+        "nodes": [
+          [
+            "button[aria-label=\"V36 · VAL 36\"]"
+          ]
+        ]
+      }
+    ]
+  },
+  "mappingPaste": {
+    "milliseconds": 41.920099999999366,
+    "inputEvents": 215
+  },
+  "alignment": {
+    "rmsdAngstrom": 0.25873158777360117,
+    "matched": 108,
+    "residues": 108
+  },
+  "comparisonAccessibility": [],
+  "png": {
+    "width": 2220,
+    "height": 801,
+    "sha256": "fa0a7e38171c83eb70fa1bc315e0be235137c0e6b59b8f9aefb8213b236ad493"
+  },
+  "cancellation": {
+    "code": "CANCELLED",
+    "events": [
+      "queued",
+      "running",
+      "cancelled"
+    ],
+    "nextContacts": 165
+  },
+  "help": "<project>\\release\\win-unpacked\\resources\\USER_GUIDE.html",
+  "layouts": [
+    {
+      "outer": [
+        960,
+        720
+      ],
+      "width": 944,
+      "height": 681,
+      "devicePixelRatio": 1,
+      "overflow": false
+    },
+    {
+      "outer": [
+        1280,
+        800
+      ],
+      "width": 1264,
+      "height": 761,
+      "devicePixelRatio": 1,
+      "overflow": false
+    },
+    {
+      "outer": [
+        1600,
+        1000
+      ],
+      "width": 1584,
+      "height": 961,
+      "devicePixelRatio": 1,
+      "overflow": false
+    }
+  ],
+  "runtime": {
+    "versions": {
+      "node": "24.22.2",
+      "acorn": "8.18.0",
+      "ada": "4.0.0",
+      "amaro": "1.1.11",
+      "ares": "1.34.9",
+      "brotli": "1.2.0",
+      "cldr": "48.0",
+      "icu": "78.2",
+      "llhttp": "9.4.3",
+      "merve": "1.2.2",
+      "modules": "150",
+      "napi": "10",
+      "nbytes": "0.1.4",
+      "ncrypto": "0.0.1",
+      "nghttp2": "1.70.0",
+      "nghttp3": "",
+      "ngtcp2": "",
+      "openssl": "0.0.0",
+      "simdjson": "4.6.11",
+      "simdutf": "7.7.0",
+      "sqlite": "3.53.4",
+      "tz": "2026e",
+      "undici": "7.30.1",
+      "unicode": "17.0",
+      "uv": "1.52.1",
+      "uvwasi": "0.0.23",
+      "v8": "15.6.75.50-electron.0",
+      "zlib": "1.3.2.1-motley",
+      "zstd": "1.6.0",
+      "electron": "45.3.0",
+      "chrome": "156.0.8078.96"
+    },
+    "metrics": [
+      {
+        "cpu": {
+          "cumulativeCPUUsage": 7.337004,
+          "percentCPUUsage": 0,
+          "idleWakeupsPerSecond": 0
+        },
+        "pid": 8920,
+        "type": "Browser",
+        "creationTime": 1794460376012.614,
+        "memory": {
+          "workingSetSize": 293088,
+          "peakWorkingSetSize": 347060,
+          "privateBytes": 244648
+        },
+        "integrityLevel": "high",
+        "sandboxed": false
+      },
+      {
+        "cpu": {
+          "cumulativeCPUUsage": 16.986726,
+          "percentCPUUsage": 0,
+          "idleWakeupsPerSecond": 0
+        },
+        "pid": 4472,
+        "type": "GPU",
+        "creationTime": 1794460376106.817,
+        "serviceName": "GPU",
+        "memory": {
+          "workingSetSize": 524484,
+          "peakWorkingSetSize": 524484,
+          "privateBytes": 437088
+        },
+        "integrityLevel": "low",
+        "sandboxed": true
+      },
+      {
+        "cpu": {
+          "cumulativeCPUUsage": 0.041193,
+          "percentCPUUsage": 0,
+          "idleWakeupsPerSecond": 0
+        },
+        "pid": 7892,
+        "type": "Utility",
+        "creationTime": 1794460376110.507,
+        "serviceName": "network.mojom.NetworkService",
+        "name": "Network Service",
+        "memory": {
+          "workingSetSize": 42160,
+          "peakWorkingSetSize": 45120,
+          "privateBytes": 11212
+        },
+        "integrityLevel": "high",
+        "sandboxed": false
+      },
+      {
+        "cpu": {
+          "cumulativeCPUUsage": 3.868815,
+          "percentCPUUsage": 0,
+          "idleWakeupsPerSecond": 0
+        },
+        "pid": 9452,
+        "type": "Tab",
+        "creationTime": 1794460376119.015,
+        "memory": {
+          "workingSetSize": 374108,
+          "peakWorkingSetSize": 419484,
+          "privateBytes": 354212
+        },
+        "integrityLevel": "untrusted",
+        "sandboxed": true
+      }
+    ]
+  },
+  "finishedAt": "2026-11-12T05:13:10.838Z"
+}

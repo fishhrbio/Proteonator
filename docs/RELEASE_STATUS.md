@@ -7,7 +7,7 @@
 | macOS ARM64 | Target configuration only; no Mac was available, and no DMG/app ZIP was built or tested |
 | Linux, Windows ARM64, Windows 10 | Not tested; not claimed as supported |
 | Apple notarization | Not performed; no macOS build or credentials |
-| Native CI | Workflow prepared for manual dispatch; no repository CI run has been performed |
+| Native CI | Windows GitHub runner: build, 40 unit tests and 38 packaged checks passed; [run](https://github.com/fishhrbio/ProView-1.0/actions/runs/43159721598) |
 | Final interactive installer/uninstaller review | Interrupted by the user stopping Computer Use with Escape; not claimed passed |
 | Publication approval | Robert Waite approved the 1.0 launch with the documented test scope and interrupted interactive review |
 

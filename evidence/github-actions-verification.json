@@ -1,0 +1,44 @@
+{
+  "status": "passed",
+  "passedRun": {
+    "id": 43159721598,
+    "url": "https://github.com/fishhrbio/ProView-1.0/actions/runs/43159721598",
+    "headSha": "b88a51274c4478f650f73c3d0f9c29e9c3b0e2df",
+    "conclusion": "success"
+  },
+  "unitTests": 40,
+  "packagedChecks": 38,
+  "steps": [
+    "Pinned dependencies",
+    "Typecheck",
+    "Unit tests",
+    "23 schemas / 27 examples",
+    "Build",
+    "Windows NSIS packaging",
+    "38 packaged desktop checks",
+    "Artifact upload"
+  ],
+  "earlierRuns": [
+    {
+      "id": 43158195913,
+      "headSha": "726ed15f3f203ce0c1001563bf61969883804414",
+      "conclusion": "failure"
+    },
+    {
+      "id": 43158813360,
+      "headSha": "1473c322e59f89e86be276502531bd243926f435",
+      "conclusion": "failure"
+    }
+  ],
+  "failure": "Full correspondence paste timed out after ten successful checks. Each pasted input event unnecessarily rebuilt the molecular scene.",
+  "fix": "Invalidate the reviewed fit immediately; redraw only if an existing fit must be removed, retaining the camera. Add full-mapping paste/refit regression coverage.",
+  "mappingPaste": {
+    "milliseconds": 41.920099999999366,
+    "inputEvents": 215
+  },
+  "localMappingPaste": {
+    "milliseconds": 53.32719999999972,
+    "inputEvents": 215
+  },
+  "scope": "Cloud Windows runner build and packaged tests; installer workflow separately retested on Windows 11 x64. Final documentation/evidence commit does not change the application code tested at headSha."
+}

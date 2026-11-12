@@ -28,6 +28,11 @@ try {
   $report.productName=$metadata.ProductName
   $report.productVersion=$metadata.ProductVersion
   if ($metadata.ProductName -ne 'ProView' -or $metadata.ProductVersion -notmatch '^1\.0\.0(?:\.0)?$') { throw 'Installed product metadata is incorrect.' }
+  $expectedArchive=Join-Path $projectRoot 'release\win-unpacked\resources\app.asar'
+  $installedArchive=Join-Path $target 'resources\app.asar'
+  $report.installedAsarSha256=(Get-FileHash -LiteralPath $installedArchive -Algorithm SHA256).Hash.ToLower()
+  if ($report.installedAsarSha256 -ne (Get-FileHash -LiteralPath $expectedArchive -Algorithm SHA256).Hash.ToLower()) { throw 'Installed application archive differs from the audited build.' }
+  $report.checks += 'Installed application archive matches the audited build byte for byte'
   $report.shortcuts=@()
   foreach ($shortcutPath in @($startMenu,$desktop)) {
     if (-not (Test-Path -LiteralPath $shortcutPath)) { throw "Missing ProView shortcut: $shortcutPath" }

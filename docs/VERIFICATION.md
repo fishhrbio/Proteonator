@@ -1,14 +1,14 @@
 # Release verification
 
-Executed November 11, 2026, America/New_York. Host: Windows 11 Home 10.0.26200 x64; Intel i7-13700F, 24 logical CPUs, 31.72 GiB RAM; NVIDIA GeForce RTX 4060 Ti, ANGLE Direct3D 11 / WebGL 2.0. Source toolchain: Node 24.22.1 and pnpm 11.25.0. Bundled runtime: Electron 45.3.0.
+Initial checks executed November 11, 2026, with release retests November 12, 2026, America/New_York. Host: Windows 11 Home 10.0.26200 x64; Intel i7-13700F, 24 logical CPUs, 31.72 GiB RAM; NVIDIA GeForce RTX 4060 Ti, ANGLE Direct3D 11 / WebGL 2.0. Source toolchain: Node 24.22.1 and pnpm 11.25.0. Bundled runtime: Electron 45.3.0.
 
 | Check | Observed result / evidence |
 | --- | --- |
 | Starting source manifest | 142 files verified; `evidence/baseline-integrity.json` |
 | Clean pinned dependency setup, typecheck, schemas and build | Passed; 23 schemas and 27 validated examples; `evidence/toolchain-verification.json` |
 | Unit and failure/recovery tests | 40 passed, zero failed |
-| Source desktop workflow | 37 checks passed; `evidence/source-release.json` |
-| Installed desktop workflow | 37 checks passed; `evidence/installed-release.json` |
+| Source desktop workflow | 38 checks passed; `evidence/source-release.json` |
+| Installed desktop workflow | 38 checks passed; `evidence/installed-release.json` |
 | Install, shortcuts, reinstall, uninstall, project retention | Exit codes 0; `evidence/installer-verification.json` |
 | Numerical interface oracle | Exact independent atom-pair sets and counts; `evidence/numerical-verification.json` |
 | Independent import / alignment | Gemmi 0.7.5 and NumPy 2.3.5 passed; `evidence/independent-verification.json` |
@@ -22,6 +22,7 @@ Executed November 11, 2026, America/New_York. Host: Windows 11 Home 10.0.26200 x
 | Manual contrast | Six checks passed, including gradient text and 3:1 control boundaries; `evidence/manual-contrast.json` |
 | 150% / 200% native display scaling | 960×720, 1280×800 and 1600×1000 passed; accessible names and keyboard controls verified; `evidence/display-verification.json` |
 | Packaged resources and notices | Source resource/icon bytes match, required modules and notices present; `evidence/packaging-audit.json` |
+| GitHub Windows build and packaged workflow | Passed: 40 unit tests, 23 schemas/27 examples, installer build and 38 packaged checks; `evidence/github-actions-verification.json` and `evidence/cloud-packaged-release.json` |
 | Production dependency audit | No reported vulnerabilities at audit time; not a guarantee against all runtime vulnerabilities |
 
 The geometry reference reproduces a 2.497251489137609 Å minimum distance, 165 contacts, 36 residue-pair contacts and one overlap candidate over 598,752 A/D atom pairs from 1BRS. Independent alignment comparisons cover rigid, perturbed and reflected inputs; the maximum per-residue displacement difference from NumPy was below 3.3×10⁻¹³ Å. Gemmi matched all retained coordinates and author identities across five public/synthetic inputs, with zero coordinate difference. These checks validate the specified calculations, not biological interpretation or full format-dictionary compliance.
@@ -34,3 +35,5 @@ A clean short checkout resolved NSIS's long-path template error. Invalid encodin
 
 See `docs/RELEASE_STATUS.md` for untested platforms, unsigned status, account scope and the owner's launch approval with the documented interrupted-review limitation.
 
+
+Two initial cloud runs exposed repeated molecular-scene rebuilding during a full correspondence paste. The editor now clears an invalidated fit immediately and rebuilds only when an existing fit must be removed, retaining the camera. The 108-pair paste emitted 215 input events and completed in approximately 42 ms on the cloud runner and 53 ms locally after this fix. A desktop regression check verifies fit invalidation and reviewed refitting. The cloud workflow, source workflow and exact rebuilt installer were retested successfully. The cloud pass targets application commit `b88a51274c4478f650f73c3d0f9c29e9c3b0e2df`; subsequent source changes only record evidence/documentation and strengthen the installer verification script.

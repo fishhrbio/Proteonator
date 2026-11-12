@@ -1,7 +1,7 @@
 {
   "name": "installed",
   "status": "passed",
-  "startedAt": "2026-11-12T03:08:20.096Z",
+  "startedAt": "2026-11-12T05:17:47.134Z",
   "environment": {
     "platform": "win32",
     "release": "10.0.26200",
@@ -9,7 +9,7 @@
     "node": "v24.22.1",
     "cpu": "13th Gen Intel(R) Core(TM) i7-13700F"
   },
-  "executable": "<project>\\work\\installer\\ProView install \u00e9\\ProView.exe",
+  "executable": "<project>\\work\\installer-launch\\ProView install é\\ProView.exe",
   "checks": [
     "Standalone window loads bundled 1BRS offline",
     "Skip link retains trusted local IPC and unsafe resources/navigation are refused",
@@ -23,6 +23,7 @@
     "Mobile coordinates import through native-file IPC",
     "Different numbering requires explicit review; duplicate and missing pairs reject",
     "Reviewed alignment computes nonzero fitted displacement and an overlay",
+    "Pasting an edited mapping invalidates the fit and requires a reviewed refit",
     "Automated WCAG audit of expanded comparison controls",
     "Captioned PNG export has a real viewport and readable caption region",
     "Project save embeds two sources, annotation, geometry and alignment",
@@ -43,7 +44,7 @@
     "Offline retrieval gives a recoverable error and keeps local inputs usable",
     "Cancellation emits one terminal state and next job succeeds",
     "Renderer isolation and offline local help are intact",
-    "960\u00d7720, 1280\u00d7800 and 1600\u00d71000 layouts remain accessible without page-width overflow",
+    "960×720, 1280×800 and 1600×1000 layouts remain accessible without page-width overflow",
     "Native close confirmation preserves unsaved work when cancelled",
     "External navigation is blocked by the native window",
     "No renderer errors or background network activity",
@@ -103,6 +104,10 @@
       }
     ]
   },
+  "mappingPaste": {
+    "milliseconds": 43.430200000002515,
+    "inputEvents": 215
+  },
   "alignment": {
     "rmsdAngstrom": 0.25873158777360117,
     "matched": 108,
@@ -112,7 +117,7 @@
   "png": {
     "width": 2216,
     "height": 785,
-    "sha256": "28377f7cd29b9556caab4fd75d5f4067a548bf6940bf819dc443a2cfccb49b96"
+    "sha256": "4250c5f9806f0a7e4ae87b2923a767413c246d92e6939ef23f9af980e4821ec3"
   },
   "cancellation": {
     "code": "CANCELLED",
@@ -123,7 +128,7 @@
     ],
     "nextContacts": 165
   },
-  "help": "<project>\\work\\installer\\ProView install \u00e9\\resources\\USER_GUIDE.html",
+  "help": "<project>\\work\\installer-launch\\ProView install é\\resources\\USER_GUIDE.html",
   "layouts": [
     {
       "outer": [
@@ -193,76 +198,76 @@
     "metrics": [
       {
         "cpu": {
-          "cumulativeCPUUsage": 12.645685,
+          "cumulativeCPUUsage": 8.466557,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 13148,
+        "pid": 42092,
         "type": "Browser",
-        "creationTime": 1794452900308.222,
+        "creationTime": 1794460667308.371,
         "memory": {
-          "workingSetSize": 382328,
-          "peakWorkingSetSize": 487196,
-          "privateBytes": 147532
+          "workingSetSize": 421144,
+          "peakWorkingSetSize": 471152,
+          "privateBytes": 175152
         },
         "integrityLevel": "medium",
         "sandboxed": false
       },
       {
         "cpu": {
-          "cumulativeCPUUsage": 6.997947,
+          "cumulativeCPUUsage": 4.350358,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 44332,
+        "pid": 62168,
         "type": "GPU",
-        "creationTime": 1794452901976.467,
+        "creationTime": 1794460668562.189,
         "serviceName": "GPU",
         "memory": {
-          "workingSetSize": 419640,
-          "peakWorkingSetSize": 453308,
-          "privateBytes": 707808
+          "workingSetSize": 392716,
+          "peakWorkingSetSize": 411940,
+          "privateBytes": 713468
         },
         "integrityLevel": "low",
         "sandboxed": true
       },
       {
         "cpu": {
-          "cumulativeCPUUsage": 0.076067,
+          "cumulativeCPUUsage": 0.099122,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 17288,
+        "pid": 80100,
         "type": "Utility",
-        "creationTime": 1794452901983.719,
+        "creationTime": 1794460668569.865,
         "serviceName": "network.mojom.NetworkService",
         "name": "Network Service",
         "memory": {
-          "workingSetSize": 262232,
-          "peakWorkingSetSize": 262576,
-          "privateBytes": 11672
+          "workingSetSize": 262244,
+          "peakWorkingSetSize": 262708,
+          "privateBytes": 11600
         },
         "integrityLevel": "medium",
         "sandboxed": false
       },
       {
         "cpu": {
-          "cumulativeCPUUsage": 12.469823,
+          "cumulativeCPUUsage": 4.100017,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 60568,
+        "pid": 34324,
         "type": "Tab",
-        "creationTime": 1794452902055.574,
+        "creationTime": 1794460668649.423,
         "memory": {
-          "workingSetSize": 354772,
-          "peakWorkingSetSize": 579080,
-          "privateBytes": 92632
+          "workingSetSize": 356800,
+          "peakWorkingSetSize": 437472,
+          "privateBytes": 89816
         },
         "integrityLevel": "untrusted",
         "sandboxed": true
       }
     ]
   },
-  "finishedAt": "2026-11-12T03:10:36.122Z"
+  "finishedAt": "2026-11-12T05:19:58.606Z"
 }

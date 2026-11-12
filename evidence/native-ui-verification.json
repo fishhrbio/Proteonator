@@ -1,6 +1,6 @@
 {
   "status": "partial",
-  "scope": "Direct Windows UI observations before the final close-path correction; exact final build has 37 passing automated installed checks.",
+  "scope": "Direct Windows UI observations before the close-path correction. The final rebuilt installer has 38 passing automated installed checks; its final direct interactive rerun remains incomplete.",
   "observedEarlierInstallerSha256": "be4332475cef2eecdeba7af07678c7050dacf84ded980bc5a0367ad7c6ce0734",
   "observations": [
     "ProView name and PV icon visible in installer and application",
@@ -12,5 +12,5 @@
   ],
   "closePath": "A real unsaved-change close bug was found; corrected through native will-prevent-unload handling. Both native choices pass scripted source and packaged tests.",
   "remaining": "User stopped Computer Use with physical Escape during the final interactive rerun; final interactive installer/uninstaller inspection not completed.",
-  "publicationGate": "Hold; do not request publication approval until the remaining review is complete."
+  "publicationGate": "Historical hold at the time of this test; Robert Waite subsequently approved the 1.0 launch with the interrupted-review limitation retained. See docs/RELEASE_STATUS.md."
 }

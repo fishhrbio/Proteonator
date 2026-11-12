@@ -1,7 +1,7 @@
 {
   "name": "source",
   "status": "passed",
-  "startedAt": "2026-11-12T03:07:29.678Z",
+  "startedAt": "2026-11-12T05:12:25.079Z",
   "environment": {
     "platform": "win32",
     "release": "10.0.26200",
@@ -23,6 +23,7 @@
     "Mobile coordinates import through native-file IPC",
     "Different numbering requires explicit review; duplicate and missing pairs reject",
     "Reviewed alignment computes nonzero fitted displacement and an overlay",
+    "Pasting an edited mapping invalidates the fit and requires a reviewed refit",
     "Automated WCAG audit of expanded comparison controls",
     "Captioned PNG export has a real viewport and readable caption region",
     "Project save embeds two sources, annotation, geometry and alignment",
@@ -43,7 +44,7 @@
     "Offline retrieval gives a recoverable error and keeps local inputs usable",
     "Cancellation emits one terminal state and next job succeeds",
     "Renderer isolation and offline local help are intact",
-    "960\u00d7720, 1280\u00d7800 and 1600\u00d71000 layouts remain accessible without page-width overflow",
+    "960×720, 1280×800 and 1600×1000 layouts remain accessible without page-width overflow",
     "Native close confirmation preserves unsaved work when cancelled",
     "External navigation is blocked by the native window",
     "No renderer errors or background network activity",
@@ -103,6 +104,10 @@
       }
     ]
   },
+  "mappingPaste": {
+    "milliseconds": 53.32719999999972,
+    "inputEvents": 215
+  },
   "alignment": {
     "rmsdAngstrom": 0.25873158777360117,
     "matched": 108,
@@ -112,7 +117,7 @@
   "png": {
     "width": 2216,
     "height": 785,
-    "sha256": "28377f7cd29b9556caab4fd75d5f4067a548bf6940bf819dc443a2cfccb49b96"
+    "sha256": "4250c5f9806f0a7e4ae87b2923a767413c246d92e6939ef23f9af980e4821ec3"
   },
   "cancellation": {
     "code": "CANCELLED",
@@ -193,76 +198,76 @@
     "metrics": [
       {
         "cpu": {
-          "cumulativeCPUUsage": 12.173199,
+          "cumulativeCPUUsage": 7.904366,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 54656,
+        "pid": 48072,
         "type": "Browser",
-        "creationTime": 1794452849763.233,
+        "creationTime": 1794460345154.768,
         "memory": {
-          "workingSetSize": 331624,
-          "peakWorkingSetSize": 505404,
-          "privateBytes": 91832
+          "workingSetSize": 408528,
+          "peakWorkingSetSize": 472124,
+          "privateBytes": 175120
         },
         "integrityLevel": "medium",
         "sandboxed": false
       },
       {
         "cpu": {
-          "cumulativeCPUUsage": 6.843674,
+          "cumulativeCPUUsage": 4.156443,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 80556,
+        "pid": 47440,
         "type": "GPU",
-        "creationTime": 1794452850810.29,
+        "creationTime": 1794460346152.615,
         "serviceName": "GPU",
         "memory": {
-          "workingSetSize": 422712,
-          "peakWorkingSetSize": 466696,
-          "privateBytes": 704780
+          "workingSetSize": 428976,
+          "peakWorkingSetSize": 448424,
+          "privateBytes": 720824
         },
         "integrityLevel": "low",
         "sandboxed": true
       },
       {
         "cpu": {
-          "cumulativeCPUUsage": 0.081665,
+          "cumulativeCPUUsage": 0.089491,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 22276,
+        "pid": 86616,
         "type": "Utility",
-        "creationTime": 1794452850816.368,
+        "creationTime": 1794460346157.618,
         "serviceName": "network.mojom.NetworkService",
         "name": "Network Service",
         "memory": {
-          "workingSetSize": 262520,
-          "peakWorkingSetSize": 262760,
-          "privateBytes": 11780
+          "workingSetSize": 262276,
+          "peakWorkingSetSize": 262552,
+          "privateBytes": 11496
         },
         "integrityLevel": "medium",
         "sandboxed": false
       },
       {
         "cpu": {
-          "cumulativeCPUUsage": 12.764792,
+          "cumulativeCPUUsage": 3.724929,
           "percentCPUUsage": 0,
           "idleWakeupsPerSecond": 0
         },
-        "pid": 73496,
+        "pid": 24868,
         "type": "Tab",
-        "creationTime": 1794452850918.214,
+        "creationTime": 1794460346225.223,
         "memory": {
-          "workingSetSize": 357556,
-          "peakWorkingSetSize": 550576,
-          "privateBytes": 90920
+          "workingSetSize": 358708,
+          "peakWorkingSetSize": 450636,
+          "privateBytes": 91252
         },
         "integrityLevel": "untrusted",
         "sandboxed": true
       }
     ]
   },
-  "finishedAt": "2026-11-12T03:09:40.281Z"
+  "finishedAt": "2026-11-12T05:14:36.259Z"
 }
