@@ -10,8 +10,8 @@
     },
     {
       "path": ".github/workflows/release-checks.yml",
-      "bytes": 1214,
-      "sha256": "e2b9d920433ab1e3507a203235f63cb96808610e5664d096c87b3ea03cec1b9c"
+      "bytes": 1257,
+      "sha256": "8e2897ff4d9451f365b935a85e8027d03963a14494abbbdca1fc17d17d333e2d"
     },
     {
       "path": ".gitignore",
@@ -585,13 +585,13 @@
     },
     {
       "path": "scripts/verify-studio-physics.mjs",
-      "bytes": 5160,
-      "sha256": "e3c4325be9c382ce0f8f1afc356248ec7f867c217039282e278fdf6f89418f98"
+      "bytes": 5647,
+      "sha256": "e8e0967e7ef02336306e5f9d45e08264f61b2d22d3576563a39f3f53c9c844b0"
     },
     {
       "path": "scripts/verify-studio.mjs",
-      "bytes": 9317,
-      "sha256": "af078df1212e0e8ee1e13b4e0a2ae728d3f3f82c4835a049554ce51be78633bb"
+      "bytes": 9804,
+      "sha256": "da6c78826dcf0737506f783c752dfe5feddee613530a579fcb4cc9d4c2ae57e3"
     },
     {
       "path": "src/contracts/index.ts",

@@ -6,7 +6,7 @@ import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/studio-verification');await mkdir(out,{recursive:true});
 const env={...process.env,PROTEONATOR_PYTHON:process.env.PROTEONATOR_PYTHON??'python'};delete env.ELECTRON_RUN_AS_NODE;const exe=process.env.PROTEONATOR_EXE;
 const report={status:'running',checks:[],errors:[],requests:[],startedAt:new Date().toISOString()};
-const app=await electron.launch({executablePath:exe??path.join(root,'node_modules/electron/dist/electron.exe'),args:[...(exe?[]:[root]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
+const app=await electron.launch({executablePath:exe??path.join(root,'node_modules/electron/dist/electron.exe'),args:[...(exe?[]:[root]),...(process.env.PROTEONATOR_VERIFY_SOFTWARE_GL==='1'?['--use-gl=angle','--use-angle=swiftshader']:[]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
 let page;
 const check=async(name,fn)=>{await fn();report.checks.push(name);console.log('PASS',name);};
 const idle=()=>page.waitForFunction(()=>document.querySelector('main').getAttribute('aria-busy')!=='true',{timeout:120000});
@@ -16,7 +16,7 @@ const status=()=>page.locator('#status').innerText();
 async function save(filename){await app.evaluate(({dialog},filename)=>{dialog.showSaveDialog=async()=>({canceled:false,filePath:filename});},filename);}
 try{
  page=await app.firstWindow({timeout:30000});page.on('pageerror',e=>report.errors.push(e.stack));page.on('request',r=>{if(/^https?:/.test(r.url()))report.requests.push(r.url());});page.on('dialog',d=>d.accept());
- await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Proteonator is ready'),{},{timeout:60000});
+ await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Proteonator is ready'),{},{timeout:60000});report.renderer=await page.evaluate(()=>{const canvas=document.querySelector('#molecule canvas');const gl=canvas?.getContext('webgl2')??canvas?.getContext('webgl');const ext=gl?.getExtension('WEBGL_debug_renderer_info');return ext?gl.getParameter(ext.UNMASKED_RENDERER_WEBGL):null;});if(process.env.PROTEONATOR_VERIFY_SOFTWARE_GL==='1')assert.match(report.renderer??'',/SwiftShader/i);
  await check('Proteonator branding, complete components and assembly selection',async()=>{assert.equal(await page.title(),'Proteonator');assert.equal(await page.locator('#assembly option').count(),4);assert.ok(await page.locator('#components label').count()>=6);assert.match(await page.locator('#structure-counts').innerText(),/5,151/);});
  await check('Biological assembly is built with separate chain instances',async()=>{await page.locator('#assembly').selectOption('1');await idle();assert.match(await page.locator('#structure-counts').innerText(),/1,779/);assert.ok(await page.locator('#components').innerText().then(t=>t.includes('A1')&&t.includes('D1')));});
  await check('Sequence selection and real atom measurements',async()=>{await page.locator('#residue-search').fill('SER');await page.locator('#sequence button').first().click();assert.match(await page.locator('#selected-title').innerText(),/SER/);await page.locator('#atom-list button').nth(0).click();await page.locator('#atom-list button').nth(1).click();await cmd('measure');assert.match(await page.locator('#measurements').innerText(),/distance:.*Å/);});

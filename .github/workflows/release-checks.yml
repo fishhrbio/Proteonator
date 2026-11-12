@@ -11,6 +11,7 @@ jobs:
       CSC_IDENTITY_AUTO_DISCOVERY: "false"
       PROTEONATOR_PYTHON: python
       PYTHONNOUSERSITE: "1"
+      PROTEONATOR_VERIFY_SOFTWARE_GL: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
