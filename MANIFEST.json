@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "contractVersion": "1.0.0",
   "projectVersion": "2.0.0",
-  "createdAtUtc": "2026-11-12T03:21:52.397387+00:00",
+  "createdAtUtc": "2026-11-12T04:55:46.209398+00:00",
   "files": [
     {
       "path": ".gitattributes",
@@ -37,13 +37,13 @@
     },
     {
       "path": "docs/RELEASE_NOTES.md",
-      "bytes": 1916,
-      "sha256": "5d6023de62765d891c3f82d062899322ea2bb96517de1fea62d52a25da48a17b"
+      "bytes": 2266,
+      "sha256": "f36889aa53994018e7c960ad71da02ad9ac27a45e1d5712ddcee93543c0d9208"
     },
     {
       "path": "docs/RELEASE_STATUS.md",
-      "bytes": 1816,
-      "sha256": "bd50de6d11b98143d9a110c1bd95cb9c67068ca05e5da6d966334c7b4e09f6b1"
+      "bytes": 2010,
+      "sha256": "fb481deab640d7b0bc7c6461ad1263e050b2caa7c8ff03e94a6c5b7f0f8bb421"
     },
     {
       "path": "docs/SCIENCE.md",
@@ -77,8 +77,8 @@
     },
     {
       "path": "docs/VERIFICATION.md",
-      "bytes": 5356,
-      "sha256": "e6f1de124f0510e9de79ed908220ce6386275df3fb07e1191ad420784a985628"
+      "bytes": 5413,
+      "sha256": "03d3376d841e30772dda990d62e6bdbd27082a83be34abde86566b22d83875fe"
     },
     {
       "path": "evidence/baseline-integrity.json",

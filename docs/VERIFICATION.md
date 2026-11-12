@@ -32,5 +32,5 @@ The desktop suite controls file-dialog destinations and selected native message-
 
 A clean short checkout resolved NSIS's long-path template error. Invalid encodings, malformed and oversize inputs, BOM-preserving hashes, project corruption and unknown versions, failed writes, worker failure/timeout/cancel, unsafe resources/navigation and normal close/discard are covered. Failed attempts were corrected and their relevant checks repeated. The final distribution's manifest/ZIP and clean extraction results are recorded in the accompanying readiness report.
 
-See `docs/RELEASE_STATUS.md` for untested platforms, unsigned status, account scope and the publication gate.
+See `docs/RELEASE_STATUS.md` for untested platforms, unsigned status, account scope and the owner's launch approval with the documented interrupted-review limitation.
 

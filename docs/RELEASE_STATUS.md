@@ -9,10 +9,10 @@
 | Apple notarization | Not performed; no macOS build or credentials |
 | Native CI | Workflow prepared for manual dispatch; no repository CI run has been performed |
 | Final interactive installer/uninstaller review | Interrupted by the user stopping Computer Use with Escape; not claimed passed |
-| Public repository / installer upload | Not performed; final interactive review and owner approval remain |
+| Publication approval | Robert Waite approved the 1.0 launch with the documented test scope and interrupted interactive review |
 
 This release supports the tested Windows 11 x64 current-user workflow. The all-users installer option was not exercised. Testing used the current Windows account with isolated application profiles; a separate fresh Windows account or clean physical machine was not provisioned. Developer runtimes were removed from the installed application's PATH for the end-to-end test.
 
-The README's public download URL matches the exact installer asset name and version tag. It becomes live only when the owner approves publication of that release and asset. The local installer, source archive and checksums are provided together in the delivery package.
+Robert Waite approved publication on November 11, 2026 (America/New_York), after reviewing the local delivery and readiness report. The interrupted final interactive review is retained as a verification limitation; it has not been relabeled as a pass. The README's public download URL matches the exact installer asset name and version tag. The versioned GitHub release supplies the installer, integrated source archive and SHA-256 checksums.
 
 MIT licensing was selected by Robert Waite. Installed notices include the ProView license, 3Dmol.js and Zod notices, Electron/Chromium licenses, fixture provenance and the offline guide. Source and packaged resource bytes were compared. No institutional endorsement is implied.

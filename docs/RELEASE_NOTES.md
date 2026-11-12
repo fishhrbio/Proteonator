@@ -6,7 +6,9 @@ The installer bundles Electron, the scientific engine, visualization library, ex
 
 Portable projects use schema 2.0.0. Legacy `.ptmw` schema 1.0.0 geometry projects migrate in memory and can be saved as `.proview`; their original files are not overwritten during opening. Projects preserve both source coordinate inputs and revalidate derived scientific results on reopen.
 
-The Windows installer is unsigned. No signing certificate was available. macOS, Linux, Windows ARM64 and Windows 10 were not tested and are not supported claims for this release. There is no notarization claim. Public release files should be obtained from the repository's release page and checked against the accompanying SHA-256 file.
+The Windows installer is unsigned. No signing credential was supplied or configured. macOS, Linux, Windows ARM64 and Windows 10 were not tested and are not supported claims for this release. There is no notarization claim. Public release files should be obtained from the repository's release page and checked against the accompanying SHA-256 file.
+
+Validation includes 40 unit tests, 37 source desktop checks and 37 installed desktop checks, plus current-user installation, same-version reinstallation and uninstallation. The final direct interactive installer/uninstaller rerun was interrupted and is not claimed passed. The owner approved this launch with that limitation documented.
 
 Scientific results describe supplied static coordinates and reviewed correspondences. They do not establish PTM effects, biological causality, binding affinity or clinical significance. Waters, ligands, unsupported modified residues and non-protein polymers are preserved in input data but hidden from the protein viewport and excluded from interface geometry. See the user guide for supported format semantics and resource limits.
 
