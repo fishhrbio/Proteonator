@@ -205,8 +205,8 @@
     },
     {
       "path": "docs/images/liquid-glass.png",
-      "bytes": 948578,
-      "sha256": "0ad0f88af50931ec54e91958d42a4c74ce6146579ba17a71cb269136f6e0c435"
+      "bytes": 1578693,
+      "sha256": "80c8957f1ef753761fde8b5d9677ec5b3e30ddaedcbbacf4798c65e19ff5345e"
     },
     {
       "path": "docs/images/midnight.png",
@@ -500,8 +500,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 9748,
-      "sha256": "b87aeaafd06f05f4b7003aafaca6b3b4523c4fbbb81aa77bdc1840804d7cb7ef"
+      "bytes": 9775,
+      "sha256": "79668d721dd9b489c2c0de00a4c0564b1e64705ab80fa9691a06dac5b5ba7e21"
     },
     {
       "path": "requirements-compute.txt",
@@ -685,8 +685,8 @@
     },
     {
       "path": "src/renderer/studio.css",
-      "bytes": 14673,
-      "sha256": "8fea3802d7042a2a7c5a375893fbab2a9d6bf98144722ff0b695fbd589583bc2"
+      "bytes": 21689,
+      "sha256": "26258e19d554d5e3dfa1ff5c66a244af3ceff3451c4bc0d47b134d0e2e0df4e9"
     },
     {
       "path": "src/renderer/studio.html",

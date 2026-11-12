@@ -16,7 +16,7 @@ Version 1.1 includes a redesigned toolbar, a Mol* molecular viewport, three inte
 *Midnight: the default molecular workspace. A supported PTM is constructed as a separate scenario; the comparison reports geometric changes while preserving the source.*
 
 ![Proteonator Liquid Glass workspace](docs/images/liquid-glass.png)
-*Liquid Glass: translucent navigation and soft highlights around the same scientific tools and data.*
+*Liquid Glass: frosted translucent panels, luminous edges and softly raised controls around the same scientific tools and data.*
 
 ![Proteonator Painted Pixels workspace](docs/images/painted-pixels.png)
 *Painted Pixels: original atmospheric artwork and pixel typography. Standard readable text, reduced transparency and high contrast are available in Settings.*
