@@ -18,7 +18,7 @@ export function parseProject(text:string):Project{
     raw={...legacy,schemaVersion:PROJECT_VERSION,format:'proview-project',comparison:null,
       analyses:Array.isArray(legacy.analyses)?legacy.analyses.map((r:any)=>({...r,provenance:{...r.provenance,
         engineVersion:r.provenance?.engineVersion==='stage-a-geometry-1'?'proview-geometry-1':r.provenance?.engineVersion}})):legacy.analyses};
-  } else if(version!==PROJECT_VERSION) throw new EngineError({code:'UNSUPPORTED_PROJECT_VERSION',message:`Project schema ${String(version)} is unsupported`,recovery:'Use the ProView version that created this project. The file has been left unchanged.'});
+  } else if(version!==PROJECT_VERSION) throw new EngineError({code:'UNSUPPORTED_PROJECT_VERSION',message:`Project schema ${String(version)} is unsupported`,recovery:'Use the Proteonator version that created this project. The file has been left unchanged.'});
   const result=ProjectSchema.safeParse(raw);
   if(!result.success) invalidInput(`Invalid project: ${result.error.issues[0]?.message}`);
   if(new Set(result.data.inputs.map(i=>i.sourceSha256)).size!==result.data.inputs.length) invalidInput('Duplicate embedded source hash');

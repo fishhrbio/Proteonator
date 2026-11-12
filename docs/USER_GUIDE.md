@@ -1,60 +1,68 @@
-# ProView user guide
+# Proteonator 1.1 user guide
 
-ProView 1.0 is a local protein structure visualizer. It opens coordinates, links molecular and residue views, adds annotations, calculates interface geometry and compares supplied structures. Installed operation needs a compatible graphics driver, but no separate programming runtime, account or internet connection.
+## Open and navigate
 
-## Open and inspect
+Install the Windows 11 x64 package and start Proteonator. Bundled examples open offline. **Open** accepts PDB and mmCIF; **Retrieve** downloads a public PDB accession. Local coordinates are processed on your computer. Explicit retrieval sends the accession to the corresponding public service, without uploading the open coordinate file.
 
-Choose **Open coordinates** (`Ctrl+O`) for `.pdb`, `.ent`, `.cif` or `.mmcif`. The bundled 1BRS and 1CRN examples are available offline. **Retrieve from RCSB** makes an explicit public download for the accession you enter; it sends no local coordinate data. Retrieval is limited to 10 seconds and 5 MiB. On failure, your current structure remains available.
+Choose a coordinate model and assembly in the left panel before creating PTM scenarios. Changing either starts a new scenario set after confirmation. Assembly copies have distinct chain identities. Component controls show/hide groups and change representation or opacity. Water is hidden initially. Use **Style**, **Color**, clipping and Settings lighting to inspect the view. B-factor coloring refers to source B factors, not automatically to prediction confidence.
 
-Choose a coordinate **Model**, then protein **Partner A** and **Partner B** chains. The viewport shows the active canonical-protein atoms in these chains. The inspector uses the original author numbering and insertion codes; mmCIF label chain names are shown alongside differing author names. Alternate conformers are selected per residue by highest mean occupancy, with A then lexical tie-breaking. Shared blank atoms win over an alternate atom of the same name. Zero-occupancy atoms are inactive; missing occupancy is unknown and treated as active. This policy does not mix unmatched alternate labels to fill missing atoms.
+Drag to rotate, wheel to zoom and right-drag to pan. The viewport supports arrows to rotate, Shift+arrows to pan, `+`/`−` to zoom and `F` to fit. Select residues in the linked sequence or click in the molecule. Use **Pick** for atoms, residues or chains. Shift-click adds a residue/atom to the selection. **Selection ⋯** exposes contextual actions without requiring a right-click. Use **Toggle residue label** in Inspect to keep up to 12 labels visible. Labels, named selections and residue notes remain in portable projects; notes are annotations, not chemical changes.
 
-Click the molecule or a residue button to inspect an identity. In the sequence strip, left/right arrows move focus, Home/End jump to the chain boundaries, and Enter or Space selects. **Focus selection** centers the selected residue. The viewport supports dragging, wheel zoom, and keyboard controls while focused: arrows rotate, Shift+arrow keys pan, `+`/`-` zoom, and `F` fits the view. These controls make rotation and zoom available without a pointer. Numeric scientific results and correspondence are also available as text; the 3D shape itself does not have a screen-reader-equivalent spatial description.
+## Inspect and measure
 
-Choose backbone trace, sticks or spheres. **Clipping depth** hides parts outside the near/far slab for visual inspection. **Reduced motion** starts enabled; disable it to allow animated focus transitions. Inferred display bonds are visual aids rather than validated chemical connectivity. Source coordinates stay unchanged when you move, clip, align or restyle the view.
+The Inspector lists exact author chain/residue/atom identities. Choose 2, 3 or 4 atoms to measure distance, angle or torsion, then select **Measure**. Measurements apply to the current displayed state and are recalculated when that state changes. **Neighborhood** selects residues/components within 5 Å of the selected residue. A geometric neighborhood is not a predicted binding site.
 
-## Annotate a residue
+## Construct a PTM
 
-Select a residue, choose a PTM type and enter a nonempty label. **Add or update annotation** stores a user note. **Remove annotation** removes it. An annotation never constructs atoms, changes chemistry, predicts a site or demonstrates a PTM effect. Save a project to retain annotations.
+Choose a supported Ser, Thr, Tyr or Lys site and open **PTM**. Review the chemistry description, then **Construct modification**. A separate named scenario retains the source and records the edit. Edited residues appear as sticks; added atoms have a teal overlay. The comparison drawer reports new/lost contacts, added atoms, bond geometry, torsions, steric overlaps and displacement. Source heavy-atom coordinates are retained during construction, so common-heavy-atom RMSD initially remains zero.
 
-## Calculate interface geometry
+You can add compatible edits at other residues, replace the edit at a selected residue, remove an edit, undo/redo or duplicate a scenario. Double-click its name to rename it. Source coordinates are always available in the scenario list. Unsupported residue chemistry, missing attachment atoms or unresolved alternate conformers reject construction with an explanation.
 
-Choose two distinct protein chains in one coordinate model and select **Calculate interface**. The calculation reports minimum heavy-atom distance, atom-pair contacts at or below 4.0 Å, unique contacting residue pairs and geometric overlap candidates. **Show closest pair** connects the actual measured atoms. **Method, exclusions & provenance** contains the source hash, selection policies, units and calculation method. **Export JSON** writes the full result.
+## Calculate a local response
 
-Only active canonical-protein ATOM records with known heavy elements are eligible. Hydrogens, waters, ligands, unsupported modified residues and unknown elements are excluded. Contacts include all eligible atom pairs. Overlap candidates use the Bondi C/N/O/S/P radii and overlap strictly greater than 0.4 Å (10⁻¹² Å boundary tolerance); explicit CONECT 1–2 and 1–3 neighbors are excluded from overlaps. Other elements have no invented overlap radius. Incomplete connectivity means candidates require chemical review and are not a validated clashscore. These static geometric values do not measure affinity, energy or biological function.
+The initial supported set is SEP/TPO/PTR with CHARMM36m July 2024, and ALY with legacy CHARMM36. Select **CHARMM36 · legacy ALY support** for acetyllysine. Methyllysine construction remains available, but its local-relaxation parameters are not bundled. Modified termini and incomplete or unparameterized structures may also be unsupported.
 
-## Compare two supplied structures
+Review force field, preparation pH, radius, restraint strength, maximum iterations, force tolerance and seed. Select **Calculate local relaxation**. This is a cancelable CPU calculation and can take seconds to minutes. A 300-second calculation deadline prevents an unbounded job. Original sources and the previous valid state remain available if preparation fails or the calculation is canceled.
 
-Expand **Compare supplied structures**, open a mobile PDB/mmCIF file and choose reference and mobile chains/models. **Propose Cα pairs** matches exact author residue numbers, insertion codes and residue names. Review all pairs.
+Read the convergence result. An unconverged result has not met the selected RMS-force tolerance. The prepared source control is calculated separately with the same settings; **Prepared baseline** switches geometric comparison to this control. **Return to constructed state** restores the unrelaxed chemistry. Re-running relaxation starts from the retained constructed state. These configurations are local hypotheses under vacuum restraints, not equilibrium folding or binding-affinity predictions. [Methods and limitations](SCIENCE.md) explain the assumptions and units.
 
-For different numbering, edit the two-column list: reference residue, mobile residue, one pair per line. Include insertion codes (`10A 14`, for example). Choose **Review edited pairs** after every edit. At least three non-collinear pairs are needed, and each residue may appear only once on each side. Missing Cα atoms, inactive conformers and ambiguous residue identities are rejected. Different residue names are identified for explicit review rather than silently treated as equivalent. This is explicit correspondence, without automated sequence or homology alignment.
+## Compare supplied structures
 
-Confirm the correspondence and choose **Fit mobile to reference**. The fit is rotation plus translation, with no reflection, scale or coordinate optimization. Fitted RMSD and every matched residue's displacement appear as text. The reference stays teal/blue; the mobile display is orange. Amber connectors show up to 500 fitted atom displacements at true scale; tiny coincident displacements are omitted from drawing, and every value remains in the numeric result. Use **Comparison overlay** to show or hide it. **Export alignment JSON** includes the transform, correspondence, both source hashes, fitted displacements and limitations.
+Open a comparison file and use linked views to inspect it. In **Supplied-structure alignment**, propose exact Cα identities or choose reference and comparison chains for a sequence proposal. Review the two atom identifiers on every correspondence line, confirm review, then **Fit comparison**. At least three non-collinear one-to-one pairs are required. RMSD and the transform refer only to the reviewed correspondence. Portable projects retain the original comparison and recalculate the fit when reopened.
 
-A fit depends on your correspondence and supplied coordinates. A small RMSD cannot verify a biological relationship or establish that a change was caused by a PTM. The bundled synthetic comparison fixture deliberately changes coordinates for testing and illustration.
+## Gene, isoform and processing context
+
+Open **Context**, review or enter a UniProt accession and retrieve context explicitly. The panel shows available gene, organism, transcript/isoform and processing information. Ensembl exon bars are genomic summaries with compressed introns. Select a structural residue to see whether a SIFTS sequence mapping agrees with its identity. A mismatch or missing mapping requires review; the application does not assume a constant author-number offset or invent a unique transcript. Cached context reopens offline even if the reference service later fails.
+
+## Local density maps
+
+Use **Open density map** for a local CCP4/MRC or Gaussian Cube file. Single-dataset density Cube input requires positive grid counts and Bohr coordinates, with at most 32 million grid values; convert Angstrom-grid Cube files first. Up to two maps display at 1.5 sigma and their original bytes are included in the portable project. Confirm the map's coordinate frame, origin, units and relationship to the structure. No automatic registration occurs. Start a new workspace to change the map set.
 
 ## Save, reopen and export
 
-**Save project** (`Ctrl+S`) creates a portable `.proview` file containing original coordinate text, hashes, annotations, the selected reference/mobile sources, alignment and geometry results, selections, representations, camera and clipping. Copy this one file to another tested ProView installation to reopen offline. Saved source identities and derived results are re-imported and recalculated before acceptance. A corrupted or inconsistent file is rejected without replacing the open workspace.
+**Save** writes a portable `.proteonator` project containing source coordinates, scenario results and method provenance, comparison coordinates and reviewed pairs, maps, notes, named selections, measurements, cached biological context and display preferences. Sources and map/result snapshots have integrity hashes. Save your project before closing; the application prompts before discarding unsaved changes.
 
-Legacy schema 1.0.0 `.ptmw` geometry projects are migrated in memory. Save them with the new `.proview` extension. Unknown future versions are rejected without modifying the input file. Project replacement uses a temporary file beside the destination; a failed write preserves the previous destination and reports the error. Select a writable folder and retry.
+**Open project** also imports earlier `.proview`/`.ptmw` files. Original files remain unchanged. Source inputs, selected coordinate model, comparison pairs and residue annotations are migrated. Earlier geometry reports remain attached as historical records; calculate new comparisons under the current methods rather than treating historical results as fresh calculations. Older camera formats cannot always be translated exactly and the view is fitted again.
 
-**Export PNG** saves the actual viewport plus a provenance caption, source hash, analysis/alignment context and scientific limitations. The image contains the current displayed representation and clipping. Geometry and alignment JSON are separate scientific exports; they do not replace a portable project. Original PDB/mmCIF coordinates are retained verbatim within the project, and no transformed coordinate file is emitted.
+Export current coordinates as mmCIF, a scientific comparison report as JSON, or a captioned PNG. The PNG includes source identity and the evidence state. Keep the JSON/project alongside an image when sharing a scientific result. The coordinate file alone does not contain every project annotation or all interpretation limits.
 
-ProView asks before discarding unsaved changes when replacing a workspace or closing the window. Cancel a running calculation with **Cancel calculation** or Escape. A cancelled or failed job does not prevent the next calculation.
+## Themes and accessibility
 
-## Limits and troubleshooting
+Settings contains Midnight, Liquid Glass and Painted Pixels. Switching skin preserves molecular state and undo history. Reduced motion is initially enabled. Standard readable typography, high contrast, reduced transparency, graphics quality, panel widths and collapsed side panels are available. Customize toolbar buttons and keyboard shortcuts in the same dialog. A hidden toolbar action remains available in Commands and menus.
 
-- Inputs: 5 MiB and 25,000 recorded atoms per structure. Projects: 50 MiB. Geometry: 25 million cross-partner pairs and 100,000 output pair records. Workers have a 30-second calculation deadline. Limits produce explicit errors rather than silent truncation.
-- mmCIF support covers coordinate atom_site loops, not the entire dictionary, connectivity categories, multiple coordinate data blocks or BinaryCIF. PDB hybrid-36 serials are unsupported. Missing atoms/residues, biological assemblies and secondary-structure assignments are not reconstructed. The trace follows the supplied protein backbone; it is not an independently assigned helix/sheet classification.
-- A single-chain structure can be inspected and annotated; interface calculation needs two distinct protein chains. Non-protein polymers, waters, ligands and unsupported modified residues are retained in the input and normalized data but hidden in this protein viewport.
-- If the view cannot initialize, update the graphics driver and use a system with WebGL support. ProView does not claim a fallback 3D renderer.
-- If retrieval fails, use a local coordinate file or a bundled example. Save, reopen, alignment and exports work offline.
-- Windows 11 x64 is the tested target. The installer is unsigned, so Windows may show an unknown-publisher or SmartScreen reputation prompt. There is no claim of Windows 10, ARM64, macOS or Linux verification for this release.
+`Ctrl+O` opens coordinates, `Ctrl+S` saves, `Ctrl+Z`/`Ctrl+Shift+Z` undo/redo chemistry, and `Ctrl+K` opens command search. Shortcuts can be changed. Text fields retain ordinary editing behavior. Escape closes dialogs or cancels a running calculation. The linked sequence supports arrow, Home and End keys; the atom list provides keyboard-accessible measurement selection.
 
-Use the repository's issue tracker to report a problem, describing the operation and error. Share only coordinate or project files you are permitted to disclose; no diagnostic upload happens automatically.
+## Troubleshooting and limits
 
-## Credits and license
+- **Preparation cannot match a template:** inspect the named residue/component and the selected force field. Supply a complete compatible structure. Do not delete an unresolved partner solely to obtain a plausible-looking energy.
+- **Unconverged:** review the reported force and preparation; a larger iteration budget can be tried, but a completed job is not evidence of convergence or physical validity.
+- **Mapping unavailable:** verify the accession, chain, species, construct and sequence coverage. Continue with the coordinates and cached annotations as appropriate.
+- **Map misplaced:** confirm the map origin, scale and coordinate frame with its source. Proteonator does not register it automatically.
+- **Large/slow scene:** use lower graphics quality, cartoons or bonds, hide water, and collapse panels. Source/assembly guard: 100,000 atoms; local-response guard: 5,000 atoms before adding hydrogens. File/project size limits appear in the README.
+- **Offline:** core work and embedded projects remain available. Online retrieval requires a network connection; no placeholder data are substituted on failure.
 
-I’m Robert Waite, an M.S. Biotechnology student at the University of South Florida. ProView is a small independent project I’ve been developing in my free time.
+Only Windows 11 x64 is a verified installer platform for 1.1. The package is unsigned. Uninstall through Windows Settings → Apps; saved projects and user preferences are retained. Proteonator is an independent scientific exploration tool, not a clinical decision system.
 
-ProView is independent and does not imply institutional endorsement. The original code and icon use the MIT license. Visualization: 3Dmol.js (Rego and Koes, 2015). Runtime: Electron and its included third-party components. Validation: Zod. Example coordinates: the original 1BRS and 1CRN depositors through the wwPDB/RCSB archive, CC0-1.0. Consult `THIRD_PARTY_NOTICES.md` and the installed Electron/Chromium license files for complete notices.
+Computed local-response coordinates use occupancy 1 and B factor 0 as display placeholders; these values are not experimental occupancies or uncertainty estimates.
+
+A local response that inverts a retained stereocenter is discarded. Review severe construction clashes or supply a prepared compatible structure rather than interpreting that result.

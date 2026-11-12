@@ -1,0 +1,180 @@
+{
+  "resource": "wwPDB Chemical Component Dictionary",
+  "components": [
+    {
+      "path": "data/components/A.cif",
+      "bytes": 11501,
+      "sha256": "46db841d33a8147dcd5a3802123e362d708c875f9ba7db457525f094ab55179a",
+      "source": "https://files.rcsb.org/ligands/download/A.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/ALY.cif",
+      "bytes": 8269,
+      "sha256": "2b51dcd1dc065fb46df3a05ea166b61271aa5d6d60341dc792df1e1b53ff92c2",
+      "source": "https://files.rcsb.org/ligands/download/ALY.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/BMA.cif",
+      "bytes": 9034,
+      "sha256": "3663ac87ab4fbdab73c7c80915c1e0d15cac7e61f3f43f14df9eb3d5261974b8",
+      "source": "https://files.rcsb.org/ligands/download/BMA.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/C.cif",
+      "bytes": 8261,
+      "sha256": "4937647bc2142b3a67fedb3db7e4f24c0ecad844ca5330356f2e95a981e9544e",
+      "source": "https://files.rcsb.org/ligands/download/C.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/DA.cif",
+      "bytes": 9797,
+      "sha256": "57f7122cec3b98b35d1ab6428b6e0ed84898d37857d048079e1455804f4fa225",
+      "source": "https://files.rcsb.org/ligands/download/DA.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/DC.cif",
+      "bytes": 9563,
+      "sha256": "898169cacb03d9375cabe76813110e69e3892609ef3afb9f8e48576541179ea4",
+      "source": "https://files.rcsb.org/ligands/download/DC.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/DG.cif",
+      "bytes": 10126,
+      "sha256": "87b9c4eddf89edcbc7aba4f77ed2159bb572e9c8092409d893998be426d872f2",
+      "source": "https://files.rcsb.org/ligands/download/DG.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/DT.cif",
+      "bytes": 9826,
+      "sha256": "6fda70602012a9fbed3529298e850cd34fef2c3074856ee7fb5d6007fe02a4f6",
+      "source": "https://files.rcsb.org/ligands/download/DT.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/FUC.cif",
+      "bytes": 8787,
+      "sha256": "b05b59fd2eae453a012a24ab319c5a7cf0dec6620fc67f58b46be01a77aacc83",
+      "source": "https://files.rcsb.org/ligands/download/FUC.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/G.cif",
+      "bytes": 9786,
+      "sha256": "4fbcf5b5222d7c7f0a761676cffa9bb997daa8f76d41fdb7657aa59e969b85fa",
+      "source": "https://files.rcsb.org/ligands/download/G.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/GAL.cif",
+      "bytes": 9091,
+      "sha256": "404cefc4700fba1eb89e24f7cdaf5b831138c7056cd796ed7ef24e82ce0bc45a",
+      "source": "https://files.rcsb.org/ligands/download/GAL.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/HEM.cif",
+      "bytes": 20740,
+      "sha256": "80f4134bdc5b18dff8c31477ad8aabad7553a84fa4a5a1960677c733939d1429",
+      "source": "https://files.rcsb.org/ligands/download/HEM.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/LYS.cif",
+      "bytes": 7549,
+      "sha256": "318a0f6fa8f98682b35e1793517d5b683b9045c1e6174bc564b7d43e07e4c07c",
+      "source": "https://files.rcsb.org/ligands/download/LYS.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/M3L.cif",
+      "bytes": 8767,
+      "sha256": "efb4dd79d847754858ab04e901ffdb73031fdffacebd29699501f7ea4f6f2b34",
+      "source": "https://files.rcsb.org/ligands/download/M3L.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/MAN.cif",
+      "bytes": 9785,
+      "sha256": "79bc85094a794dfccdb827470fed9124e2dcaac2266d366d120d242d3d7aa8d5",
+      "source": "https://files.rcsb.org/ligands/download/MAN.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/MLY.cif",
+      "bytes": 8299,
+      "sha256": "5f6c3878bc50a166a1571237131c262e293eaac0027112d91a885f486e39afc2",
+      "source": "https://files.rcsb.org/ligands/download/MLY.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/MLZ.cif",
+      "bytes": 7931,
+      "sha256": "2ba0d81a7870db5d40bea4ed54d8ed5fb526251b6a56f6afe5407742c9f0c00d",
+      "source": "https://files.rcsb.org/ligands/download/MLZ.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/NAG.cif",
+      "bytes": 11333,
+      "sha256": "eada750ebb20e7abd76ef486c0a8278e461309e1cdde415545bb1c63c09bfb0f",
+      "source": "https://files.rcsb.org/ligands/download/NAG.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/PTR.cif",
+      "bytes": 8777,
+      "sha256": "b78f4345d0daeea714cd3af836934b5aec24e5cad8f4d5a5ecbaa4a99722ad6d",
+      "source": "https://files.rcsb.org/ligands/download/PTR.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/SEP.cif",
+      "bytes": 7339,
+      "sha256": "8a64575a99938ed0960684067183d8b7a85daabb204fda3c13c24fa9353e86a9",
+      "source": "https://files.rcsb.org/ligands/download/SEP.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/SER.cif",
+      "bytes": 6234,
+      "sha256": "46db0296a07732854d2c3ca67ed0f74f4c82ddc5698d0e59f433039a5d7c88a0",
+      "source": "https://files.rcsb.org/ligands/download/SER.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/THR.cif",
+      "bytes": 5884,
+      "sha256": "feb75dfac5bfcc7045de7a75a31575f3bf3e5b411716a06e92712924759dd554",
+      "source": "https://files.rcsb.org/ligands/download/THR.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/TPO.cif",
+      "bytes": 7734,
+      "sha256": "d642585cb6396dd78eccb0240a3ed654a27b772881e719b8d3d298cd57d57b1b",
+      "source": "https://files.rcsb.org/ligands/download/TPO.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/TYR.cif",
+      "bytes": 7493,
+      "sha256": "fa0ef32f9d623e087a527b0a146c0494a5a656037c6448d956072dd2406fa554",
+      "source": "https://files.rcsb.org/ligands/download/TYR.cif",
+      "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/U.cif",
+      "bytes": 8103,
+      "sha256": "de78a1e4a9860baaefc17c5e509fad96b0b25e0b62f90352976f9079cd4b051b",
+      "source": "https://files.rcsb.org/ligands/download/U.cif",
+      "license": "CC0-1.0"
+    }
+  ]
+}

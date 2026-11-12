@@ -1,92 +1,85 @@
-# ProView
+<p align="center"><img src="assets/logo.svg" width="112" alt="Proteonator fedora and bill outline"></p>
 
-ProView is a standalone desktop visualizer for inspecting protein structures on your own computer. Open PDB or mmCIF coordinates, explore residues in a linked 3D view and sequence strip, annotate candidate modification sites, calculate interface geometry, and compare two supplied structures using a correspondence you review yourself. Save a portable project or export results and captioned images for later inspection.
+# Proteonator
 
-All visualization and calculations run locally. The installer includes the runtime and examples; you do not need Node.js, Python, a development server, an account, or a subscription. An optional **Retrieve from RCSB** action downloads only the public accession you enter. Local coordinate files are never uploaded.
+**A local molecular workspace for exploring protein structures and post-translational modifications.**
 
-![ProView showing the barnase–barstar interface](docs/screenshots/interface.png)
+Proteonator brings molecular inspection, supported PTM construction and structural comparison into one desktop application. Open a structure, choose its biological assembly, inspect a residue or ligand, and construct a modification in a separate scenario. See the added atoms, inspect changes in local contacts and geometry, and compare the result with the original coordinates. Save the complete workspace for another session or share a portable project.
 
-*Barnase–barstar (1BRS): linked residue inspection and interface distances calculated from the supplied crystal coordinates. This is an actual ProView capture.*
+Version 1.1 includes a redesigned toolbar, a Mol* molecular viewport, three interchangeable skins, gene and isoform context, and a bundled CPU runtime for supported local minimization. Core viewing, editing, calculations, projects and exports run locally. A separate Python installation, browser account or subscription is not required.
 
-![ProView comparing supplied structures](docs/screenshots/alignment.png)
+[Download the Windows installer](https://github.com/fishhrbio/Proteonator/releases/download/v1.1.0/Proteonator-Setup-1.1.0-x64.exe) · [User guide](docs/USER_GUIDE.md) · [Scientific methods](docs/SCIENCE.md) · [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
 
-*Reviewed Cα correspondence, an orange fitted mobile structure, and displacement markers. The mobile example is a deliberately transformed, renumbered and perturbed test copy of barnase; it is not evidence of a biological conformational change.*
+## See the workspace
 
-![A captioned image exported by ProView](docs/screenshots/export.png)
+![Proteonator Midnight workspace](docs/images/midnight.png)
+*Midnight: the default molecular workspace. A supported PTM is constructed as a separate scenario; the comparison reports geometric changes while preserving the source.*
 
-*A PNG exported by ProView includes source identity, the coordinate hash, calculation context and scientific limitations.*
+![Proteonator Liquid Glass workspace](docs/images/liquid-glass.png)
+*Liquid Glass: translucent navigation and soft highlights around the same scientific tools and data.*
 
-## Download and install
+![Proteonator Painted Pixels workspace](docs/images/painted-pixels.png)
+*Painted Pixels: original atmospheric artwork and pixel typography. Standard readable text, reduced transparency and high contrast are available in Settings.*
 
-**Windows 11 x64:** [Download ProView 1.0.0 installer](https://github.com/fishhrbio/ProView-1.0/releases/download/v1.0.0/ProView-Setup-1.0.0-x64.exe). The [release page](https://github.com/fishhrbio/ProView-1.0/releases/tag/v1.0.0) also supplies SHA-256 checksums and the integrated source archive.
+These are captures of the running application. Constructed modifications illustrate hypotheses, rather than experimental observations of a PTM-induced change.
 
-1. Download `ProView-Setup-1.0.0-x64.exe` and compare its SHA-256 with the release checksum file if desired: `Get-FileHash .\ProView-Setup-1.0.0-x64.exe -Algorithm SHA256`.
-2. Run the installer, choose the current-user installation and destination, then install. The MIT license is included with the application. Administrator access is not required for a current-user installation.
-3. Open **ProView** from the Start menu or desktop shortcut. The bundled 1BRS example opens without a connection.
-4. Close ProView before reinstalling or updating. Remove ProView using Windows **Installed apps** or the installed **Uninstall ProView** program. Projects saved outside the installation folder are retained.
+## What you can do
 
-The Windows installer is **unsigned**. Windows may identify its publisher as unknown or show SmartScreen reputation prompts. No signing certificate has been used. Windows 11 x64 is the tested release target; Windows 10, Windows ARM64, macOS and Linux are not claimed as tested or supported by this release. A compatible graphics driver with WebGL support is required for the 3D view.
+- **Inspect complete structures.** Choose coordinate models and biological assemblies; view proteins, DNA/RNA, ligands, heme, ions, waters and glycans. Switch between cartoons, backbone, bonds, sticks, spheres and surfaces. Adjust component visibility, opacity, clipping and lighting.
+- **Work directly with residues and atoms.** Pick in the viewport or linked sequence, inspect an exact chain/residue/atom identity, focus a neighborhood, save named selections and attach residue notes. Measure distances, angles and torsions.
+- **Construct supported PTMs.** Phosphorylate serine, threonine or tyrosine; acetylate lysine; or construct mono-, di- and trimethyllysine. Added atoms appear in the viewport. Undo, redo, duplicate, name and switch scenarios.
+- **Compare structural environments.** Inspect gained/lost heavy-atom contacts, bond geometry, torsions, added-atom steric overlaps and common-atom displacement. Use linked views or overlays; fit supplied comparison structures with reviewed exact or sequence-assisted correspondence.
+- **Calculate a bounded local response.** Run supported OpenMM minimization with explicit preparation, force-field, pH, neighborhood, restraints and stopping criteria. Compare with a separately prepared baseline control. Convergence and calculation provenance remain visible.
+- **Connect structure to biology.** Explicitly retrieve UniProt, PDBe SIFTS and available Ensembl records. Inspect gene, organism, transcript/isoform and processing annotations, with verified residue mappings and cached offline context.
+- **Keep a portable record.** Save embedded sources, scenarios, maps, notes, measurements, reviewed alignment, cached context and scene settings. Export mmCIF coordinates, structured JSON reports and captioned PNG images.
+- **Choose your workspace.** Midnight, Liquid Glass and Painted Pixels share the same functions. Customize shortcuts, toolbar actions, panel widths and accessibility preferences.
 
-## Features
+## Supported inputs and outputs
 
-- Linked molecular viewport, residue sequence and source-identity inspector.
-- Backbone trace, sticks and sphere representations; clipping, focus and keyboard view controls.
-- Author and label chain/residue identity, insertion codes, multiple coordinate models and documented alternate-conformer handling.
-- Editable PTM annotations that leave source coordinates unchanged.
-- Cross-chain heavy-atom minimum distance, contacts within 4 Å, residue-pair contacts and geometric overlap candidates.
-- Reviewed one-to-one Cα alignment with editable residue pairs, fitted RMSD, per-residue displacement and a visual overlay.
-- Portable `.proview` projects containing both original sources, annotations, view state and verified results. Legacy `.ptmw` geometry projects are migrated in memory.
-- Geometry and alignment JSON exports with units and provenance, and captioned viewport PNG export.
-- Local user guide, keyboard controls, reduced motion, labeled controls and responsive layouts.
-
-## Supported inputs and limits
-
-| Input | Scope |
+| Item | Support |
 | --- | --- |
-| `.pdb`, `.ent` | Fixed-column ATOM/HETATM coordinates, MODEL blocks, insertion codes, alternate locations and explicit CONECT records |
-| `.cif`, `.mmcif` | Coordinate-bearing PDBx/mmCIF atom_site loops, author/label identity and multiple models |
-| `.proview` | Portable ProView projects, schema 2.0.0, with embedded source and result revalidation |
-| `.ptmw` | Legacy schema 1.0.0 geometry projects; save as `.proview` after opening |
-| RCSB accession | Explicit retrieval of a four-character PDB accession as mmCIF; a connection is required for this action |
+| Coordinates | Local PDB, `.cif` and `.mmcif`; optional retrieval by four-character PDB accession |
+| Assemblies | Assembly operators supplied in the coordinate file; explicit asymmetric-unit view |
+| Coordinate models | One selected model at a time |
+| Local maps | CCP4/MRC and single-dataset density Cube with positive grid counts in Bohr; no automatic map-to-coordinate registration |
+| Projects | `.proteonator`; imports of earlier `.proview` and `.ptmw` projects |
+| Exports | Current mmCIF, JSON comparison/provenance, captioned PNG |
+| Sequence-only input | Does not create a three-dimensional structure; FASTA-to-fold conversion is unavailable |
 
-Coordinate inputs are limited to 5 MiB and 25,000 recorded atoms per structure, projects to 50 MiB, geometry to 25 million cross-partner pairs and 100,000 output pair records. Operations fail visibly at these limits instead of silently truncating results. The parser does not implement the entire mmCIF dictionary, BinaryCIF, PDB hybrid-36 numbering or multiple coordinate data blocks. FASTA sequences and trajectories are not coordinate inputs.
+The coordinate guard is 32 MiB and 100,000 recorded atoms per model or expanded assembly. Local relaxation has a separate 5,000-atom limit before hydrogen preparation. Map files are limited to 128 MiB each, two per project; portable projects are limited to 200 MiB. Performance depends on the structure, representation, graphics driver and calculation. These limits do not guarantee that every unusual chemical component can be parameterized.
 
-## Use ProView
+## Install and start
 
-Open coordinates or choose a bundled example. Choose a coordinate model and two protein chains. Click a residue in the molecule or sequence to inspect its original identity, then add, edit or remove an annotation. **Calculate interface** evaluates the selected source coordinates; **Show closest pair** draws the measured atom pair.
+**Supported release platform: Windows 11 x64.** macOS, Linux and Windows ARM installers are not supplied or verified for this release.
 
-Expand **Compare supplied structures**, open the mobile coordinates, and choose a chain and model in each structure. **Propose Cα pairs** finds exact identities. For different numbering, edit the two-column residue-pair list and select **Review edited pairs**. Resolve missing, duplicate or ambiguous pairs, confirm your review and fit. The mobile structure is displayed in orange with true-scale displacement connectors (up to 500); the numeric report includes every fitted residue. Correspondence is explicit, without sequence alignment or automatic homology inference.
+1. Download `Proteonator-Setup-1.1.0-x64.exe` from the [1.1 release](https://github.com/fishhrbio/Proteonator/releases/tag/v1.1.0).
+2. Run the installer, choose the installation location, and finish the setup wizard.
+3. Open **Proteonator** from the Start menu or desktop shortcut. A local barnase–barstar example opens automatically.
 
-Use **Save project** to retain the original inputs, comparison and workspace offline. **Export JSON**, **Export alignment JSON** and **Export PNG** create separate reports. See the [user guide](docs/USER_GUIDE.md) for policies, keyboard controls and troubleshooting.
+The installer contains the molecular runtime, examples, fonts, artwork, licenses and offline guide. The Windows package is unsigned; there is no publisher certificate in this release. Verify the download against the release's `SHA256SUMS.txt` if Windows displays an unfamiliar-app prompt. An earlier ProView installation is a separate application; open its saved projects in Proteonator and save new `.proteonator` copies before removing the old application.
 
-## Scientific limitations
+## First PTM comparison
 
-ProView describes supplied static coordinates. Contacts, fitted displacements, annotations and overlap candidates do not establish binding affinity, energetics, PTM effects, biological causality or clinical significance. An annotation adds a label, not atoms or chemical modifications. Missing atoms and residues are not reconstructed.
+1. Choose **Crambin · 1CRN** in **Example**, or open your own PDB/mmCIF file. Select the desired assembly and coordinate model before creating scenarios.
+2. Choose a serine in the linked sequence. Open **PTM**, review the modification and chemical state, then select **Construct modification**.
+3. Inspect the added atoms and the **Environment & comparison** results. Enable **Overlay** or **Linked comparison** to compare states.
+4. If the complete structure and modified residue have compatible parameters, choose the local-response settings and calculate relaxation. Review the convergence result and prepared baseline control.
+5. Save the portable project. Export the coordinates, scientific report or captioned image as needed.
 
-The viewport shows active canonical-protein atoms in the selected partner chains. Waters, ligands, unsupported modified residues and non-protein polymers are retained in project inputs and normalized data but hidden in this protein view and excluded from interface calculations. Heavy-atom contacts use an inclusive 4.0 Å cutoff. Overlap candidates use the Bondi C/N/O/S/P radius subset and a strict overlap greater than 0.4 Å, with a 10⁻¹² Å boundary tolerance. Known explicit CONECT 1–2 and 1–3 neighbors are excluded from overlaps; the bond graph remains incomplete. This is not a validated clashscore. Display bonds are inferred visual aids and do not enter the scientific calculations.
+Drag to orbit, use the wheel to zoom and right-drag to pan. Arrow keys rotate; Shift+arrows pan; `+`/`−` zoom. `F` fits the molecule. **Commands** (`Ctrl+K`) finds actions; **Settings** contains themes, layout, input and accessibility preferences. The Help menu opens the offline guide.
 
-Alignment uses only the pairs you review. A mathematically small RMSD does not validate correspondence. The fit is a proper rigid rotation and translation, without reflection, scale, coordinate optimization or source-coordinate replacement. [Methods and validation](docs/SCIENCE.md) describes the calculations and independent checks.
+## Scientific scope
 
-## Credits
+A constructed PTM changes chemistry and local geometry. It does **not** uniquely predict a protein's equilibrium fold, biological activity or binding affinity. Restricted minimization finds a nearby configuration under the selected preparation and restraints; it does not sample an equilibrium ensemble. Raw potential-energy differences between chemically different systems are not binding free energies.
 
-I’m Robert Waite, an M.S. Biotechnology student at the University of South Florida. ProView is a small independent project I’ve been developing in my free time.
+The initial local-response scope covers internal SEP/TPO/PTR residues with the bundled CHARMM36m parameters and internal ALY with the legacy CHARMM36 parameters. Methyllysine construction is available, but compatible relaxation parameters are not bundled. Terminal modifications, missing heavy atoms, unresolved alternates, incomplete chains or unparameterized partners can stop preparation. Display and static comparison remain available. Severe clashes or inverted retained stereocenters reject local response. Construction is a heavy-atom hypothesis; complete protonation and force-field charges belong to the supported preparation and its report. Phosphate templates are **monoanionic**; changing the preparation pH does not switch the phosphate state.
 
-ProView is an independent project and is not endorsed by or affiliated with the University of South Florida. Thanks to the authors and maintainers of [3Dmol.js](https://3dmol.org/), [Electron](https://www.electronjs.org/), [Zod](https://zod.dev/) and the [wwPDB/RCSB archive](https://www.rcsb.org/) for the visualization tools, runtime, validation library and public example structures. The experimental structures remain credited to their original depositors. See [third-party notices](THIRD_PARTY_NOTICES.md) and [fixture provenance](fixtures/README.md).
+Contacts, overlaps and displacement are geometric descriptors. Biological assemblies follow deposited author assignments. Gene, isoform and processing annotations depend on curated references and successful mapping; a coordinate file alone may not identify a unique gene or transcript. Read the [methods and limitations](docs/SCIENCE.md) before interpreting results.
 
-ProView's original code and icon are released under the [MIT license](LICENSE).
+## Credits and license
 
-## Build from source
+I’m Robert Waite, an M.S. Biotechnology student at the University of South Florida. Proteonator is a small independent project I’ve been developing in my free time.
 
-Use Node.js 24.22.1 and pnpm 11.25.0. On Windows, use a short checkout path (for example, `C:\src\ProView`) because NSIS build tools have path-length limits. From the repository root:
+This project is independent and is not endorsed by the University of South Florida. Molecular visualization and calculations depend on the work of the Mol*, Gemmi, OpenMM, NumPy, wwPDB, RCSB PDB, UniProt, PDBe SIFTS and Ensembl communities. The Silkscreen typeface is by Jason Kottke. Original coordinate depositors retain their scientific credit; bundled examples link to their archive records.
 
-```text
-pnpm install --frozen-lockfile
-pnpm setup:electron
-pnpm typecheck
-pnpm test
-pnpm schemas
-pnpm build
-pnpm start
-```
-
-`pnpm dist:win` builds a Windows x64 installer without publishing. `pnpm test:release` runs the desktop release suite. `pnpm verify:numerical` uses Python 3 for an independent reference calculation. The optional Gemmi/NumPy comparison uses Python 3.12 with `requirements-verification.txt` and `pnpm test:independent`. Build and test dependencies are separate from the installed app. Platform and test evidence is recorded in [release verification](docs/VERIFICATION.md).
+Original Proteonator code is available under the [MIT license](LICENSE). Dependency and data terms are listed in [Third-party notices](THIRD_PARTY_NOTICES.md), with full license texts included in the application. Hilbert Curve implementation copyright 1998, Rice University.

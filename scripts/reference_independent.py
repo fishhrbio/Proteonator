@@ -1,4 +1,4 @@
-"""Independent Gemmi import and NumPy SVD alignment oracle; no ProView imports."""
+"""Independent Gemmi import and NumPy SVD alignment oracle; no Proteonator imports."""
 import json
 import sys
 from pathlib import Path

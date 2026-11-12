@@ -1,23 +1,37 @@
 # Third-party notices
 
-ProView's original code and icon are copyright © 2026 Robert Waite, released under the MIT license in `LICENSE`. This does not replace any dependency or data license.
+Original Proteonator code and the fedora/bill outline icon are copyright © 2026 Robert Waite and distributed under the MIT license in `LICENSE`. Dependency, font and data licenses remain separate. No institutional endorsement is implied.
 
-| Component | Purpose | License / included notice |
+| Component | Purpose | Terms and included notice |
 | --- | --- | --- |
-| 3Dmol.js 2.5.5 | Local WebGL visualization and inferred display bonds | BSD-3-Clause, `licenses/3dmol-LICENSE.txt` |
-| Zod 4.6.7 | Runtime validation of scientific and project data | MIT, `licenses/zod-LICENSE.txt` |
-| Electron 45.3.0 | Bundled desktop runtime | MIT, `licenses/electron-LICENSE.txt`; installed `LICENSE.electron.txt` |
-| Chromium, Node.js and Electron's runtime dependencies | Embedded runtime components | Installed `LICENSES.chromium.html` and Electron notice files |
-| wwPDB / RCSB coordinate archive | Bundled 1BRS and 1CRN examples | CC0-1.0; original depositors and exact file provenance in `fixtures/PROVENANCE.json` and `fixtures/README.md` |
+| Mol* 5.13.0 | Molecular visualization, connectivity, representations, maps and measurement display | MIT; `licenses/Molstar-MIT.txt` |
+| Gemmi 0.7.5 | Coordinate parsing, assemblies, chemical data and mmCIF writing | MPL-2.0; `licenses/Gemmi-MPL-2.0.txt`; unmodified upstream source below |
+| OpenMM 8.6.0 | CPU preparation and local minimization | API/CPU/Reference: MIT; additional component terms in `licenses/OpenMM-Licenses.txt`; complete LGPL/GPL texts also included |
+| CHARMM force-field XML distributed with OpenMM | Molecular parameters | Source/version and scientific references embedded in the XML; distributed with the OpenMM runtime |
+| NumPy 2.3.5 and bundled numerical libraries | Numerical geometry and linear algebra | BSD and bundled dependency terms; `licenses/NumPy-and-bundled-libraries.txt` |
+| CPython 3.12.14 | Standalone molecular runtime | PSF and included component licenses; `licenses/Python-PSF.txt` |
+| PyInstaller 6.17.0 bootloader | Standalone executable | GPL with application-distribution exception; `licenses/PyInstaller-license-and-exception.txt` |
+| charset-normalizer 3.5.2 | Runtime text support | MIT; `licenses/charset-normalizer-MIT.txt` |
+| Electron 45.3.0 | Desktop runtime | MIT; `licenses/electron-LICENSE.txt`; installed `LICENSE.electron.txt` |
+| Chromium, Node.js and Electron runtime components | Embedded desktop services | Installed `LICENSES.chromium.html` and runtime notice files |
+| 3Dmol.js 2.5.5 | Compatibility source dependency | BSD-3-Clause; `licenses/3dmol-LICENSE.txt` |
+| Zod 4.6.7 | Project/input validation | MIT; `licenses/zod-LICENSE.txt` |
+| JavaScript transitive dependencies | Library components | Full notices in `licenses/JavaScript-dependencies.txt`, version inventory in the companion JSON |
+| Silkscreen, Jason Kottke | Painted Pixels typeface | SIL Open Font License 1.1; `licenses/Silkscreen-OFL.txt`; unmodified font |
+| wwPDB Chemical Component Dictionary and PDB archive | Chemistry definitions and example structures | CC0-1.0; archive links and provenance below |
 
-3Dmol.js: Nicholas Rego and David Koes, “3Dmol.js: molecular visualization with WebGL,” Bioinformatics 31(8), 1322–1324 (2015). [Publication](https://doi.org/10.1093/bioinformatics/btu829), [project](https://3dmol.org/).
+OpenMM reports its internal revision as `8.6.0.dev-c6173db`; the installed distribution version is 8.6.0. Only CPU/Reference execution is used. OpenCL/CUDA plugins are not supplied as a supported calculation path. PdbxReader by John Westbrook is redistributed within OpenMM under CC BY 3.0; see [license](https://creativecommons.org/licenses/by/3.0/) and the full OpenMM notices. Hilbert Curve implementation copyright 1998, Rice University.
 
-1BRS: Buckle, Schreiber and Fersht, “Protein-protein recognition: crystal structural analysis of a barnase-barstar complex at 2.0-Å resolution,” Biochemistry (1994). [RCSB record](https://www.rcsb.org/structure/1BRS).
+Gemmi: © 2017–2025 Global Phasing Ltd and contributors. The executable library is unmodified. Its corresponding source is freely available from the [v0.7.5 source archive](https://github.com/project-gemmi/gemmi/archive/refs/tags/v0.7.5.tar.gz) and [upstream repository](https://github.com/project-gemmi/gemmi/tree/v0.7.5), under MPL-2.0. Proteonator's separate code remains MIT. Other exact-version source links are listed in `licenses/DEPENDENCY_SOURCES.md`.
 
-1CRN depositors: W. A. Hendrickson and M. M. Teeter. Primary entry citation: M. M. Teeter, “Water structure of a hydrophobic protein at atomic resolution: Pentagon rings of water molecules in crystals of crambin,” PNAS 81, 6014–6018 (1984). [RCSB record](https://www.rcsb.org/structure/1CRN).
+Mol*: Sehnal et al., [Nucleic Acids Research (2021)](https://doi.org/10.1093/nar/gkab314). OpenMM and CHARMM parameter references are described in the [scientific methods](docs/SCIENCE.md) and parameter XML. The 3Dmol compatibility dependency is by Nicholas Rego and David Koes, [Bioinformatics (2015)](https://doi.org/10.1093/bioinformatics/btu829).
 
-Overlap radii use the C/N/O/S/P subset from A. Bondi, “van der Waals Volumes and Radii,” J. Phys. Chem. 68(3), 441–451 (1964). [Publication](https://doi.org/10.1021/j100785a001).
+## Coordinate and chemistry data
 
-Proper rigid fitting solves the least-squares rotation problem using Horn's quaternion eigenvector formulation: B. K. P. Horn, “Closed-form solution of absolute orientation using unit quaternions,” JOSA A 4(4), 629–642 (1987). [Publication](https://doi.org/10.1364/JOSAA.4.000629). The method allows rotation and translation, with determinant +1 and no reflection or scale.
+Public archive examples are credited to their depositors and primary publications through their entry records: [1BRS](https://www.rcsb.org/structure/1BRS), [1CRN](https://www.rcsb.org/structure/1CRN), [1UBQ](https://www.rcsb.org/structure/1UBQ), [4HHB](https://www.rcsb.org/structure/4HHB), [1BNA](https://www.rcsb.org/structure/1BNA) and [1HZH](https://www.rcsb.org/structure/1HZH). Exact coordinate bytes and chemistry-component hashes are recorded in `fixtures/PROVENANCE.json` and `data/PROVENANCE.json`. Synthetic fixtures are explicitly identified as artificial and are not deposited biological assemblies or observations of PTM-induced folding.
 
-Coordinate archive [usage policy](https://www.wwpdb.org/about/usage-policies). Synthetic comparison and load-test fixtures are explicitly identified as derived test data and are not experimental assemblies. Development dependencies and the independent validation tools are not part of the installed scientific engine.
+The [wwPDB usage policy](https://www.wwpdb.org/about/usage-policies) places PDB archive data and the [Chemical Component Dictionary](https://www.wwpdb.org/data/ccd) under CC0. Cite original structures and scientific methods when reporting analyses.
+
+## Optional reference services
+
+Biological annotations come from [UniProt](https://www.uniprot.org/help/license), [PDBe SIFTS](https://www.ebi.ac.uk/pdbe/docs/sifts/quick.html) and [Ensembl](https://www.ensembl.org/info/about/legal/disclaimer.html). UniProt copyrightable database content uses CC BY 4.0. PDBe's [public-data statement](https://www.ebi.ac.uk/pdbe/about/public-data-access-statement) describes CC0 archive/derived data and service terms. Cached records retain source and retrieval time; these services and contributors do not endorse Proteonator. Local coordinate files are not uploaded for context retrieval.

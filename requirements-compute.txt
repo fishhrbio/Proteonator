@@ -1,0 +1,6 @@
+gemmi==0.7.5
+numpy==2.3.5
+OpenMM==8.6.0
+charset-normalizer==3.5.2
+PyInstaller==6.17.0
+pyinstaller-hooks-contrib==2026.10

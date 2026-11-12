@@ -1,7 +1,12 @@
 node_modules/
+compute-libs/
+compute-dist/
 dist/
 release/
 work/
+evidence/
+__pycache__/
+*.pyc
 *.log
 *.tmp
 .env

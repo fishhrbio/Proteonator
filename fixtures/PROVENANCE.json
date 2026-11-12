@@ -1,195 +1,181 @@
 {
-  "recordedAt": "2026-11-11T18:33:59.844042-05:00",
-  "files": [
+  "pathConvention": "Paths are relative to the source repository root.",
+  "coordinates": [
     {
-      "path": "ccd/ALY.cif",
-      "bytes": 8269,
-      "sha256": "2b51dcd1dc065fb46df3a05ea166b61271aa5d6d60341dc792df1e1b53ff92c2",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/ALY.cif",
+      "path": "fixtures/structures/1BNA.pdb",
+      "bytes": 76464,
+      "sha256": "df42f1506792f191b957227b061360652adcf6f813eb69d9ec553067ea584670",
+      "source": "https://files.rcsb.org/download/1BNA.pdb",
+      "entry": "https://www.rcsb.org/structure/1BNA",
       "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
+      "retrievalTime": null
     },
     {
-      "path": "ccd/M3L.cif",
-      "bytes": 8767,
-      "sha256": "efb4dd79d847754858ab04e901ffdb73031fdffacebd29699501f7ea4f6f2b34",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/M3L.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "ccd/MLY.cif",
-      "bytes": 8299,
-      "sha256": "5f6c3878bc50a166a1571237131c262e293eaac0027112d91a885f486e39afc2",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/MLY.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "ccd/MLZ.cif",
-      "bytes": 7931,
-      "sha256": "2ba0d81a7870db5d40bea4ed54d8ed5fb526251b6a56f6afe5407742c9f0c00d",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/MLZ.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "ccd/NAG.cif",
-      "bytes": 11333,
-      "sha256": "eada750ebb20e7abd76ef486c0a8278e461309e1cdde415545bb1c63c09bfb0f",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/NAG.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "ccd/PTR.cif",
-      "bytes": 8777,
-      "sha256": "b78f4345d0daeea714cd3af836934b5aec24e5cad8f4d5a5ecbaa4a99722ad6d",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/PTR.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "ccd/SEP.cif",
-      "bytes": 7339,
-      "sha256": "8a64575a99938ed0960684067183d8b7a85daabb204fda3c13c24fa9353e86a9",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/SEP.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "ccd/TPO.cif",
-      "bytes": 7734,
-      "sha256": "d642585cb6396dd78eccb0240a3ed654a27b772881e719b8d3d298cd57d57b1b",
-      "evidenceClass": "chemical-dictionary-reference",
-      "sourceUrl": "https://files.rcsb.org/ligands/download/TPO.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "usedFor": "Reference inventory only; no coordinate constructor or force-field parameterization"
-    },
-    {
-      "path": "structures/1BRS.pdb",
+      "path": "fixtures/structures/1BRS.pdb",
       "bytes": 466965,
       "sha256": "0076aae54252706a8c8c02f7b1e71ce2394b0e928b413590b4ac12aade9e8f6c",
-      "evidenceClass": "observed-structure",
-      "accession": "1BRS",
-      "sourceUrl": "https://files.rcsb.org/download/1BRS.pdb",
-      "recordUrl": "https://www.rcsb.org/structure/1BRS",
+      "source": "https://files.rcsb.org/download/1BRS.pdb",
+      "entry": "https://www.rcsb.org/structure/1BRS",
       "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "provenanceNote": "Exact saved bytes recovered from the interrupted Stage A workspace; original download timestamp not independently established.",
-      "coordinateRows": {
-        "ATOM": 4640,
-        "HETATM": 513
-      }
+      "retrievalTime": null
     },
     {
-      "path": "structures/1CRN.pdb",
+      "path": "fixtures/structures/1CRN.cif",
+      "bytes": 69506,
+      "sha256": "23787562c427d7c1abe5420e86d5f1d0a6c7007dec1e8ce85645a6d69c32e8ba",
+      "source": "https://files.rcsb.org/download/1CRN.cif",
+      "entry": "https://www.rcsb.org/structure/1CRN",
+      "license": "CC0-1.0",
+      "retrievalTime": "2026-11-12T00:41:54.5012978Z"
+    },
+    {
+      "path": "fixtures/structures/1CRN.pdb",
       "bytes": 49491,
       "sha256": "42199a30a0701864a2a5cc76cd7f35cc544cd0e65fbcf63e03c166543249b811",
-      "evidenceClass": "observed-structure",
-      "accession": "1CRN",
-      "sourceUrl": "https://files.rcsb.org/download/1CRN.pdb",
-      "recordUrl": "https://www.rcsb.org/structure/1CRN",
+      "source": "https://files.rcsb.org/download/1CRN.pdb",
+      "entry": "https://www.rcsb.org/structure/1CRN",
       "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "recoveredAt": "2026-11-11T18:33:59.844042-05:00",
-      "retrievedAt": null,
-      "provenanceNote": "Exact saved bytes recovered from the interrupted Stage A workspace; original download timestamp not independently established.",
-      "coordinateRows": {
-        "ATOM": 327,
-        "HETATM": 0
-      }
+      "retrievalTime": null
     },
     {
-      "path": "synthetic/contact-boundary.pdb",
+      "path": "fixtures/structures/1HZH.pdb",
+      "bytes": 950778,
+      "sha256": "d47d146ee087cfced727df65176c75d7f3472069a304e6c7063d78c863e58951",
+      "source": "https://files.rcsb.org/download/1HZH.pdb",
+      "entry": "https://www.rcsb.org/structure/1HZH",
+      "license": "CC0-1.0",
+      "retrievalTime": null
+    },
+    {
+      "path": "fixtures/structures/1UBQ.pdb",
+      "bytes": 78570,
+      "sha256": "d4a6812d8951cf6594e6a0763f089e35f5a80b62acb3c117b2c5565228a7b161",
+      "source": "https://files.rcsb.org/download/1UBQ.pdb",
+      "entry": "https://www.rcsb.org/structure/1UBQ",
+      "license": "CC0-1.0",
+      "retrievalTime": null
+    },
+    {
+      "path": "fixtures/structures/4HHB.pdb",
+      "bytes": 473850,
+      "sha256": "abf382e0fd84b53bd4c08b373d37c0d7fe9fbe1a9a9c3851b2f5f2fbbe627101",
+      "source": "https://files.rcsb.org/download/4HHB.pdb",
+      "entry": "https://www.rcsb.org/structure/4HHB",
+      "license": "CC0-1.0",
+      "retrievalTime": null
+    }
+  ],
+  "componentReferences": [
+    {
+      "path": "fixtures/ccd/ALY.cif",
+      "bytes": 8269,
+      "sha256": "2b51dcd1dc065fb46df3a05ea166b61271aa5d6d60341dc792df1e1b53ff92c2",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/ALY.cif"
+    },
+    {
+      "path": "fixtures/ccd/M3L.cif",
+      "bytes": 8767,
+      "sha256": "efb4dd79d847754858ab04e901ffdb73031fdffacebd29699501f7ea4f6f2b34",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/M3L.cif"
+    },
+    {
+      "path": "fixtures/ccd/MLY.cif",
+      "bytes": 8299,
+      "sha256": "5f6c3878bc50a166a1571237131c262e293eaac0027112d91a885f486e39afc2",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/MLY.cif"
+    },
+    {
+      "path": "fixtures/ccd/MLZ.cif",
+      "bytes": 7931,
+      "sha256": "2ba0d81a7870db5d40bea4ed54d8ed5fb526251b6a56f6afe5407742c9f0c00d",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/MLZ.cif"
+    },
+    {
+      "path": "fixtures/ccd/NAG.cif",
+      "bytes": 11333,
+      "sha256": "eada750ebb20e7abd76ef486c0a8278e461309e1cdde415545bb1c63c09bfb0f",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/NAG.cif"
+    },
+    {
+      "path": "fixtures/ccd/PTR.cif",
+      "bytes": 8777,
+      "sha256": "b78f4345d0daeea714cd3af836934b5aec24e5cad8f4d5a5ecbaa4a99722ad6d",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/PTR.cif"
+    },
+    {
+      "path": "fixtures/ccd/SEP.cif",
+      "bytes": 7339,
+      "sha256": "8a64575a99938ed0960684067183d8b7a85daabb204fda3c13c24fa9353e86a9",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/SEP.cif"
+    },
+    {
+      "path": "fixtures/ccd/TPO.cif",
+      "bytes": 7734,
+      "sha256": "d642585cb6396dd78eccb0240a3ed654a27b772881e719b8d3d298cd57d57b1b",
+      "license": "CC0-1.0",
+      "sourceUrl": "https://files.rcsb.org/ligands/download/TPO.cif"
+    }
+  ],
+  "synthetic": [
+    {
+      "path": "fixtures/synthetic/contact-boundary.pdb",
       "bytes": 206,
       "sha256": "eadaeae2f8830a44669af30a1ed4d16f1fa074eabd885c317224aa4bfc3fc0e6",
       "evidenceClass": "synthetic-fixture",
-      "generatedAt": "2026-11-11T18:33:59.844042-05:00",
-      "usedFor": "Parser or numeric verification only",
-      "derivedFrom": null
+      "description": "Artificial parser, analytic geometry or load-test coordinates; not an experimentally observed conformation."
     },
     {
-      "path": "synthetic/crambin-grid-48.pdb",
+      "path": "fixtures/synthetic/crambin-grid-48.pdb",
       "bytes": 1272654,
       "sha256": "99187f087aa56c1d3a9c79c6cb0141ffe58a9e8fecd8f7236741d565a64e9c87",
       "evidenceClass": "synthetic-fixture",
-      "generatedAt": "2026-11-11T18:33:59.844042-05:00",
-      "usedFor": "Parser or numeric verification only",
-      "derivedFrom": "1CRN.pdb"
+      "description": "Artificial parser, analytic geometry or load-test coordinates; not an experimentally observed conformation.",
+      "derivedFrom": "fixtures/structures/1CRN.pdb"
     },
     {
-      "path": "synthetic/distance-3-4-5.pdb",
+      "path": "fixtures/synthetic/distance-3-4-5.pdb",
       "bytes": 206,
       "sha256": "bc512d12ccbcf4ebcd3d224a7f9ecc61ec6f6f8778d6573d823d1f4b265f7ce7",
       "evidenceClass": "synthetic-fixture",
-      "generatedAt": "2026-11-11T18:33:59.844042-05:00",
-      "usedFor": "Parser or numeric verification only",
-      "derivedFrom": null
+      "description": "Artificial parser, analytic geometry or load-test coordinates; not an experimentally observed conformation."
     },
     {
-      "path": "synthetic/insertion-alternates.pdb",
+      "path": "fixtures/synthetic/insertion-alternates.pdb",
       "bytes": 368,
       "sha256": "d32b2967ea8bc7ce7dac179c54d27a19d3f83b858b1199f4541652d45c16c4e8",
       "evidenceClass": "synthetic-fixture",
-      "generatedAt": "2026-11-11T18:33:59.844042-05:00",
-      "usedFor": "Parser or numeric verification only",
-      "derivedFrom": null
+      "description": "Artificial parser, analytic geometry or load-test coordinates; not an experimentally observed conformation."
     },
     {
-      "path": "structures/1CRN.cif",
-      "bytes": 69506,
-      "sha256": "23787562c427d7c1abe5420e86d5f1d0a6c7007dec1e8ce85645a6d69c32e8ba",
-      "evidenceClass": "observed-structure",
-      "sourceUrl": "https://files.rcsb.org/download/1CRN.cif",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "retrievedAt": "2026-11-12T00:41:54.5012978Z",
-      "usedFor": "Public mmCIF cross-format atom-site import check against bundled 1CRN PDB"
-    },
-    {
-      "path": "synthetic/barnase-comparison.pdb",
+      "path": "fixtures/synthetic/barnase-comparison.pdb",
       "bytes": 71036,
       "sha256": "7721f22dad721194f01bac40a70d6dea49738ecde4be48ec32880ceb478bac7a",
       "evidenceClass": "synthetic-fixture",
-      "sourceUrl": "https://www.rcsb.org/structure/1BRS",
-      "license": "CC0-1.0",
-      "licenseUrl": "https://www.wwpdb.org/about/usage-policies",
-      "usedFor": "Synthetic alignment verification and screenshot demonstration; not an observed conformation",
-      "generation": "scripts/generate-comparison.py: chain A, numbering +100, rigid transform and local z perturbation"
+      "description": "Synthetic chain A comparison with changed numbering, a rigid transform and a local z displacement; not an observed PTM-induced conformation.",
+      "derivedFrom": "fixtures/structures/1BRS.pdb"
     }
-  ]
+  ],
+  "expectedGeometry": [
+    {
+      "path": "fixtures/expected/1BRS-A-D.json",
+      "bytes": 3201,
+      "sha256": "f9741eb5a38291d586d86accf22e56f9e97a7962c3aa76c865848498399ce919",
+      "description": "Expected numerical geometry values for verification."
+    },
+    {
+      "path": "fixtures/expected/synthetic.json",
+      "bytes": 561,
+      "sha256": "21fabb5680dac61d93b351b49e94f56fc88dd8e316d972a8167beacf1daa903c",
+      "description": "Expected numerical geometry values for verification."
+    }
+  ],
+  "currentChemistry": "data/PROVENANCE.json",
+  "license": "CC0-1.0 for archive data; synthetic fixtures are explicitly identified."
 }

@@ -1,3 +1,4 @@
+import {registerStudio,studioMenu} from './studio';
 import { app, BrowserWindow, dialog, ipcMain, protocol, session, shell } from 'electron';
 import { readFile, stat, writeFile, rename, unlink } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -11,8 +12,9 @@ import {
   type NormalizedStructure, type GeometryRequest, type JobEvent, type Project, type GeometryResult, type AlignmentResult,
 } from '../contracts';
 
-const ORIGIN = 'proview://app';
+const ORIGIN = 'proteonator://app';
 // A hidden native window lets automated checks coexist with the user's desktop.
+if(process.platform==='win32')app.setAppUserModelId('org.robertwaite.proteonator');
 const verificationMode = process.argv.includes('--proview-verify-hidden');
 const MAX_INPUT_BYTES = 5 * 1024 * 1024;
 const MAX_ATOMS = 25000;
@@ -36,7 +38,7 @@ function normalizedError(error: any) {
   return appError('INVALID_INPUT',error?.message??'The operation failed.','Check your input and try again.');
 }
 
-protocol.registerSchemesAsPrivileged([{ scheme: 'proview', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
+protocol.registerSchemesAsPrivileged([{ scheme: 'proteonator', privileges: { standard: true, secure: true, supportFetchAPI: true } }]);
 
 function emit(event: JobEvent) {
   const checked = JobEventSchema.parse(event);
@@ -97,7 +99,7 @@ async function analyze(raw: unknown) {
 function handle(channel: string, handler: (argument: unknown) => Promise<unknown>) {
   ipcMain.handle(channel, async (event, argument) => {
     const senderUrl=new URL(event.senderFrame?.url??'about:blank');
-    if (!win || event.sender.id !== win.webContents.id || event.senderFrame !== win.webContents.mainFrame || senderUrl.protocol!=='proview:' || senderUrl.hostname!=='app' || senderUrl.pathname!=='/index.html' || senderUrl.search) {
+    if (!win || event.sender.id !== win.webContents.id || event.senderFrame !== win.webContents.mainFrame || senderUrl.protocol!=='proteonator:' || senderUrl.hostname!=='app' || senderUrl.pathname!=='/index.html' || senderUrl.search) {
       return { ok: false, error: appError('INVALID_INPUT', 'Untrusted IPC sender.', 'Use the local application window.') };
     }
     try { return { ok: true, value: await handler(argument) }; }
@@ -110,10 +112,11 @@ function handle(channel: string, handler: (argument: unknown) => Promise<unknown
 async function atomicJson(filename:string,value:unknown){await atomicWrite(filename,JSON.stringify(value,null,2));}
 
 app.whenReady().then(async () => {
+  registerStudio(()=>win);
   const assets: Record<string, string> = {
-    '/index.html': 'text/html', '/app.js': 'text/javascript', '/style.css': 'text/css', '/3Dmol-min.js': 'text/javascript', '/icon.png':'image/png',
+    '/index.html': 'text/html', '/app.js': 'text/javascript', '/style.css': 'text/css', '/3Dmol-min.js': 'text/javascript', '/icon.png':'image/png', '/logo.svg':'image/svg+xml', '/molstar.css':'text/css', '/molstar.js':'text/javascript', '/pixel.ttf':'font/ttf', '/painted-world.png':'image/png',
   };
-  protocol.handle('proview', async (request) => {
+  protocol.handle('proteonator', async (request) => {
     const url = new URL(request.url);
     if (url.hostname !== 'app' || !(url.pathname in assets) || request.method !== 'GET') return new Response('Not found', { status: 404 });
     const bytes = await readFile(path.join(__dirname, 'renderer', url.pathname.slice(1)));
@@ -182,10 +185,10 @@ app.whenReady().then(async () => {
   });
   handle('proview:open-project', async () => {
     if(importing||jobs.size) throw appError('INVALID_INPUT','A local operation is running.','Wait or cancel before opening a project.');
-    const answer=await dialog.showOpenDialog(win!,{properties:['openFile'],filters:[{name:'ProView project',extensions:['proview','ptmw']}]});
+    const answer=await dialog.showOpenDialog(win!,{properties:['openFile'],filters:[{name:'Proteonator project',extensions:['proview','ptmw']}]});
     if(answer.canceled||!answer.filePaths[0]) return null;
     const file=answer.filePaths[0];
-    if(!['.proview','.ptmw'].includes(path.extname(file).toLowerCase())) throw appError('UNSUPPORTED_FORMAT','Choose a .proview project (or a legacy .ptmw file).','Use a ProView project file.');
+    if(!['.proview','.ptmw'].includes(path.extname(file).toLowerCase())) throw appError('UNSUPPORTED_FORMAT','Choose a .proview project (or a legacy .ptmw file).','Use a Proteonator project file.');
     const info=await stat(file);
     if(info.size>50*1024*1024) throw appError('RESOURCE_LIMIT','Project exceeds 50 MiB.','Open a smaller project.');
     importing=true;
@@ -222,7 +225,7 @@ app.whenReady().then(async () => {
     if(project.analyses.some(a=>!completedResults.some(r=>JSON.stringify(r)===JSON.stringify(a)))) throw appError('INVALID_INPUT','Project contains an unknown analysis result.','Recalculate the analysis before saving.');
     // Run the full source and derived-state check off the UI thread before touching disk.
     await workerCall({operation:'project',text:JSON.stringify(project)});
-    const answer=await dialog.showSaveDialog(win!,{defaultPath:`${structure.source.name.replace(/\.[^.]+$/,'')}.proview`,filters:[{name:'ProView project',extensions:['proview']}]});
+    const answer=await dialog.showSaveDialog(win!,{defaultPath:`${structure.source.name.replace(/\.[^.]+$/,'')}.proview`,filters:[{name:'Proteonator project',extensions:['proview']}]});
     if(answer.canceled||!answer.filePath) return null;
     const filename=path.extname(answer.filePath).toLowerCase()==='.proview'?answer.filePath:`${answer.filePath}.proview`;
     await atomicJson(filename,project); currentProject=project;
@@ -232,7 +235,7 @@ app.whenReady().then(async () => {
     const result=GeometryResultSchema.parse(raw);
     if(!current||result.structureId!==current.id||!completedResults.some(r=>JSON.stringify(r)===JSON.stringify(result))) throw appError('INVALID_INPUT','No matching completed result.','Calculate geometry before exporting.');
     const payload=AnalysisExportSchema.parse({schemaVersion:'1.0.0',format:'proview-geometry-export',exportedAt:new Date().toISOString(),coordinateUnit:'angstrom',result,source:current.source});
-    const answer=await dialog.showSaveDialog(win!,{defaultPath:'ProView-geometry.json',filters:[{name:'JSON geometry',extensions:['json']}]});
+    const answer=await dialog.showSaveDialog(win!,{defaultPath:'Proteonator-geometry.json',filters:[{name:'JSON geometry',extensions:['json']}]});
     if(answer.canceled||!answer.filePath) return null;
     const filename=path.extname(answer.filePath).toLowerCase()==='.json'?answer.filePath:`${answer.filePath}.json`;
     await atomicJson(filename,payload);return {path:filename};
@@ -246,7 +249,7 @@ app.whenReady().then(async () => {
     if(bytes.length<45||!bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))||bytes.toString('ascii',12,16)!=='IHDR') throw appError('INVALID_INPUT','Invalid PNG header.','Retry image export.');
     const width=bytes.readUInt32BE(16),height=bytes.readUInt32BE(20);
     if(width<256||height<256||width>8192||height>8192) throw appError('RESOURCE_LIMIT','PNG dimensions are outside the supported range.','Resize the viewer and retry.');
-    const answer=await dialog.showSaveDialog(win!,{defaultPath:'ProView-view.png',filters:[{name:'PNG image',extensions:['png']}]});
+    const answer=await dialog.showSaveDialog(win!,{defaultPath:'Proteonator-view.png',filters:[{name:'PNG image',extensions:['png']}]});
     if(answer.canceled||!answer.filePath) return null;
     const filename=path.extname(answer.filePath).toLowerCase()==='.png'?answer.filePath:`${answer.filePath}.png`;
     await atomicWrite(filename,bytes);
@@ -255,7 +258,7 @@ app.whenReady().then(async () => {
   handle('proview:export-alignment',async raw=>{
     const result=AlignmentResultSchema.parse(raw);
     if(!current||!comparison||JSON.stringify(result)!==JSON.stringify(completedAlignment)) throw appError('INVALID_INPUT','No matching completed alignment.','Fit a reviewed mapping first.');
-    const answer=await dialog.showSaveDialog(win!,{defaultPath:'ProView-alignment.json',filters:[{name:'JSON alignment',extensions:['json']}]});
+    const answer=await dialog.showSaveDialog(win!,{defaultPath:'Proteonator-alignment.json',filters:[{name:'JSON alignment',extensions:['json']}]});
     if(answer.canceled||!answer.filePath)return null;
     const filename=path.extname(answer.filePath).toLowerCase()==='.json'?answer.filePath:`${answer.filePath}.json`;
     await atomicJson(filename,{schemaVersion:'1.0.0',format:'proview-alignment-export',coordinateUnit:'angstrom',exportedAt:new Date().toISOString(),referenceSource:current.source,mobileSource:comparison.source,result});
@@ -274,13 +277,13 @@ app.whenReady().then(async () => {
   });
   win = new BrowserWindow({
     width: 1440, height: 940, minWidth: 760, minHeight: 600, show: false,
-    backgroundColor: '#0b111b', title: 'ProView',
+    backgroundColor: '#0b111b', title: 'Proteonator',
     icon:path.join(__dirname,'renderer/icon.png'),
     webPreferences: { preload: path.join(__dirname, 'preload.cjs'), nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true, backgroundThrottling: !verificationMode },
   });
-  win.setMenuBarVisibility(false);
+  studioMenu(win);
   win.webContents.on('will-prevent-unload',event=>{
-    const choice=dialog.showMessageBoxSync(win!,{type:'question',title:'ProView',message:'Close ProView and discard unsaved changes?',detail:'Choose Keep working to save your project before closing.',buttons:['Keep working','Discard changes'],defaultId:0,cancelId:0,noLink:true});
+    const choice=dialog.showMessageBoxSync(win!,{type:'question',title:'Proteonator',message:'Close Proteonator and discard unsaved changes?',detail:'Choose Keep working to save your project before closing.',buttons:['Keep working','Discard changes'],defaultId:0,cancelId:0,noLink:true});
     if(choice===1)event.preventDefault();
   });
   win.webContents.on('will-attach-webview',event=>event.preventDefault());

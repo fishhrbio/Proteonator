@@ -1,9 +1,9 @@
 {
-  "name": "proview",
-  "version": "1.0.0",
+  "name": "proteonator",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "A local protein structure visualizer with residue annotations, interface geometry and reviewed structural alignment",
+  "description": "A local molecular structure and PTM scenario explorer",
   "author": "Robert Waite",
   "main": "dist/main.cjs",
   "license": "MIT",
@@ -18,32 +18,27 @@
     "dev": "pnpm build && pnpm start",
     "typecheck": "tsc --noEmit",
     "test": "tsx --test tests/*.test.ts",
-    "schemas": "tsx scripts/export-contracts.ts",
-    "test:desktop": "node scripts/verify-release.mjs",
-    "test:packaged": "node scripts/verify-packaged.mjs",
-    "make:icon": "python scripts/make-icon.py",
-    "benchmark": "tsx scripts/benchmark.ts",
-    "verify:numerical": "tsx scripts/verify-numerical.ts",
-    "verify:package": "node scripts/verify-package.mjs",
+    "make:icon": "node scripts/make-brand.mjs",
     "pack:dir": "electron-builder --dir --publish never",
     "dist:win": "electron-builder --win nsis --x64 --publish never",
-    "dist:mac": "electron-builder --mac dmg --arm64 --publish never",
-    "test:release": "node scripts/verify-release.mjs",
-    "test:installer": "powershell -NoProfile -File scripts/verify-installer.ps1",
-    "test:independent": "tsx scripts/verify-independent.ts",
-    "test:display": "node scripts/verify-display.mjs",
-    "test:lifecycle": "node scripts/verify-lifecycle.mjs",
-    "test:live": "node scripts/verify-live.mjs",
-    "benchmark:desktop": "node scripts/benchmark-desktop.mjs",
-    "test:portability": "node scripts/verify-portability.mjs",
-    "test:close": "node scripts/verify-close.mjs"
+    "test:studio": "node scripts/verify-studio.mjs",
+    "test:molecule": "python compute/test_molecule.py",
+    "test:physics": "python compute/verify_physics.py",
+    "test:extended": "node scripts/verify-studio-extended.mjs",
+    "test:studio-physics": "node scripts/verify-studio-physics.mjs",
+    "freeze:compute": "python scripts/freeze-compute.py",
+    "guides": "python scripts/render-guides.py",
+    "test:desktop": "node scripts/verify-studio-desktop.mjs",
+    "test:stereochemistry": "python compute/verify_stereochemistry.py"
   },
   "dependencies": {
     "3dmol": "2.5.5",
+    "molstar": "5.13.0",
     "zod": "4.6.7"
   },
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
+    "@resvg/resvg-js": "2.6.2",
     "@types/node": "26.6.6",
     "electron": "45.3.0",
     "electron-builder": "26.18.0",
@@ -53,21 +48,27 @@
     "typescript": "7.0.2"
   },
   "build": {
-    "appId": "org.robertwaite.proview",
-    "productName": "ProView",
+    "appId": "org.robertwaite.proteonator",
+    "productName": "Proteonator",
     "asar": true,
     "files": [
       "dist/**/*",
       "package.json",
       "LICENSE",
-      "licenses/**/*"
+      "licenses/**/*",
+      "!node_modules/**/*"
     ],
     "extraResources": [
       {
-        "from": "dist/fixtures",
-        "to": "fixtures",
+        "from": "compute-dist/ProteonatorCompute",
+        "to": "compute"
+      },
+      {
+        "from": "fixtures/structures",
+        "to": "examples",
         "filter": [
-          "*.pdb"
+          "*.pdb",
+          "*.cif"
         ]
       },
       {
@@ -79,23 +80,24 @@
         "to": "THIRD_PARTY_NOTICES.md"
       },
       {
-        "from": "fixtures/PROVENANCE.json",
-        "to": "fixtures/PROVENANCE.json"
-      },
-      {
-        "from": "fixtures/README.md",
-        "to": "fixtures/README.md"
+        "from": "licenses",
+        "to": "licenses"
       },
       {
         "from": "LICENSE",
-        "to": "ProView-LICENSE.txt"
+        "to": "Proteonator-LICENSE.txt"
       },
       {
-        "from": "licenses",
-        "to": "licenses",
-        "filter": [
-          "*.txt"
-        ]
+        "from": "docs/SCIENCE.html",
+        "to": "SCIENCE.html"
+      },
+      {
+        "from": "fixtures/PROVENANCE.json",
+        "to": "examples/PROVENANCE.json"
+      },
+      {
+        "from": "data/PROVENANCE.json",
+        "to": "compute/data-PROVENANCE.json"
       }
     ],
     "directories": {
@@ -116,37 +118,28 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "shortcutName": "ProView",
-      "uninstallDisplayName": "ProView 1.0.0",
+      "shortcutName": "Proteonator",
+      "uninstallDisplayName": "Proteonator 1.1.0",
       "deleteAppDataOnUninstall": false,
       "license": "LICENSE",
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
-    },
-    "mac": {
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "arm64"
-          ]
-        },
-        {
-          "target": "zip",
-          "arch": [
-            "arm64"
-          ]
-        }
-      ],
-      "category": "public.app-category.education",
-      "icon": "assets/icon.png"
+      "createStartMenuShortcut": true,
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico",
+      "selectPerMachineByDefault": false,
+      "include": "scripts/installer.nsh",
+      "allowElevation": false,
+      "packElevateHelper": false,
+      "installerSidebar": "assets/installer-sidebar.bmp",
+      "uninstallerSidebar": "assets/installer-sidebar.bmp"
     },
     "publish": null,
-    "artifactName": "ProView-Setup-${version}-${arch}.${ext}"
+    "artifactName": "Proteonator-Setup-${version}-${arch}.${ext}",
+    "npmRebuild": false
   },
-  "homepage": "https://github.com/fishhrbio/ProView-1.0",
+  "homepage": "https://github.com/fishhrbio/Proteonator",
   "repository": {
     "type": "git",
-    "url": "https://github.com/fishhrbio/ProView-1.0.git"
+    "url": "https://github.com/fishhrbio/Proteonator.git"
   }
 }

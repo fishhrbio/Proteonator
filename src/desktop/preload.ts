@@ -28,3 +28,5 @@ const bridge: DesktopBridge = {
   },
 };
 contextBridge.exposeInMainWorld('proview', bridge);
+
+contextBridge.exposeInMainWorld('proteonator',{request:(action:string,data:unknown)=>invoke('proteonator:studio',{action,data}),onCommand:(fn:(id:string)=>void)=>{const cb=(_event:unknown,id:string)=>fn(id);ipcRenderer.on('proteonator:command',cb);return ()=>ipcRenderer.removeListener('proteonator:command',cb);}});

@@ -3,3 +3,4 @@ packages:
 allowBuilds:
   esbuild: true
   electron-winstaller: false
+  '@scarf/scarf': false

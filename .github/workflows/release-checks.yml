@@ -1,4 +1,4 @@
-name: Local application checks
+name: Proteonator checks
 on:
   workflow_dispatch:
 permissions:
@@ -6,10 +6,11 @@ permissions:
 jobs:
   windows-x64:
     runs-on: windows-latest
-    timeout-minutes: 15
+    timeout-minutes: 30
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: "false"
-      PROVIEW_VERIFY_VISIBLE: "1"
+      PROTEONATOR_PYTHON: python
+      PYTHONNOUSERSITE: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -17,20 +18,23 @@ jobs:
           version: 11.25.0
       - uses: actions/setup-node@v4
         with:
-          node-version: 24.22.1
+          node-version: 24
           cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -r requirements-compute.txt
       - run: pnpm install --frozen-lockfile
       - run: pnpm setup:electron
       - run: pnpm typecheck
       - run: pnpm test
-      - run: pnpm schemas
+      - run: python compute/test_molecule.py
+      - run: python scripts/freeze-compute.py
       - run: pnpm build
       - run: pnpm dist:win
-      - run: pnpm test:packaged
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: ProView-windows-x64
-          path: |
-            release/ProView-Setup-*.exe
-            evidence/packaged*
+      - run: pnpm test:studio
+        env:
+          PROTEONATOR_EXE: ${{ github.workspace }}/release/win-unpacked/Proteonator.exe
+      - run: pnpm test:studio-physics
+        env:
+          PROTEONATOR_EXE: ${{ github.workspace }}/release/win-unpacked/Proteonator.exe
