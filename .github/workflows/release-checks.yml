@@ -6,8 +6,10 @@ permissions:
 jobs:
   windows-x64:
     runs-on: windows-latest
+    timeout-minutes: 15
     env:
       CSC_IDENTITY_AUTO_DISCOVERY: "false"
+      PROVIEW_VERIFY_VISIBLE: "1"
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
@@ -26,8 +28,9 @@ jobs:
       - run: pnpm dist:win
       - run: pnpm test:packaged
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: ProView-windows-x64
           path: |
             release/ProView-Setup-*.exe
-            evidence/*release.json
+            evidence/packaged*

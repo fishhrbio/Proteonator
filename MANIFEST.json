@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "contractVersion": "1.0.0",
   "projectVersion": "2.0.0",
-  "createdAtUtc": "2026-11-12T04:55:46.209398+00:00",
+  "createdAtUtc": "2026-11-12T05:03:27.056586+00:00",
   "files": [
     {
       "path": ".gitattributes",
@@ -12,8 +12,8 @@
     },
     {
       "path": ".github/workflows/release-checks.yml",
-      "bytes": 833,
-      "sha256": "108f889669bf17199bb4a63b08a691c9ccdd1e105355849a4963c538e2bb6a4d"
+      "bytes": 908,
+      "sha256": "f9fb708d86ae55e6a747d7e59d8dbe2494fe6bdc752f3f9e8fd3c234a952a07a"
     },
     {
       "path": ".gitignore",
@@ -647,8 +647,8 @@
     },
     {
       "path": "scripts/verify-release.mjs",
-      "bytes": 25593,
-      "sha256": "65809ad148a36cdbe3aa73ccc0e7ac499174c0253f2ab8ef6791b28afe686ce8"
+      "bytes": 26213,
+      "sha256": "d3eb2f52af85f3d8a0008ef7afaac84f4b6805ce15cd126c100b2a48ba3049e1"
     },
     {
       "path": "src/contracts/index.ts",
