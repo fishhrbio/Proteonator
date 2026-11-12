@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "startedAt": "2026-11-12T03:08:10.3657564Z",
+  "installer": "<delivery>/ProView-Setup-1.0.0-x64.exe",
+  "target": "<project>\\work\\installer\\ProView install \u00e9",
+  "installerSha256": "2610f53dfe44478e57422d7018559339634697e9d0271f5bf70eabcc9ab33d94",
+  "signature": "NotSigned",
+  "checks": [
+    "Silent current-user installation into a path with spaces and non-ASCII characters",
+    "Start menu and desktop shortcut targets and ProView version metadata verified",
+    "Runtime notices, third-party attribution and offline guide present",
+    "Installed import, selection, annotation, geometry, alignment, save/reopen, JSON/PNG export, accessibility and offline suite passed with developer runtimes excluded from the application PATH",
+    "Same-version reinstall completed successfully",
+    "Uninstall removed the application and shortcuts while the separately saved project remained"
+  ],
+  "installExitCode": 0,
+  "productName": "ProView",
+  "productVersion": "1.0.0.0",
+  "shortcuts": [
+    {
+      "target": "<project>\\work\\installer\\ProView install \u00e9\\ProView.exe",
+      "path": "<Start menu>\\ProView.lnk"
+    },
+    {
+      "target": "<project>\\work\\installer\\ProView install \u00e9\\ProView.exe",
+      "path": "<Desktop>\\ProView.lnk"
+    }
+  ],
+  "installedWorkflowExitCode": 0,
+  "reinstallExitCode": 0,
+  "uninstallExitCode": 0,
+  "executableRemoved": true,
+  "shortcutsRemoved": true,
+  "externalProjectRetained": true,
+  "finishedAt": "2026-11-12T03:10:55.5652095Z"
+}

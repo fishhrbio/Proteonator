@@ -1,0 +1,8 @@
+{
+  "status": "passed",
+  "checks": [
+    "Native import retains source models 7 and 42",
+    "Choosing model 42 updates residue identity and geometry selection",
+    "Portable project saves and reopens model 42, its selected residue and its 165 contacts"
+  ]
+}

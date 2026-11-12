@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; font-src 'self'; worker-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'" />
+  <title>ProView</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="3Dmol-min.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#viewer">Skip to molecular view</a>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand"><img class="brand-mark" src="icon.png" alt="" /><div><strong>ProView</strong><small>A MOLECULAR WORKSPACE</small></div></div>
+    <div class="version-tag">1.0</div>
+    <span class="local-badge"><span></span> Local processing</span>
+    <button id="help" class="secondary">User guide</button>
+    <button id="import" class="secondary">Open coordinates <kbd>Ctrl O</kbd></button>
+  </header>
+  <main class="workspace">
+    <aside class="rail" aria-label="Structures and analysis">
+      <div class="section-label">WORKSPACE <span>01</span></div>
+      <h1 id="structure-title">Loading structure</h1>
+      <p class="muted" id="structure-subtitle">Public coordinate fixture</p>
+      <label class="input-label" for="example">Bundled examples</label>
+      <select id="example"><option value="1BRS">1BRS · barnase / barstar</option><option value="1CRN">1CRN · crambin</option></select>
+      <label class="input-label" for="model">Model</label><select id="model"></select>
+      <label class="input-label" for="accession">Public PDB accession</label><input id="accession" maxlength="4" placeholder="1CRN" aria-label="Four-character PDB accession" />
+      <button id="retrieve" class="secondary">Retrieve from RCSB</button>
+      <button id="open-project" class="secondary">Open project</button>
+      <button id="save-project" class="secondary">Save project</button>
+      <div class="metadata-grid"><div><strong id="atom-count">—</strong><small>recorded atoms</small></div><div><strong id="chain-count">—</strong><small>chains / segments</small></div></div>
+      <div class="rail-divider"></div>
+      <div class="section-label">PARTNER GEOMETRY</div>
+      <p class="small muted">Compare protein atoms in two separate chains.</p>
+      <label class="input-label" for="partner-a"><span class="dot teal"></span> Partner A</label>
+      <select id="partner-a"></select>
+      <label class="input-label" for="partner-b"><span class="dot blue"></span> Partner B</label>
+      <select id="partner-b"></select>
+      <button id="analyze" class="primary">Calculate interface <span aria-hidden="true">↗</span></button>
+      <button id="cancel" class="secondary" hidden>Cancel calculation</button>
+      <div id="job-status" class="job-status" role="status" aria-live="polite">Loading local coordinates…</div>
+      <div class="rail-bottom"><span class="evidence-dot"></span><strong>Geometry, with context</strong><p>Distances and overlap candidates describe this coordinate model. They do not measure binding affinity.</p></div>
+    </aside>
+    <section class="molecular-area" aria-label="Molecular structure view">
+      <div class="viewer-heading"><div><span class="eyebrow">STRUCTURE EXPLORER</span><h2 id="view-title">Barnase · barstar</h2></div><span id="evidence-badge" class="pill">Observed coordinates</span></div>
+      <div id="viewer" role="img" aria-label="Interactive 3D molecular structure; use arrow keys to rotate, plus or minus to zoom, F to fit; residue selection is also available in the sequence strip" tabindex="0"></div>
+      <div id="viewer-error" class="viewer-error" role="alert" hidden></div>
+      <div class="viewer-tools"><div class="segmented" role="group" aria-label="Representation"><button id="trace" aria-pressed="true">Backbone trace</button><button id="sticks" aria-pressed="false">Sticks</button><button id="sphere" aria-pressed="false">Spheres</button></div><button id="fit" title="Fit molecule (F)">Fit view <kbd>F</kbd></button><button id="export-png">Export PNG</button><label class="motion"><input id="motion" type="checkbox" checked /> Reduced motion</label></div>
+      <div class="clip-tools"><label for="clip">Clipping depth</label><input id="clip" type="range" min="5" max="150" value="50" /><output id="clip-value" for="clip">50 Å</output><label><input id="show-overlay" type="checkbox" checked /> Comparison overlay</label></div>
+      <div class="view-caption"><span id="visible-count">— visible atoms</span><span>Drag to rotate · scroll to zoom · arrow keys rotate</span></div>
+      <section class="sequence-panel" aria-label="Linked residue sequence">
+        <div class="sequence-title"><strong>Residues</strong><label for="sequence-chain">Chain</label><select id="sequence-chain"></select><span id="selection-caption">Select a residue to inspect</span></div>
+        <div id="sequence" class="sequence" role="group" aria-label="Residues in selected chain"></div>
+      </section>
+    </section>
+    <aside class="inspector" aria-label="Residue inspector">
+      <div class="section-label">INSPECTOR <span>↗</span></div>
+      <div id="residue-empty" class="empty-inspector"><div class="empty-icon">◎</div><h2>Explore a residue</h2><p>Select in the molecule or sequence strip to reveal its source identity.</p></div>
+      <div id="residue-details" hidden>
+        <span class="eyebrow">SELECTED RESIDUE</span><h2 id="residue-name"></h2><div id="residue-position" class="residue-position"></div>
+        <dl><div><dt>Active atoms</dt><dd id="residue-atoms"></dd></div><div><dt>Alternate state</dt><dd id="residue-alt"></dd></div><div><dt>Classification</dt><dd id="residue-class"></dd></div></dl>
+        <button id="focus" class="secondary">Focus selection <kbd>Enter</kbd></button>
+        <div class="rail-divider"></div>
+        <div class="section-label">PTM ANNOTATION</div>
+        <p class="small muted">Mark a hypothesis without changing any coordinates.</p>
+        <label class="input-label" for="ptm-type">Annotation type</label><select id="ptm-type"><option value="phosphorylation">Phosphorylation</option><option value="methylation">Methylation</option><option value="glycosylation">Glycosylation</option></select>
+        <label class="input-label" for="annotation-label">Annotation label</label><input id="annotation-label" maxlength="256" value="Candidate site" />
+        <button id="annotate" class="secondary">Add or update annotation</button><button id="remove-annotation" class="secondary">Remove annotation</button><p id="annotation-status" class="small" aria-live="polite"></p>
+      </div>
+      <details class="notes"><summary>Scope & coordinate policies</summary><p>PDB and mmCIF coordinates are analyzed locally. Choose a model before comparing protein chains. Waters and non-protein residues are retained but hidden here and excluded from partner geometry. Display bonds are distance-inferred visual aids, not validated connectivity.</p><p>Annotations are saved in portable projects; no PTM position or effect is predicted. Compare supplied structures using a reviewed Cα mapping. Projects retain both coordinate sources and recalculate saved results when reopened.</p></details>
+      <details class="notes"><summary>Import diagnostics <span id="diagnostic-count"></span></summary><ul id="diagnostics"></ul></details>
+    </aside>
+    <section class="analysis-panel" aria-label="Analysis results">
+      <div class="analysis-heading"><div><span class="eyebrow">DERIVED GEOMETRY</span><h2>Interface inspection</h2></div><span id="analysis-state" class="pill">No result yet</span></div>
+      <div id="analysis-empty" class="analysis-empty">Calculate an interface to inspect real atom distances, contacts and geometric overlap candidates.</div>
+      <div id="analysis-result" hidden>
+        <div class="metric-grid"><div><span>Closest heavy atoms</span><strong id="minimum-distance"></strong><small>Euclidean distance · Å</small></div><div><span>Atom-pair contacts</span><strong id="contact-count"></strong><small>Distance ≤ 4.0 Å</small></div><div><span>Residue-pair contacts</span><strong id="residue-contact-count"></strong><small>Unique residue pairs</small></div><div><span>Overlap candidates</span><strong id="clash-count"></strong><small>Overlap &gt; 0.4 Å · partial topology</small></div></div>
+        <div class="analysis-foot"><button id="show-closest">Show closest pair</button><button id="export-geometry">Export JSON</button><p id="analysis-method"></p></div>
+        <details class="provenance"><summary>Method, exclusions & provenance</summary><pre id="result-provenance"></pre></details>
+      </div>
+      <details id="comparison-panel" class="comparison-panel"><summary>Compare supplied structures by reviewed Cα correspondence</summary>
+        <p class="small muted">Choose one reference chain and one mobile chain. Propose exact Cα identities or edit residue pairs explicitly to compare different numbering. Review every correspondence before fitting. The orange mobile overlay and displacement markers use a display transform; source coordinates stay unchanged.</p>
+        <button id="import-comparison" class="secondary">Open mobile structure</button>
+        <div class="comparison-controls"><label for="reference-chain">Reference chain<select id="reference-chain"></select></label><label for="mobile-model">Mobile model<select id="mobile-model"></select></label><label for="mobile-chain">Mobile chain<select id="mobile-chain"></select></label></div>
+        <button id="prepare-mapping" class="secondary">Propose Cα pairs</button>
+        <label class="input-label" for="mapping-editor">Residue pairs: reference mobile, one pair per line (include insertion codes, for example 10A 14)</label><textarea id="mapping-editor" rows="5" spellcheck="false" placeholder="1 1&#10;2 2&#10;3 3"></textarea><button id="validate-mapping">Review edited pairs</button><pre id="mapping-summary" class="mapping-summary" tabindex="0" role="region" aria-label="Correspondence review">Load a mobile structure to prepare a mapping.</pre>
+        <label class="small"><input id="mapping-confirm" type="checkbox" /> I reviewed the correspondence and any residue differences above</label>
+        <button id="align" class="secondary" disabled>Fit mobile to reference</button>
+        <button id="export-alignment" disabled>Export alignment JSON</button>
+        <pre id="alignment-output" class="mapping-summary" tabindex="0" role="region" aria-label="Alignment result and residue displacements" aria-live="polite"></pre>
+      </details>
+    </section>
+  </main>
+  <footer class="statusbar"><span id="app-status" role="status" aria-live="polite">Initializing local workspace</span><span>Å coordinates <b>·</b> Local analysis <b>·</b> ProView 1.0</span></footer>
+</div>
+</body>
+</html>

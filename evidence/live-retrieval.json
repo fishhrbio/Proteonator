@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "url": "https://files.rcsb.org/download/1CRN.cif",
+  "startedAt": "2026-11-12T03:05:24.428Z",
+  "retrievalMs": 3011.9140999999995,
+  "source": {
+    "name": "1CRN.cif",
+    "kind": "remote-accession",
+    "sourceUrl": "https://files.rcsb.org/download/1CRN.cif",
+    "accession": "1CRN",
+    "retrievedAt": "2026-11-12T03:05:27.013Z",
+    "evidenceClass": "observed-structure",
+    "format": "mmcif",
+    "sha256": "23787562c427d7c1abe5420e86d5f1d0a6c7007dec1e8ce85645a6d69c32e8ba"
+  },
+  "atomCount": 327,
+  "finishedAt": "2026-11-12T03:05:31.019Z"
+}

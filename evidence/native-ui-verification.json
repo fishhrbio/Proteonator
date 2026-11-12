@@ -1,0 +1,16 @@
+{
+  "status": "partial",
+  "scope": "Direct Windows UI observations before the final close-path correction; exact final build has 37 passing automated installed checks.",
+  "observedEarlierInstallerSha256": "be4332475cef2eecdeba7af07678c7050dacf84ded980bc5a0367ad7c6ce0734",
+  "observations": [
+    "ProView name and PV icon visible in installer and application",
+    "Current-user choice and editable Unicode installation destination inspected",
+    "Interactive installation completed and Finish/Run ProView launched the installed application",
+    "Direct 3D pick selected TYR 17 in chain A, with 12 active atoms and matching sequence identity",
+    "The installed offline user guide opened in the system browser and its content was inspected",
+    "Native Windows accessibility tree exposed control labels, residue names and live status text"
+  ],
+  "closePath": "A real unsaved-change close bug was found; corrected through native will-prevent-unload handling. Both native choices pass scripted source and packaged tests.",
+  "remaining": "User stopped Computer Use with physical Escape during the final interactive rerun; final interactive installer/uninstaller inspection not completed.",
+  "publicationGate": "Hold; do not request publication approval until the remaining review is complete."
+}

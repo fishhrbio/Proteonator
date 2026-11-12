@@ -1,0 +1,27 @@
+{
+  "distance-3-4-5.pdb": {
+    "minimumDistanceAngstrom": 5,
+    "contactCount": 0,
+    "clashCandidateCount": 0
+  },
+  "contact-boundary.pdb": {
+    "minimumDistanceAngstrom": 4,
+    "contactCount": 1,
+    "clashCandidateCount": 0
+  },
+  "insertion-alternates.pdb": {
+    "recordedAtoms": 4,
+    "residues": 3,
+    "activeSerials": [
+      "1",
+      "3",
+      "4"
+    ]
+  },
+  "crambin-grid-48.pdb": {
+    "recordedAtoms": 15696,
+    "chains": 48,
+    "residues": 2208,
+    "classification": "synthetic parser-load fixture"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "jobId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "kind": {
+      "type": "string",
+      "const": "rigid-alignment"
+    },
+    "referenceStructureId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "mobileStructureId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "atomCorrespondence": {
+      "readOnly": true,
+      "minItems": 3,
+      "maxItems": 25000,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "referenceAtomKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "mobileAtomKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          }
+        },
+        "required": [
+          "referenceAtomKey",
+          "mobileAtomKey"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "method": {
+      "type": "string",
+      "const": "kabsch-no-reflection"
+    },
+    "atomPolicy": {
+      "type": "string",
+      "const": "explicit-correspondence-only"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "jobId",
+    "kind",
+    "referenceStructureId",
+    "mobileStructureId",
+    "atomCorrespondence",
+    "method",
+    "atomPolicy"
+  ],
+  "additionalProperties": false,
+  "title": "AlignmentRequest",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

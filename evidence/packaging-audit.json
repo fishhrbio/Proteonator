@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "asarFiles": 1293,
+  "required": [
+    "/dist/main.cjs",
+    "/dist/preload.cjs",
+    "/dist/analysis-worker.cjs",
+    "/dist/renderer/3Dmol-min.js",
+    "/dist/renderer/icon.png",
+    "/licenses/3dmol-LICENSE.txt",
+    "/licenses/zod-LICENSE.txt"
+  ],
+  "resources": [
+    "LICENSE.electron.txt",
+    "LICENSES.chromium.html",
+    "resources/USER_GUIDE.html",
+    "resources/ProView-LICENSE.txt",
+    "resources/THIRD_PARTY_NOTICES.md",
+    "resources/licenses/3dmol-LICENSE.txt",
+    "resources/licenses/zod-LICENSE.txt",
+    "resources/fixtures/PROVENANCE.json",
+    "resources/fixtures/README.md",
+    "resources/fixtures/1BRS.pdb",
+    "resources/fixtures/1CRN.pdb"
+  ],
+  "sourceResourceMatches": [
+    [
+      "docs/USER_GUIDE.html",
+      "resources/USER_GUIDE.html"
+    ],
+    [
+      "LICENSE",
+      "resources/ProView-LICENSE.txt"
+    ],
+    [
+      "THIRD_PARTY_NOTICES.md",
+      "resources/THIRD_PARTY_NOTICES.md"
+    ],
+    [
+      "fixtures/PROVENANCE.json",
+      "resources/fixtures/PROVENANCE.json"
+    ]
+  ],
+  "iconMatchesSource": true,
+  "package": {
+    "name": "proview",
+    "version": "1.0.0",
+    "license": "MIT"
+  },
+  "asarSha256": "0873090bbb95505c1e0226f622c58e49860de5b3a693ae4098688e0980e5f925"
+}

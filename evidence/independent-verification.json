@@ -1,0 +1,71 @@
+{
+  "status": "passed",
+  "parser": [
+    {
+      "fixture": "structures/1CRN.cif",
+      "atoms": 327,
+      "maxCoordinateErrorAngstrom": 0,
+      "gemmi": "0.7.5"
+    },
+    {
+      "fixture": "structures/1CRN.pdb",
+      "atoms": 327,
+      "maxCoordinateErrorAngstrom": 0,
+      "gemmi": "0.7.5"
+    },
+    {
+      "fixture": "structures/1BRS.pdb",
+      "atoms": 5153,
+      "maxCoordinateErrorAngstrom": 0,
+      "gemmi": "0.7.5"
+    },
+    {
+      "fixture": "synthetic/insertion-alternates.pdb",
+      "atoms": 4,
+      "maxCoordinateErrorAngstrom": 0,
+      "gemmi": "0.7.5"
+    },
+    {
+      "fixture": "synthetic/barnase-comparison.pdb",
+      "atoms": 864,
+      "maxCoordinateErrorAngstrom": 0,
+      "gemmi": "0.7.5"
+    }
+  ],
+  "alignments": [
+    {
+      "case": "rigid",
+      "atoms": 120,
+      "rmsdAngstrom": 0.0005945664617776082,
+      "rmsdErrorAngstrom": 9.599526035186656e-16,
+      "rotationError": 1.093268177878204e-15,
+      "translationErrorAngstrom": 1.7763568394002505e-14,
+      "maxDisplacementErrorAngstrom": 3.184810677984637e-14,
+      "independentDeterminant": 0.9999999999999996,
+      "numpy": "2.3.5"
+    },
+    {
+      "case": "perturbed",
+      "atoms": 120,
+      "rmsdAngstrom": 0.3650443586065187,
+      "rmsdErrorAngstrom": 1.6653345369377348e-16,
+      "rotationError": 5.551115123125783e-16,
+      "translationErrorAngstrom": 1.2434497875801753e-14,
+      "maxDisplacementErrorAngstrom": 1.7263968032921184e-14,
+      "independentDeterminant": 1.0000000000000009,
+      "numpy": "2.3.5"
+    },
+    {
+      "case": "reflection",
+      "atoms": 120,
+      "rmsdAngstrom": 22.24081462258558,
+      "rmsdErrorAngstrom": 3.552713678800501e-15,
+      "rotationError": 1.0824674490095276e-14,
+      "translationErrorAngstrom": 1.758593271006248e-13,
+      "maxDisplacementErrorAngstrom": 3.2862601528904634e-13,
+      "independentDeterminant": 1.0000000000000002,
+      "numpy": "2.3.5"
+    }
+  ],
+  "verifiedAt": "2026-11-12T02:49:02.647Z"
+}

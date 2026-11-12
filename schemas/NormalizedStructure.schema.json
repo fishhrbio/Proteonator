@@ -1,0 +1,503 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "coordinateUnit": {
+      "type": "string",
+      "const": "angstrom"
+    },
+    "evidenceClass": {
+      "type": "string",
+      "enum": [
+        "observed-structure",
+        "supplied-coordinates",
+        "model-based-prediction",
+        "synthetic-fixture"
+      ]
+    },
+    "source": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 512
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "local-file",
+            "bundled-fixture",
+            "remote-accession",
+            "synthetic-test"
+          ]
+        },
+        "sourceUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "accession": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "retrievedAt": {
+          "type": "string",
+          "format": "date-time",
+          "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+        },
+        "evidenceClass": {
+          "type": "string",
+          "enum": [
+            "observed-structure",
+            "supplied-coordinates",
+            "model-based-prediction",
+            "synthetic-fixture"
+          ]
+        },
+        "format": {
+          "type": "string",
+          "enum": [
+            "pdb",
+            "mmcif"
+          ]
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      },
+      "required": [
+        "name",
+        "kind",
+        "format",
+        "sha256"
+      ],
+      "additionalProperties": false
+    },
+    "models": {
+      "readOnly": true,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "sourceModelNumber": {
+            "type": "integer",
+            "minimum": -9007199254740991,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "id",
+          "sourceModelNumber"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "selectedModelId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "chains": {
+      "readOnly": true,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "modelId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "authAsymId": {
+            "type": "string",
+            "maxLength": 128
+          },
+          "labelAsymId": {
+            "anyOf": [
+              {
+                "type": "string",
+                "maxLength": 128
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "segmentIndex": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "key",
+          "modelId",
+          "authAsymId",
+          "labelAsymId",
+          "segmentIndex"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "residues": {
+      "readOnly": true,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "chainKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "modelId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "authSeqId": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "labelSeqId": {
+            "anyOf": [
+              {
+                "type": "integer",
+                "minimum": -9007199254740991,
+                "maximum": 9007199254740991
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "insertionCode": {
+            "type": "string",
+            "maxLength": 8
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "classification": {
+            "type": "string",
+            "enum": [
+              "protein",
+              "water",
+              "ligand",
+              "modified-residue",
+              "unknown"
+            ]
+          },
+          "preferredAltLoc": {
+            "type": "string",
+            "maxLength": 16
+          }
+        },
+        "required": [
+          "key",
+          "chainKey",
+          "modelId",
+          "authSeqId",
+          "labelSeqId",
+          "insertionCode",
+          "name",
+          "classification",
+          "preferredAltLoc"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "atoms": {
+      "readOnly": true,
+      "minItems": 1,
+      "maxItems": 100000,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "residueKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "chainKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "modelId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "serial": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 32
+          },
+          "element": {
+            "anyOf": [
+              {
+                "type": "string",
+                "pattern": "^[A-Z][A-Z]?$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceElement": {
+            "type": "string",
+            "maxLength": 8
+          },
+          "position": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "x": {
+                "type": "number"
+              },
+              "y": {
+                "type": "number"
+              },
+              "z": {
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y",
+              "z"
+            ],
+            "additionalProperties": false
+          },
+          "altLoc": {
+            "type": "string",
+            "maxLength": 16
+          },
+          "occupancy": {
+            "anyOf": [
+              {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bFactor": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "recordType": {
+            "type": "string",
+            "enum": [
+              "ATOM",
+              "HETATM"
+            ]
+          },
+          "sourceLine": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "key",
+          "residueKey",
+          "chainKey",
+          "modelId",
+          "serial",
+          "name",
+          "element",
+          "sourceElement",
+          "position",
+          "altLoc",
+          "occupancy",
+          "bFactor",
+          "recordType",
+          "sourceLine"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "bonds": {
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "atomAKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "atomBKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "source": {
+            "type": "string",
+            "const": "pdb-conect"
+          },
+          "order": {
+            "type": "string",
+            "const": "unknown"
+          }
+        },
+        "required": [
+          "atomAKey",
+          "atomBKey",
+          "source",
+          "order"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "topology": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "completeness": {
+          "type": "string",
+          "enum": [
+            "unknown",
+            "partial"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "enum": [
+            "none",
+            "pdb-conect"
+          ]
+        }
+      },
+      "required": [
+        "completeness",
+        "source"
+      ],
+      "additionalProperties": false
+    },
+    "altLocPolicy": {
+      "type": "string",
+      "const": "residue-mean-occupancy;tie-A-then-lexical;shared-blank-wins;zero-occupancy-excluded"
+    },
+    "diagnostics": {
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "type": "string",
+            "enum": [
+              "info",
+              "warning"
+            ]
+          },
+          "message": {
+            "type": "string",
+            "minLength": 1
+          },
+          "line": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 9007199254740991
+          }
+        },
+        "required": [
+          "code",
+          "severity",
+          "message"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "coordinateUnit",
+    "evidenceClass",
+    "source",
+    "models",
+    "selectedModelId",
+    "chains",
+    "residues",
+    "atoms",
+    "bonds",
+    "topology",
+    "altLocPolicy",
+    "diagnostics"
+  ],
+  "additionalProperties": false,
+  "title": "NormalizedStructure",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

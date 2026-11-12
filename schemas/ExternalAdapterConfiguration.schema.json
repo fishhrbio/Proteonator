@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "enabled": {
+      "type": "boolean"
+    },
+    "kind": {
+      "type": "string",
+      "enum": [
+        "structure-prediction",
+        "docking",
+        "minimization"
+      ]
+    },
+    "endpoint": {
+      "type": "string",
+      "pattern": "^https:\\/\\/"
+    },
+    "credentialReference": {
+      "anyOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "availability": {
+      "type": "string",
+      "enum": [
+        "not-configured",
+        "offline",
+        "available"
+      ]
+    },
+    "requiresPerRunUploadConsent": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "enabled",
+    "kind",
+    "endpoint",
+    "credentialReference",
+    "availability",
+    "requiresPerRunUploadConsent"
+  ],
+  "additionalProperties": false,
+  "title": "ExternalAdapterConfiguration",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "currentVersion": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "acceptedVersions": {
+      "type": "array",
+      "prefixItems": [
+        {
+          "type": "string",
+          "const": "1.0.0"
+        },
+        {
+          "type": "string",
+          "const": "2.0.0"
+        }
+      ],
+      "items": false,
+      "minItems": 2,
+      "maxItems": 2
+    },
+    "unknownVersionBehavior": {
+      "type": "string",
+      "const": "reject-without-modifying-file"
+    },
+    "migrationsImplemented": {
+      "type": "boolean",
+      "const": true
+    }
+  },
+  "required": [
+    "currentVersion",
+    "acceptedVersions",
+    "unknownVersionBehavior",
+    "migrationsImplemented"
+  ],
+  "additionalProperties": false,
+  "title": "ProjectMigrationPolicy",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

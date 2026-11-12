@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "sourceNode": "24.22.1",
+  "pnpm": "11.25.0",
+  "cleanInstall": "Frozen lockfile, 286 packages restored into a new short checkout; Electron setup, typecheck, unit tests, schemas and build passed",
+  "windowsBuilderPathNote": "NSIS could not read a deeply nested template path in the original long checkout. A clean short checkout resolved the build; README documents the short-path requirement.",
+  "unitTests": 40,
+  "schemas": 23,
+  "schemaExamples": 27,
+  "productionDependencyAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 0,
+    "critical": 0
+  }
+}

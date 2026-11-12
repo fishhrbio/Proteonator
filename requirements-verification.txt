@@ -1,0 +1,3 @@
+# Optional independent scientific verification only; never needed by the installed app.
+gemmi==0.7.5
+numpy==2.3.5

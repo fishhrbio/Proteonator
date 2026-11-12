@@ -1,0 +1,261 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "kind": {
+      "type": "string",
+      "const": "image-export"
+    },
+    "format": {
+      "type": "string",
+      "enum": [
+        "png"
+      ]
+    },
+    "width": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 8192
+    },
+    "height": {
+      "type": "integer",
+      "minimum": 256,
+      "maximum": 8192
+    },
+    "includeProvenanceCaption": {
+      "type": "boolean",
+      "const": true
+    },
+    "view": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "selection": {
+          "anyOf": [
+            {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "structureId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "modelId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "residueKeys": {
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                  }
+                },
+                "atomKeys": {
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                  }
+                }
+              },
+              "required": [
+                "structureId",
+                "modelId",
+                "residueKeys",
+                "atomKeys"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transforms": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "additionalProperties": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "convention": {
+                "type": "string",
+                "const": "row-major;column-vector;p-display=R*p-source+t"
+              },
+              "coordinateUnit": {
+                "type": "string",
+                "const": "angstrom"
+              },
+              "rotation": {
+                "readOnly": true,
+                "minItems": 9,
+                "maxItems": 9,
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "translation": {
+                "readOnly": true,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "convention",
+              "coordinateUnit",
+              "rotation",
+              "translation"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "representation": {
+          "type": "string",
+          "enum": [
+            "cartoon",
+            "sticks",
+            "sphere"
+          ]
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#[a-fA-F0-9]{6}$"
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "camera": {
+          "anyOf": [
+            {
+              "readOnly": true,
+              "minItems": 8,
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "partnerAChainKey": {
+          "default": null,
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "partnerBChainKey": {
+          "default": null,
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "slab": {
+          "default": {
+            "near": -50,
+            "far": 50
+          },
+          "type": "object",
+          "properties": {
+            "near": {
+              "type": "number",
+              "minimum": -500,
+              "maximum": 0
+            },
+            "far": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 500
+            }
+          },
+          "required": [
+            "near",
+            "far"
+          ],
+          "additionalProperties": false
+        },
+        "comparisonVisible": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "selection",
+        "transforms",
+        "representation",
+        "background",
+        "reducedMotion",
+        "camera",
+        "partnerAChainKey",
+        "partnerBChainKey",
+        "slab",
+        "comparisonVisible"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "kind",
+    "format",
+    "width",
+    "height",
+    "includeProvenanceCaption",
+    "view"
+  ],
+  "additionalProperties": false,
+  "title": "ImageExportRequest",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

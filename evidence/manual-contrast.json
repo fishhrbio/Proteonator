@@ -1,0 +1,48 @@
+{
+  "status": "passed",
+  "method": "WCAG sRGB relative luminance; manual resolution of gradient-background cases marked incomplete by axe, plus explicit control-boundary and selected-state checks. Header and tool text lie outside the molecular canvas.",
+  "checks": [
+    {
+      "target": "Muted text over the lightest molecular-panel gradient (heading, motion, clipping and captions)",
+      "foreground": "#a2b2c6",
+      "background": "#1a2b3b",
+      "minimum": 4.5,
+      "ratio": 6.691243274101938
+    },
+    {
+      "target": "Main title over the lightest gradient",
+      "foreground": "#edf3fa",
+      "background": "#1a2b3b",
+      "minimum": 4.5,
+      "ratio": 12.94315262783067
+    },
+    {
+      "target": "Status separators",
+      "foreground": "#a2b2c6",
+      "background": "#0b121c",
+      "minimum": 4.5,
+      "ratio": 8.697721033425898
+    },
+    {
+      "target": "Form/control borders against control background",
+      "foreground": "#60758c",
+      "background": "#172233",
+      "minimum": 3,
+      "ratio": 3.3666492684770555
+    },
+    {
+      "target": "Pressed representation and keyboard-focus outline",
+      "foreground": "#64ddca",
+      "background": "#203b40",
+      "minimum": 3,
+      "ratio": 7.232851773648648
+    },
+    {
+      "target": "Selected residue text",
+      "foreground": "#ffd28b",
+      "background": "#564225",
+      "minimum": 4.5,
+      "ratio": 6.741854800616059
+    }
+  ]
+}

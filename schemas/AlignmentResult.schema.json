@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "jobId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "kind": {
+      "type": "string",
+      "const": "rigid-alignment"
+    },
+    "referenceStructureId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "mobileStructureId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "referenceSourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "mobileSourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "coordinateUnit": {
+      "type": "string",
+      "const": "angstrom"
+    },
+    "evidenceClass": {
+      "type": "string",
+      "const": "derived-geometry"
+    },
+    "method": {
+      "type": "string",
+      "const": "kabsch-no-reflection"
+    },
+    "engineVersion": {
+      "type": "string",
+      "minLength": 1
+    },
+    "computedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "transformMobileToReference": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "convention": {
+          "type": "string",
+          "const": "row-major;column-vector;p-display=R*p-source+t"
+        },
+        "coordinateUnit": {
+          "type": "string",
+          "const": "angstrom"
+        },
+        "rotation": {
+          "readOnly": true,
+          "minItems": 9,
+          "maxItems": 9,
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "translation": {
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "x": {
+              "type": "number"
+            },
+            "y": {
+              "type": "number"
+            },
+            "z": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "convention",
+        "coordinateUnit",
+        "rotation",
+        "translation"
+      ],
+      "additionalProperties": false
+    },
+    "matchedAtomCount": {
+      "type": "integer",
+      "minimum": 3,
+      "maximum": 9007199254740991
+    },
+    "rmsdAngstrom": {
+      "type": "number",
+      "minimum": 0
+    },
+    "atomCorrespondence": {
+      "readOnly": true,
+      "minItems": 3,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "referenceAtomKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "mobileAtomKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          }
+        },
+        "required": [
+          "referenceAtomKey",
+          "mobileAtomKey"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "residueDisplacements": {
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "referenceResidueKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "mobileResidueKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "matchedAtomCount": {
+            "type": "integer",
+            "exclusiveMinimum": 0,
+            "maximum": 9007199254740991
+          },
+          "rmsDisplacementAngstrom": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "required": [
+          "referenceResidueKey",
+          "mobileResidueKey",
+          "matchedAtomCount",
+          "rmsDisplacementAngstrom"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "exclusions": {
+      "readOnly": true,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "structureId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "atomKey": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "residueKey": {
+            "anyOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reason": {
+            "type": "string",
+            "enum": [
+              "missing-coordinate",
+              "unmatched-identity",
+              "alternate-conformer",
+              "ambiguous-mapping",
+              "outside-selection"
+            ]
+          }
+        },
+        "required": [
+          "structureId",
+          "atomKey",
+          "residueKey",
+          "reason"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "limitations": {
+      "readOnly": true,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "jobId",
+    "kind",
+    "referenceStructureId",
+    "mobileStructureId",
+    "referenceSourceSha256",
+    "mobileSourceSha256",
+    "coordinateUnit",
+    "evidenceClass",
+    "method",
+    "engineVersion",
+    "computedAt",
+    "transformMobileToReference",
+    "matchedAtomCount",
+    "rmsdAngstrom",
+    "atomCorrespondence",
+    "residueDisplacements",
+    "exclusions",
+    "limitations"
+  ],
+  "additionalProperties": false,
+  "title": "AlignmentResult",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

@@ -1,0 +1,4 @@
+REMARK    SYNTHETIC NUMERICAL TEST ONLY
+ATOM      1  CA  ALA A   1       0.000   0.000   0.000  1.00 20.00           C  
+ATOM      2  CA  ALA B   1       4.000   0.000   0.000  1.00 20.00           C  
+END

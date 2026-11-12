@@ -1,0 +1,2239 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "2.0.0"
+    },
+    "format": {
+      "type": "string",
+      "const": "proview-project"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+    },
+    "portability": {
+      "type": "string",
+      "const": "embedded-inputs-only"
+    },
+    "inputs": {
+      "readOnly": true,
+      "minItems": 1,
+      "maxItems": 2,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "sourceSha256": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "pdb",
+              "mmcif"
+            ]
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 10485760
+          }
+        },
+        "required": [
+          "sourceSha256",
+          "format",
+          "name",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "structures": {
+      "readOnly": true,
+      "minItems": 1,
+      "maxItems": 1,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "1.0.0"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "coordinateUnit": {
+            "type": "string",
+            "const": "angstrom"
+          },
+          "evidenceClass": {
+            "type": "string",
+            "enum": [
+              "observed-structure",
+              "supplied-coordinates",
+              "model-based-prediction",
+              "synthetic-fixture"
+            ]
+          },
+          "source": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 512
+              },
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "local-file",
+                  "bundled-fixture",
+                  "remote-accession",
+                  "synthetic-test"
+                ]
+              },
+              "sourceUrl": {
+                "type": "string",
+                "format": "uri"
+              },
+              "accession": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 128
+              },
+              "retrievedAt": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+              },
+              "evidenceClass": {
+                "type": "string",
+                "enum": [
+                  "observed-structure",
+                  "supplied-coordinates",
+                  "model-based-prediction",
+                  "synthetic-fixture"
+                ]
+              },
+              "format": {
+                "type": "string",
+                "enum": [
+                  "pdb",
+                  "mmcif"
+                ]
+              },
+              "sha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              }
+            },
+            "required": [
+              "name",
+              "kind",
+              "format",
+              "sha256"
+            ],
+            "additionalProperties": false
+          },
+          "models": {
+            "readOnly": true,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "sourceModelNumber": {
+                  "type": "integer",
+                  "minimum": -9007199254740991,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "id",
+                "sourceModelNumber"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "selectedModelId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "chains": {
+            "readOnly": true,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "modelId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "authAsymId": {
+                  "type": "string",
+                  "maxLength": 128
+                },
+                "labelAsymId": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "maxLength": 128
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "segmentIndex": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "key",
+                "modelId",
+                "authAsymId",
+                "labelAsymId",
+                "segmentIndex"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "residues": {
+            "readOnly": true,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "chainKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "modelId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "authSeqId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "labelSeqId": {
+                  "anyOf": [
+                    {
+                      "type": "integer",
+                      "minimum": -9007199254740991,
+                      "maximum": 9007199254740991
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "insertionCode": {
+                  "type": "string",
+                  "maxLength": 8
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 32
+                },
+                "classification": {
+                  "type": "string",
+                  "enum": [
+                    "protein",
+                    "water",
+                    "ligand",
+                    "modified-residue",
+                    "unknown"
+                  ]
+                },
+                "preferredAltLoc": {
+                  "type": "string",
+                  "maxLength": 16
+                }
+              },
+              "required": [
+                "key",
+                "chainKey",
+                "modelId",
+                "authSeqId",
+                "labelSeqId",
+                "insertionCode",
+                "name",
+                "classification",
+                "preferredAltLoc"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "atoms": {
+            "readOnly": true,
+            "minItems": 1,
+            "maxItems": 100000,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "key": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "residueKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "chainKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "modelId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "serial": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 128
+                },
+                "name": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 32
+                },
+                "element": {
+                  "anyOf": [
+                    {
+                      "type": "string",
+                      "pattern": "^[A-Z][A-Z]?$"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "sourceElement": {
+                  "type": "string",
+                  "maxLength": 8
+                },
+                "position": {
+                  "readOnly": true,
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "number"
+                    },
+                    "y": {
+                      "type": "number"
+                    },
+                    "z": {
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "x",
+                    "y",
+                    "z"
+                  ],
+                  "additionalProperties": false
+                },
+                "altLoc": {
+                  "type": "string",
+                  "maxLength": 16
+                },
+                "occupancy": {
+                  "anyOf": [
+                    {
+                      "type": "number",
+                      "minimum": 0,
+                      "maximum": 1
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                },
+                "bFactor": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "recordType": {
+                  "type": "string",
+                  "enum": [
+                    "ATOM",
+                    "HETATM"
+                  ]
+                },
+                "sourceLine": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "key",
+                "residueKey",
+                "chainKey",
+                "modelId",
+                "serial",
+                "name",
+                "element",
+                "sourceElement",
+                "position",
+                "altLoc",
+                "occupancy",
+                "bFactor",
+                "recordType",
+                "sourceLine"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "bonds": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "atomAKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "atomBKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "source": {
+                  "type": "string",
+                  "const": "pdb-conect"
+                },
+                "order": {
+                  "type": "string",
+                  "const": "unknown"
+                }
+              },
+              "required": [
+                "atomAKey",
+                "atomBKey",
+                "source",
+                "order"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "topology": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "completeness": {
+                "type": "string",
+                "enum": [
+                  "unknown",
+                  "partial"
+                ]
+              },
+              "source": {
+                "type": "string",
+                "enum": [
+                  "none",
+                  "pdb-conect"
+                ]
+              }
+            },
+            "required": [
+              "completeness",
+              "source"
+            ],
+            "additionalProperties": false
+          },
+          "altLocPolicy": {
+            "type": "string",
+            "const": "residue-mean-occupancy;tie-A-then-lexical;shared-blank-wins;zero-occupancy-excluded"
+          },
+          "diagnostics": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": [
+                    "info",
+                    "warning"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "line": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "code",
+                "severity",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "id",
+          "coordinateUnit",
+          "evidenceClass",
+          "source",
+          "models",
+          "selectedModelId",
+          "chains",
+          "residues",
+          "atoms",
+          "bonds",
+          "topology",
+          "altLocPolicy",
+          "diagnostics"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "annotations": {
+      "readOnly": true,
+      "maxItems": 10000,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "1.0.0"
+          },
+          "id": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "kind": {
+            "type": "string",
+            "const": "annotation"
+          },
+          "structureId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "residueKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "ptm": {
+            "type": "string",
+            "enum": [
+              "phosphorylation",
+              "methylation",
+              "glycosylation",
+              "other"
+            ]
+          },
+          "label": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 256
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+          },
+          "evidence": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "user-annotation",
+                  "source-record",
+                  "literature"
+                ]
+              },
+              "citation": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "kind"
+            ],
+            "additionalProperties": false
+          },
+          "coordinatesChanged": {
+            "type": "boolean",
+            "const": false
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "id",
+          "kind",
+          "structureId",
+          "residueKey",
+          "ptm",
+          "label",
+          "createdAt",
+          "evidence",
+          "coordinatesChanged"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "modifications": {
+      "readOnly": true,
+      "minItems": 0,
+      "maxItems": 0,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "1.0.0"
+          },
+          "kind": {
+            "type": "string",
+            "const": "constructed-chemistry"
+          },
+          "jobId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "inputStructureId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "outputStructureId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "residueKey": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "chemistry": {
+            "type": "string",
+            "minLength": 1
+          },
+          "method": {
+            "type": "string",
+            "minLength": 1
+          },
+          "parameterSet": {
+            "type": "string",
+            "minLength": 1
+          },
+          "engineVersion": {
+            "type": "string",
+            "minLength": 1
+          },
+          "validationReport": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "kind",
+          "jobId",
+          "inputStructureId",
+          "outputStructureId",
+          "residueKey",
+          "chemistry",
+          "method",
+          "parameterSet",
+          "engineVersion",
+          "validationReport"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "analyses": {
+      "readOnly": true,
+      "maxItems": 20,
+      "type": "array",
+      "items": {
+        "readOnly": true,
+        "type": "object",
+        "properties": {
+          "schemaVersion": {
+            "type": "string",
+            "const": "1.0.0"
+          },
+          "kind": {
+            "type": "string",
+            "const": "interface-geometry"
+          },
+          "jobId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "structureId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "modelId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+          },
+          "partnerAChainKeys": {
+            "readOnly": true,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            }
+          },
+          "partnerBChainKeys": {
+            "readOnly": true,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            }
+          },
+          "minimumDistance": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "atomAKey": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+              },
+              "atomBKey": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+              },
+              "residueAKey": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+              },
+              "residueBKey": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1024,
+                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+              },
+              "distanceAngstrom": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": [
+              "atomAKey",
+              "atomBKey",
+              "residueAKey",
+              "residueBKey",
+              "distanceAngstrom"
+            ],
+            "additionalProperties": false
+          },
+          "contacts": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "atomAKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "atomBKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "residueAKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "residueBKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "distanceAngstrom": {
+                  "type": "number",
+                  "minimum": 0
+                }
+              },
+              "required": [
+                "atomAKey",
+                "atomBKey",
+                "residueAKey",
+                "residueBKey",
+                "distanceAngstrom"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "clashCandidates": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "atomAKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "atomBKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "residueAKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "residueBKey": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 1024,
+                  "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                },
+                "distanceAngstrom": {
+                  "type": "number",
+                  "minimum": 0
+                },
+                "radiusAAngstrom": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "radiusBAngstrom": {
+                  "type": "number",
+                  "exclusiveMinimum": 0
+                },
+                "overlapAngstrom": {
+                  "type": "number",
+                  "exclusiveMinimum": 0.4
+                },
+                "interpretation": {
+                  "type": "string",
+                  "const": "geometric-candidate"
+                }
+              },
+              "required": [
+                "atomAKey",
+                "atomBKey",
+                "residueAKey",
+                "residueBKey",
+                "distanceAngstrom",
+                "radiusAAngstrom",
+                "radiusBAngstrom",
+                "overlapAngstrom",
+                "interpretation"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "summary": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "selectedAtomCountA": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "selectedAtomCountB": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "evaluatedPairCount": {
+                "type": "integer",
+                "exclusiveMinimum": 0,
+                "maximum": 9007199254740991
+              },
+              "contactCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "contactResiduePairCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "clashCandidateCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "knownBondExcludedPairCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              },
+              "unknownRadiusPairCount": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 9007199254740991
+              }
+            },
+            "required": [
+              "selectedAtomCountA",
+              "selectedAtomCountB",
+              "evaluatedPairCount",
+              "contactCount",
+              "contactResiduePairCount",
+              "clashCandidateCount",
+              "knownBondExcludedPairCount",
+              "unknownRadiusPairCount"
+            ],
+            "additionalProperties": false
+          },
+          "provenance": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "engineVersion": {
+                "type": "string",
+                "const": "proview-geometry-1"
+              },
+              "method": {
+                "type": "string",
+                "const": "cross-partner-euclidean-heavy-atom-pairs"
+              },
+              "computedAt": {
+                "type": "string",
+                "format": "date-time",
+                "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+              },
+              "sourceSha256": {
+                "type": "string",
+                "pattern": "^[a-f0-9]{64}$"
+              },
+              "structureId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "modelId": {
+                "type": "string",
+                "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+              },
+              "coordinateUnit": {
+                "type": "string",
+                "const": "angstrom"
+              },
+              "evidenceClass": {
+                "type": "string",
+                "const": "derived-geometry"
+              },
+              "altLocPolicy": {
+                "type": "string",
+                "const": "residue-mean-occupancy;tie-A-then-lexical;shared-blank-wins;zero-occupancy-excluded"
+              },
+              "selectionPolicy": {
+                "type": "string",
+                "const": "canonical-protein-ATOM;known-heavy-elements;positive-or-missing-occupancy"
+              },
+              "contactCutoffAngstrom": {
+                "type": "number",
+                "const": 4
+              },
+              "clashOverlapThresholdAngstrom": {
+                "type": "number",
+                "const": 0.4
+              },
+              "radiiSet": {
+                "type": "string",
+                "const": "Bondi-1964-subset-C-N-O-S-P"
+              },
+              "bondExclusionPolicy": {
+                "type": "string",
+                "const": "exclude-explicit-CONECT-1-2-and-1-3-from-overlaps;contacts-include-all"
+              },
+              "topologyCompleteness": {
+                "type": "string",
+                "enum": [
+                  "unknown",
+                  "partial"
+                ]
+              },
+              "clashInterpretation": {
+                "type": "string",
+                "const": "geometric-candidates-only"
+              },
+              "limitations": {
+                "readOnly": true,
+                "minItems": 1,
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              }
+            },
+            "required": [
+              "engineVersion",
+              "method",
+              "computedAt",
+              "sourceSha256",
+              "structureId",
+              "modelId",
+              "coordinateUnit",
+              "evidenceClass",
+              "altLocPolicy",
+              "selectionPolicy",
+              "contactCutoffAngstrom",
+              "clashOverlapThresholdAngstrom",
+              "radiiSet",
+              "bondExclusionPolicy",
+              "topologyCompleteness",
+              "clashInterpretation",
+              "limitations"
+            ],
+            "additionalProperties": false
+          },
+          "diagnostics": {
+            "readOnly": true,
+            "type": "array",
+            "items": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "severity": {
+                  "type": "string",
+                  "enum": [
+                    "info",
+                    "warning"
+                  ]
+                },
+                "message": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "line": {
+                  "type": "integer",
+                  "exclusiveMinimum": 0,
+                  "maximum": 9007199254740991
+                },
+                "count": {
+                  "type": "integer",
+                  "minimum": 0,
+                  "maximum": 9007199254740991
+                }
+              },
+              "required": [
+                "code",
+                "severity",
+                "message"
+              ],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": [
+          "schemaVersion",
+          "kind",
+          "jobId",
+          "structureId",
+          "modelId",
+          "partnerAChainKeys",
+          "partnerBChainKeys",
+          "minimumDistance",
+          "contacts",
+          "clashCandidates",
+          "summary",
+          "provenance",
+          "diagnostics"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "view": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "selection": {
+          "anyOf": [
+            {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "structureId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "modelId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "residueKeys": {
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                  }
+                },
+                "atomKeys": {
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                  }
+                }
+              },
+              "required": [
+                "structureId",
+                "modelId",
+                "residueKeys",
+                "atomKeys"
+              ],
+              "additionalProperties": false
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "transforms": {
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+          },
+          "additionalProperties": {
+            "readOnly": true,
+            "type": "object",
+            "properties": {
+              "convention": {
+                "type": "string",
+                "const": "row-major;column-vector;p-display=R*p-source+t"
+              },
+              "coordinateUnit": {
+                "type": "string",
+                "const": "angstrom"
+              },
+              "rotation": {
+                "readOnly": true,
+                "minItems": 9,
+                "maxItems": 9,
+                "type": "array",
+                "items": {
+                  "type": "number"
+                }
+              },
+              "translation": {
+                "readOnly": true,
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "number"
+                  },
+                  "y": {
+                    "type": "number"
+                  },
+                  "z": {
+                    "type": "number"
+                  }
+                },
+                "required": [
+                  "x",
+                  "y",
+                  "z"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "convention",
+              "coordinateUnit",
+              "rotation",
+              "translation"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "representation": {
+          "type": "string",
+          "enum": [
+            "cartoon",
+            "sticks",
+            "sphere"
+          ]
+        },
+        "background": {
+          "type": "string",
+          "pattern": "^#[a-fA-F0-9]{6}$"
+        },
+        "reducedMotion": {
+          "type": "boolean"
+        },
+        "camera": {
+          "anyOf": [
+            {
+              "readOnly": true,
+              "minItems": 8,
+              "maxItems": 8,
+              "type": "array",
+              "items": {
+                "type": "number"
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "partnerAChainKey": {
+          "default": null,
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "partnerBChainKey": {
+          "default": null,
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "slab": {
+          "default": {
+            "near": -50,
+            "far": 50
+          },
+          "type": "object",
+          "properties": {
+            "near": {
+              "type": "number",
+              "minimum": -500,
+              "maximum": 0
+            },
+            "far": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 500
+            }
+          },
+          "required": [
+            "near",
+            "far"
+          ],
+          "additionalProperties": false
+        },
+        "comparisonVisible": {
+          "default": true,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "selection",
+        "transforms",
+        "representation",
+        "background",
+        "reducedMotion",
+        "camera",
+        "partnerAChainKey",
+        "partnerBChainKey",
+        "slab",
+        "comparisonVisible"
+      ],
+      "additionalProperties": false
+    },
+    "comparison": {
+      "anyOf": [
+        {
+          "readOnly": true,
+          "type": "object",
+          "properties": {
+            "structure": {
+              "readOnly": true,
+              "type": "object",
+              "properties": {
+                "schemaVersion": {
+                  "type": "string",
+                  "const": "1.0.0"
+                },
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "coordinateUnit": {
+                  "type": "string",
+                  "const": "angstrom"
+                },
+                "evidenceClass": {
+                  "type": "string",
+                  "enum": [
+                    "observed-structure",
+                    "supplied-coordinates",
+                    "model-based-prediction",
+                    "synthetic-fixture"
+                  ]
+                },
+                "source": {
+                  "readOnly": true,
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 512
+                    },
+                    "kind": {
+                      "type": "string",
+                      "enum": [
+                        "local-file",
+                        "bundled-fixture",
+                        "remote-accession",
+                        "synthetic-test"
+                      ]
+                    },
+                    "sourceUrl": {
+                      "type": "string",
+                      "format": "uri"
+                    },
+                    "accession": {
+                      "type": "string",
+                      "minLength": 1,
+                      "maxLength": 128
+                    },
+                    "retrievedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                    },
+                    "evidenceClass": {
+                      "type": "string",
+                      "enum": [
+                        "observed-structure",
+                        "supplied-coordinates",
+                        "model-based-prediction",
+                        "synthetic-fixture"
+                      ]
+                    },
+                    "format": {
+                      "type": "string",
+                      "enum": [
+                        "pdb",
+                        "mmcif"
+                      ]
+                    },
+                    "sha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    }
+                  },
+                  "required": [
+                    "name",
+                    "kind",
+                    "format",
+                    "sha256"
+                  ],
+                  "additionalProperties": false
+                },
+                "models": {
+                  "readOnly": true,
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "readOnly": true,
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                      },
+                      "sourceModelNumber": {
+                        "type": "integer",
+                        "minimum": -9007199254740991,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "sourceModelNumber"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "selectedModelId": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                },
+                "chains": {
+                  "readOnly": true,
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "readOnly": true,
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "modelId": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                      },
+                      "authAsymId": {
+                        "type": "string",
+                        "maxLength": 128
+                      },
+                      "labelAsymId": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "maxLength": 128
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "segmentIndex": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "modelId",
+                      "authAsymId",
+                      "labelAsymId",
+                      "segmentIndex"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "residues": {
+                  "readOnly": true,
+                  "minItems": 1,
+                  "type": "array",
+                  "items": {
+                    "readOnly": true,
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "chainKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "modelId": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                      },
+                      "authSeqId": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                      },
+                      "labelSeqId": {
+                        "anyOf": [
+                          {
+                            "type": "integer",
+                            "minimum": -9007199254740991,
+                            "maximum": 9007199254740991
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "insertionCode": {
+                        "type": "string",
+                        "maxLength": 8
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 32
+                      },
+                      "classification": {
+                        "type": "string",
+                        "enum": [
+                          "protein",
+                          "water",
+                          "ligand",
+                          "modified-residue",
+                          "unknown"
+                        ]
+                      },
+                      "preferredAltLoc": {
+                        "type": "string",
+                        "maxLength": 16
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "chainKey",
+                      "modelId",
+                      "authSeqId",
+                      "labelSeqId",
+                      "insertionCode",
+                      "name",
+                      "classification",
+                      "preferredAltLoc"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "atoms": {
+                  "readOnly": true,
+                  "minItems": 1,
+                  "maxItems": 100000,
+                  "type": "array",
+                  "items": {
+                    "readOnly": true,
+                    "type": "object",
+                    "properties": {
+                      "key": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "residueKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "chainKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "modelId": {
+                        "type": "string",
+                        "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                      },
+                      "serial": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 128
+                      },
+                      "name": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 32
+                      },
+                      "element": {
+                        "anyOf": [
+                          {
+                            "type": "string",
+                            "pattern": "^[A-Z][A-Z]?$"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "sourceElement": {
+                        "type": "string",
+                        "maxLength": 8
+                      },
+                      "position": {
+                        "readOnly": true,
+                        "type": "object",
+                        "properties": {
+                          "x": {
+                            "type": "number"
+                          },
+                          "y": {
+                            "type": "number"
+                          },
+                          "z": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "x",
+                          "y",
+                          "z"
+                        ],
+                        "additionalProperties": false
+                      },
+                      "altLoc": {
+                        "type": "string",
+                        "maxLength": 16
+                      },
+                      "occupancy": {
+                        "anyOf": [
+                          {
+                            "type": "number",
+                            "minimum": 0,
+                            "maximum": 1
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ]
+                      },
+                      "bFactor": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "recordType": {
+                        "type": "string",
+                        "enum": [
+                          "ATOM",
+                          "HETATM"
+                        ]
+                      },
+                      "sourceLine": {
+                        "type": "integer",
+                        "exclusiveMinimum": 0,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "required": [
+                      "key",
+                      "residueKey",
+                      "chainKey",
+                      "modelId",
+                      "serial",
+                      "name",
+                      "element",
+                      "sourceElement",
+                      "position",
+                      "altLoc",
+                      "occupancy",
+                      "bFactor",
+                      "recordType",
+                      "sourceLine"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "bonds": {
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "readOnly": true,
+                    "type": "object",
+                    "properties": {
+                      "atomAKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "atomBKey": {
+                        "type": "string",
+                        "minLength": 1,
+                        "maxLength": 1024,
+                        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                      },
+                      "source": {
+                        "type": "string",
+                        "const": "pdb-conect"
+                      },
+                      "order": {
+                        "type": "string",
+                        "const": "unknown"
+                      }
+                    },
+                    "required": [
+                      "atomAKey",
+                      "atomBKey",
+                      "source",
+                      "order"
+                    ],
+                    "additionalProperties": false
+                  }
+                },
+                "topology": {
+                  "readOnly": true,
+                  "type": "object",
+                  "properties": {
+                    "completeness": {
+                      "type": "string",
+                      "enum": [
+                        "unknown",
+                        "partial"
+                      ]
+                    },
+                    "source": {
+                      "type": "string",
+                      "enum": [
+                        "none",
+                        "pdb-conect"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "completeness",
+                    "source"
+                  ],
+                  "additionalProperties": false
+                },
+                "altLocPolicy": {
+                  "type": "string",
+                  "const": "residue-mean-occupancy;tie-A-then-lexical;shared-blank-wins;zero-occupancy-excluded"
+                },
+                "diagnostics": {
+                  "readOnly": true,
+                  "type": "array",
+                  "items": {
+                    "readOnly": true,
+                    "type": "object",
+                    "properties": {
+                      "code": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "severity": {
+                        "type": "string",
+                        "enum": [
+                          "info",
+                          "warning"
+                        ]
+                      },
+                      "message": {
+                        "type": "string",
+                        "minLength": 1
+                      },
+                      "line": {
+                        "type": "integer",
+                        "exclusiveMinimum": 0,
+                        "maximum": 9007199254740991
+                      },
+                      "count": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "maximum": 9007199254740991
+                      }
+                    },
+                    "required": [
+                      "code",
+                      "severity",
+                      "message"
+                    ],
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "required": [
+                "schemaVersion",
+                "id",
+                "coordinateUnit",
+                "evidenceClass",
+                "source",
+                "models",
+                "selectedModelId",
+                "chains",
+                "residues",
+                "atoms",
+                "bonds",
+                "topology",
+                "altLocPolicy",
+                "diagnostics"
+              ],
+              "additionalProperties": false
+            },
+            "referenceChainKey": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            },
+            "mobileChainKey": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1024,
+              "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+            },
+            "mapping": {
+              "readOnly": true,
+              "maxItems": 25000,
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "referenceAtomKey": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                  },
+                  "mobileAtomKey": {
+                    "type": "string",
+                    "minLength": 1,
+                    "maxLength": 1024,
+                    "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                  }
+                },
+                "required": [
+                  "referenceAtomKey",
+                  "mobileAtomKey"
+                ],
+                "additionalProperties": false
+              }
+            },
+            "result": {
+              "anyOf": [
+                {
+                  "readOnly": true,
+                  "type": "object",
+                  "properties": {
+                    "schemaVersion": {
+                      "type": "string",
+                      "const": "1.0.0"
+                    },
+                    "jobId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                    },
+                    "kind": {
+                      "type": "string",
+                      "const": "rigid-alignment"
+                    },
+                    "referenceStructureId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                    },
+                    "mobileStructureId": {
+                      "type": "string",
+                      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                    },
+                    "referenceSourceSha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "mobileSourceSha256": {
+                      "type": "string",
+                      "pattern": "^[a-f0-9]{64}$"
+                    },
+                    "coordinateUnit": {
+                      "type": "string",
+                      "const": "angstrom"
+                    },
+                    "evidenceClass": {
+                      "type": "string",
+                      "const": "derived-geometry"
+                    },
+                    "method": {
+                      "type": "string",
+                      "const": "kabsch-no-reflection"
+                    },
+                    "engineVersion": {
+                      "type": "string",
+                      "minLength": 1
+                    },
+                    "computedAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$"
+                    },
+                    "transformMobileToReference": {
+                      "readOnly": true,
+                      "type": "object",
+                      "properties": {
+                        "convention": {
+                          "type": "string",
+                          "const": "row-major;column-vector;p-display=R*p-source+t"
+                        },
+                        "coordinateUnit": {
+                          "type": "string",
+                          "const": "angstrom"
+                        },
+                        "rotation": {
+                          "readOnly": true,
+                          "minItems": 9,
+                          "maxItems": 9,
+                          "type": "array",
+                          "items": {
+                            "type": "number"
+                          }
+                        },
+                        "translation": {
+                          "readOnly": true,
+                          "type": "object",
+                          "properties": {
+                            "x": {
+                              "type": "number"
+                            },
+                            "y": {
+                              "type": "number"
+                            },
+                            "z": {
+                              "type": "number"
+                            }
+                          },
+                          "required": [
+                            "x",
+                            "y",
+                            "z"
+                          ],
+                          "additionalProperties": false
+                        }
+                      },
+                      "required": [
+                        "convention",
+                        "coordinateUnit",
+                        "rotation",
+                        "translation"
+                      ],
+                      "additionalProperties": false
+                    },
+                    "matchedAtomCount": {
+                      "type": "integer",
+                      "minimum": 3,
+                      "maximum": 9007199254740991
+                    },
+                    "rmsdAngstrom": {
+                      "type": "number",
+                      "minimum": 0
+                    },
+                    "atomCorrespondence": {
+                      "readOnly": true,
+                      "minItems": 3,
+                      "type": "array",
+                      "items": {
+                        "readOnly": true,
+                        "type": "object",
+                        "properties": {
+                          "referenceAtomKey": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 1024,
+                            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                          },
+                          "mobileAtomKey": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 1024,
+                            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                          }
+                        },
+                        "required": [
+                          "referenceAtomKey",
+                          "mobileAtomKey"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "residueDisplacements": {
+                      "readOnly": true,
+                      "type": "array",
+                      "items": {
+                        "readOnly": true,
+                        "type": "object",
+                        "properties": {
+                          "referenceResidueKey": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 1024,
+                            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                          },
+                          "mobileResidueKey": {
+                            "type": "string",
+                            "minLength": 1,
+                            "maxLength": 1024,
+                            "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                          },
+                          "matchedAtomCount": {
+                            "type": "integer",
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991
+                          },
+                          "rmsDisplacementAngstrom": {
+                            "type": "number",
+                            "minimum": 0
+                          }
+                        },
+                        "required": [
+                          "referenceResidueKey",
+                          "mobileResidueKey",
+                          "matchedAtomCount",
+                          "rmsDisplacementAngstrom"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "exclusions": {
+                      "readOnly": true,
+                      "type": "array",
+                      "items": {
+                        "readOnly": true,
+                        "type": "object",
+                        "properties": {
+                          "structureId": {
+                            "type": "string",
+                            "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+                          },
+                          "atomKey": {
+                            "anyOf": [
+                              {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 1024,
+                                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "residueKey": {
+                            "anyOf": [
+                              {
+                                "type": "string",
+                                "minLength": 1,
+                                "maxLength": 1024,
+                                "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+                              },
+                              {
+                                "type": "null"
+                              }
+                            ]
+                          },
+                          "reason": {
+                            "type": "string",
+                            "enum": [
+                              "missing-coordinate",
+                              "unmatched-identity",
+                              "alternate-conformer",
+                              "ambiguous-mapping",
+                              "outside-selection"
+                            ]
+                          }
+                        },
+                        "required": [
+                          "structureId",
+                          "atomKey",
+                          "residueKey",
+                          "reason"
+                        ],
+                        "additionalProperties": false
+                      }
+                    },
+                    "limitations": {
+                      "readOnly": true,
+                      "minItems": 1,
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "minLength": 1
+                      }
+                    }
+                  },
+                  "required": [
+                    "schemaVersion",
+                    "jobId",
+                    "kind",
+                    "referenceStructureId",
+                    "mobileStructureId",
+                    "referenceSourceSha256",
+                    "mobileSourceSha256",
+                    "coordinateUnit",
+                    "evidenceClass",
+                    "method",
+                    "engineVersion",
+                    "computedAt",
+                    "transformMobileToReference",
+                    "matchedAtomCount",
+                    "rmsdAngstrom",
+                    "atomCorrespondence",
+                    "residueDisplacements",
+                    "exclusions",
+                    "limitations"
+                  ],
+                  "additionalProperties": false
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            }
+          },
+          "required": [
+            "structure",
+            "referenceChainKey",
+            "mobileChainKey",
+            "mapping",
+            "result"
+          ],
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "format",
+    "id",
+    "title",
+    "createdAt",
+    "updatedAt",
+    "portability",
+    "inputs",
+    "structures",
+    "annotations",
+    "modifications",
+    "analyses",
+    "view",
+    "comparison"
+  ],
+  "additionalProperties": false,
+  "title": "Project",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

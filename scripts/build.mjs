@@ -1,0 +1,18 @@
+import { build } from 'esbuild';
+import { mkdir, copyFile, cp } from 'node:fs/promises';
+import { resolve } from 'node:path';
+const root = resolve(import.meta.dirname, '..');
+process.chdir(root);
+await mkdir('dist/renderer', { recursive: true });
+await build({ entryPoints: ['src/desktop/main.ts'], outfile: 'dist/main.cjs', bundle: true, platform: 'node', format: 'cjs', target: 'node24', external: ['electron'], sourcemap: true });
+await build({ entryPoints: ['src/desktop/preload.ts'], outfile: 'dist/preload.cjs', bundle: true, platform: 'node', format: 'cjs', external: ['electron'], sourcemap: true });
+await build({ entryPoints: ['src/desktop/analysis-worker.ts'], outfile: 'dist/analysis-worker.cjs', bundle: true, platform: 'node', format: 'cjs', target: 'node24', sourcemap: true });
+await build({ entryPoints: ['src/renderer/app.ts'], outfile: 'dist/renderer/app.js', bundle: true, platform: 'browser', format: 'iife', target: 'chrome140', sourcemap: true });
+await copyFile('src/renderer/index.html', 'dist/renderer/index.html');
+await copyFile('src/renderer/style.css', 'dist/renderer/style.css');
+await copyFile('assets/icon.png','dist/renderer/icon.png');
+await copyFile('node_modules/3dmol/build/3Dmol-min.js', 'dist/renderer/3Dmol-min.js');
+await copyFile('node_modules/3dmol/LICENSE', 'dist/renderer/3Dmol-LICENSE.txt');
+await mkdir('dist/fixtures', { recursive: true });
+for (const id of ['1CRN', '1BRS']) await copyFile(`fixtures/structures/${id}.pdb`, `dist/fixtures/${id}.pdb`);
+console.log('Built main, sandboxed preload, analysis worker and local renderer; copied public fixtures.');

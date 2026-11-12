@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "jobId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "kind": {
+      "type": "string",
+      "const": "interface-geometry"
+    },
+    "structureId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "modelId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:-]{0,127}$"
+    },
+    "partnerAChainKeys": {
+      "readOnly": true,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024,
+        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+      }
+    },
+    "partnerBChainKeys": {
+      "readOnly": true,
+      "minItems": 1,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024,
+        "pattern": "^[A-Za-z0-9_:/%.+~-]+$"
+      }
+    },
+    "contactCutoffAngstrom": {
+      "type": "number",
+      "const": 4
+    },
+    "clashOverlapThresholdAngstrom": {
+      "type": "number",
+      "const": 0.4
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "jobId",
+    "kind",
+    "structureId",
+    "modelId",
+    "partnerAChainKeys",
+    "partnerBChainKeys",
+    "contactCutoffAngstrom",
+    "clashOverlapThresholdAngstrom"
+  ],
+  "additionalProperties": false,
+  "title": "GeometryRequest",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

@@ -1,0 +1,33 @@
+name: Local application checks
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows-x64:
+    runs-on: windows-latest
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24.22.1
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm setup:electron
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm schemas
+      - run: pnpm build
+      - run: pnpm dist:win
+      - run: pnpm test:packaged
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ProView-windows-x64
+          path: |
+            release/ProView-Setup-*.exe
+            evidence/*release.json

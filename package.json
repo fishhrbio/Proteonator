@@ -1,0 +1,152 @@
+{
+  "name": "proview",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local protein structure visualizer with residue annotations, interface geometry and reviewed structural alignment",
+  "author": "Robert Waite",
+  "main": "dist/main.cjs",
+  "license": "MIT",
+  "packageManager": "pnpm@11.25.0",
+  "engines": {
+    "node": ">=24.12.0 <25"
+  },
+  "scripts": {
+    "setup:electron": "install-electron",
+    "build": "node scripts/build.mjs",
+    "start": "electron .",
+    "dev": "pnpm build && pnpm start",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "schemas": "tsx scripts/export-contracts.ts",
+    "test:desktop": "node scripts/verify-release.mjs",
+    "test:packaged": "node scripts/verify-packaged.mjs",
+    "make:icon": "python scripts/make-icon.py",
+    "benchmark": "tsx scripts/benchmark.ts",
+    "verify:numerical": "tsx scripts/verify-numerical.ts",
+    "verify:package": "node scripts/verify-package.mjs",
+    "pack:dir": "electron-builder --dir --publish never",
+    "dist:win": "electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "electron-builder --mac dmg --arm64 --publish never",
+    "test:release": "node scripts/verify-release.mjs",
+    "test:installer": "powershell -NoProfile -File scripts/verify-installer.ps1",
+    "test:independent": "tsx scripts/verify-independent.ts",
+    "test:display": "node scripts/verify-display.mjs",
+    "test:lifecycle": "node scripts/verify-lifecycle.mjs",
+    "test:live": "node scripts/verify-live.mjs",
+    "benchmark:desktop": "node scripts/benchmark-desktop.mjs",
+    "test:portability": "node scripts/verify-portability.mjs",
+    "test:close": "node scripts/verify-close.mjs"
+  },
+  "dependencies": {
+    "3dmol": "2.5.5",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@types/node": "26.6.6",
+    "electron": "45.3.0",
+    "electron-builder": "26.18.0",
+    "esbuild": "0.28.2",
+    "playwright": "1.65.0",
+    "tsx": "4.23.15",
+    "typescript": "7.0.2"
+  },
+  "build": {
+    "appId": "org.robertwaite.proview",
+    "productName": "ProView",
+    "asar": true,
+    "files": [
+      "dist/**/*",
+      "package.json",
+      "LICENSE",
+      "licenses/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "dist/fixtures",
+        "to": "fixtures",
+        "filter": [
+          "*.pdb"
+        ]
+      },
+      {
+        "from": "docs/USER_GUIDE.html",
+        "to": "USER_GUIDE.html"
+      },
+      {
+        "from": "THIRD_PARTY_NOTICES.md",
+        "to": "THIRD_PARTY_NOTICES.md"
+      },
+      {
+        "from": "fixtures/PROVENANCE.json",
+        "to": "fixtures/PROVENANCE.json"
+      },
+      {
+        "from": "fixtures/README.md",
+        "to": "fixtures/README.md"
+      },
+      {
+        "from": "LICENSE",
+        "to": "ProView-LICENSE.txt"
+      },
+      {
+        "from": "licenses",
+        "to": "licenses",
+        "filter": [
+          "*.txt"
+        ]
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "ProView",
+      "uninstallDisplayName": "ProView 1.0.0",
+      "deleteAppDataOnUninstall": false,
+      "license": "LICENSE",
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ],
+      "category": "public.app-category.education",
+      "icon": "assets/icon.png"
+    },
+    "publish": null,
+    "artifactName": "ProView-Setup-${version}-${arch}.${ext}"
+  },
+  "homepage": "https://github.com/fishhrbio/ProView-1.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fishhrbio/ProView-1.0.git"
+  }
+}

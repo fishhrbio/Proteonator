@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "readOnly": true,
+  "type": "object",
+  "properties": {
+    "convention": {
+      "type": "string",
+      "const": "row-major;column-vector;p-display=R*p-source+t"
+    },
+    "coordinateUnit": {
+      "type": "string",
+      "const": "angstrom"
+    },
+    "rotation": {
+      "readOnly": true,
+      "minItems": 9,
+      "maxItems": 9,
+      "type": "array",
+      "items": {
+        "type": "number"
+      }
+    },
+    "translation": {
+      "readOnly": true,
+      "type": "object",
+      "properties": {
+        "x": {
+          "type": "number"
+        },
+        "y": {
+          "type": "number"
+        },
+        "z": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "x",
+        "y",
+        "z"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "convention",
+    "coordinateUnit",
+    "rotation",
+    "translation"
+  ],
+  "additionalProperties": false,
+  "title": "RigidTransform",
+  "$comment": "TypeScript Zod refinements remain authoritative for semantic cross-reference validation."
+}

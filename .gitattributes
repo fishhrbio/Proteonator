@@ -1,0 +1,4 @@
+# Preserve the exact bytes used by source-coordinate and release manifests.
+* -text
+*.png binary
+*.ico binary

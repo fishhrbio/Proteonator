@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "checks": [
+    "Project moved to a different folder and reopened after a full process restart",
+    "Original external reference/mobile coordinate files temporarily unavailable",
+    "Network unavailable and developer runtimes excluded from app PATH",
+    "Embedded sources, 165 geometry contacts and 108-pair comparison restored"
+  ],
+  "sourceHashes": [
+    "0076aae54252706a8c8c02f7b1e71ce2394b0e928b413590b4ac12aade9e8f6c",
+    "7721f22dad721194f01bac40a70d6dea49738ecde4be48ec32880ceb478bac7a"
+  ],
+  "alignmentRmsdAngstrom": 0.25873158777360117
+}
