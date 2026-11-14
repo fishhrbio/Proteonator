@@ -14,8 +14,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {id: mac-x64, runner: macos-15-intel, artifact: mac-x64, arch: x64, previous: 43562948821}
-          - {id: mac-26-x64, runner: macos-26-intel, artifact: mac-x64, arch: x64, previous: 43562948821}
+          - {id: mac-x64, runner: macos-15-intel, artifact: mac-x64, arch: x64, previous: 43561572742}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 50
     defaults:
