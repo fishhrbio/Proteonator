@@ -11,7 +11,9 @@ for name in ['USER_GUIDE','SCIENCE']:
     blocks=[]
     for block in (root/'docs'/f'{name}.md').read_text(encoding='utf8').strip().split('\n\n'):
         lines=block.splitlines()
-        if block.startswith('#'):
+        if block.startswith('```') and lines[-1]=='```':
+            blocks.append('<pre><code>'+html.escape('\n'.join(lines[1:-1]))+'</code></pre>')
+        elif block.startswith('#'):
             n=len(block)-len(block.lstrip('#'));blocks.append(f'<h{n}>'+inline(block[n:].strip())+f'</h{n}>')
         elif block.startswith('|'):
             rows=[[c.strip() for c in line.strip('|').split('|')] for line in lines]

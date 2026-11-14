@@ -2,9 +2,9 @@
 
 Proteonator focuses on connecting source identity, proposed chemistry, supplied structures and scientific evidence in a practical local workspace. Suggestions and reproducible issues are welcome; this roadmap remains open to updates.
 
-## Current release: 1.2
+## Current release: 1.2.1
 
-Construct and maturation states, coding RNA/DNA, source CDS links, local RNA secondary structure, imported biological evidence, expanded bounded chemistry, reviewed comparison, registered frames, richer exports, recovery and the emerald fedora identity. See the [changelog](CHANGELOG.md) and [scientific scope](docs/SCIENCE.md).
+Windows, native Apple Silicon/Intel Mac packages and an Ubuntu x64 package, alongside construct and maturation states, coding RNA/DNA, source CDS links, local RNA secondary structure, imported biological evidence, expanded bounded chemistry, reviewed comparison, registered frames, richer exports, recovery and the emerald fedora identity. See the [changelog](CHANGELOG.md) and [scientific scope](docs/SCIENCE.md).
 
 ## Further improvements
 
@@ -13,7 +13,7 @@ Construct and maturation states, coding RNA/DNA, source CDS links, local RNA sec
 - More trajectory interchange formats and region-aware frame analysis with independently tested topology/time/unit registration.
 - Broader sequence/feature/domain and transcript mapping coverage, while retaining ambiguity and engineered/native distinctions.
 - More efficient large-source imports, GPU/resource measurements and accessible presentation/interaction options.
-- Publisher signing, evaluated update delivery and additional native platforms after their complete installer/scientific-runtime checks.
+- Publisher signing and Apple notarization, evaluated update delivery, and further Linux distributions/processor architectures after their complete installer/scientific-runtime checks.
 
 ## Scientific methods
 

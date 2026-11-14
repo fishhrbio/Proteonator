@@ -1,6 +1,7 @@
 ## Proteonator
 
 - [[Home]]
+- [[Installation]]
 - [[Getting-started]]
 - [[Construct-and-maturation]]
 - [[Coding-sequences-and-RNA]]

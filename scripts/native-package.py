@@ -32,6 +32,9 @@ def install():
         assert any('proteonator' in d.get('CFBundleTypeExtensions',[]) for d in info['CFBundleDocumentTypes'])
         executable=destination/'Contents/MacOS'/info['CFBundleExecutable'];resources=destination/'Contents/Resources'
         run('codesign','--verify','--deep','--strict',str(destination))
+        graphics=json.loads((resources/'mac-graphics-inventory.json').read_text(encoding='utf-8'))
+        loader=destination/'Contents/Frameworks/Electron Framework.framework/Versions/A/Libraries/libvulkan.dylib'
+        assert sha(loader)==graphics['sha256'];s['graphicsLoader']=graphics
         signature=run('codesign','--display','--verbose=4',str(destination)).stderr
         s['signature']='ad-hoc' if 'Signature=adhoc' in signature else signature
         assessment=run('spctl','--assess','--type','execute','--verbose=2',str(destination),check=False)

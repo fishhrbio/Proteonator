@@ -1,14 +1,14 @@
 <p align="center"><img src="assets/wordmark.svg" width="520" alt="Proteonator emerald fedora and wordmark"></p>
 
-# Proteonator 1.2
+# Proteonator 1.2.1
 
 **A standalone molecular and sequence workspace for protein structures, precursor designs and explicit product chemistry.**
 
 Proteonator connects an encoded construct, its proposed processing steps, mature chemical requirements, coding RNA/DNA and supplied three-dimensional structures. Assemble sourced protein components, retain the identities of residues through virtual cleavage and maturation, and compare the resulting products without losing the original inputs. The molecular workspace lets you inspect residues and ligands, construct supported chemical scenarios and review geometric changes or a bounded local relaxation.
 
-Everything needed for core work is included in the Windows application: scientific libraries, example structures, fonts, licenses and offline help. No separate Python installation, account or subscription is required. Online reference retrieval and checking the published version are explicit actions.
+Everything needed for core work is included in each desktop package: scientific libraries, example structures, fonts, licenses and offline help. No separate Python installation, account or subscription is required. Online reference retrieval and checking the published version are explicit actions.
 
-[Download for Windows](https://github.com/fishhrbio/Proteonator/releases/latest) · [User guide](docs/USER_GUIDE.md) · [Scientific methods](docs/SCIENCE.md) · [Wiki](https://github.com/fishhrbio/Proteonator/wiki) · [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
+[Download for Windows, Mac and Ubuntu](https://github.com/fishhrbio/Proteonator/releases/latest) · [User guide](docs/USER_GUIDE.md) · [Scientific methods](docs/SCIENCE.md) · [Wiki](https://github.com/fishhrbio/Proteonator/wiki) · [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
 
 ## See the workspace
 
@@ -55,19 +55,34 @@ Exports include mmCIF, FASTA with chemistry/method sidecars, original GenBank, f
 
 ## Install
 
-**Release platform: Windows 11 x64, verified on build 26200.** Other Windows versions, macOS, Linux and ARM64 do not have verified native packages in this release.
+Choose the package that matches your operating system and processor. Each includes the scientific runtime and offline help; no separate Python installation is required.
 
-1. Download `Proteonator-Setup-1.2.0-x64.exe` from the [release page](https://github.com/fishhrbio/Proteonator/releases/latest).
-2. Run the installer and choose a location for the current-user installation.
-3. Start Proteonator from the Start menu or desktop shortcut. A bundled barnase–barstar structure opens locally.
+| System | Download | Verified target |
+| --- | --- | --- |
+| Windows | [Windows installer, x64](https://github.com/fishhrbio/Proteonator/releases/download/v1.2.1/Proteonator-Setup-1.2.1-x64.exe) | Windows 11 x64 |
+| Mac with Apple Silicon | [macOS disk image, arm64](https://github.com/fishhrbio/Proteonator/releases/download/v1.2.1/Proteonator-1.2.1-mac-arm64.dmg) | macOS 15, Apple Silicon |
+| Mac with Intel processor | [macOS disk image, x64](https://github.com/fishhrbio/Proteonator/releases/download/v1.2.1/Proteonator-1.2.1-mac-x64.dmg) | macOS 15, Intel |
+| Ubuntu Linux | [Debian package, x64](https://github.com/fishhrbio/Proteonator/releases/download/v1.2.1/Proteonator-1.2.1-linux-x64.deb) | Ubuntu 22.04 and 24.04 x64 |
 
-The package is unsigned because no publisher signing credential is available. Its release includes SHA-256 checksums. The installer includes the scientific runtime and works offline; it does not require a system Python installation. Saved projects and personal settings are kept separately from the application files. Read the [guide](docs/USER_GUIDE.md) for upgrade, recovery and uninstall behavior.
+**Windows:** run the installer and choose a current-user destination. Start Proteonator from Start or the desktop shortcut. The installer is unsigned because no publisher signing credential is available. Close the app before upgrading. Uninstall through Windows Apps or the installed uninstaller.
+
+**macOS:** choose the disk image for your processor, open it, then drag Proteonator into Applications. In Finder, **About This Mac** identifies an Apple chip or Intel processor. The application has an ad-hoc signature and is **not signed with an Apple Developer ID or notarized**. macOS may block first opening. If you trust the source and have checked the checksum, follow [Apple’s instructions for opening an app from an unidentified developer](https://support.apple.com/en-us/102445). A signature-integrity check does not establish Gatekeeper approval. To update, quit the app and replace the copy in Applications. To uninstall, move that copy to Trash; projects and personal settings remain.
+
+**Ubuntu:** download the `.deb`, open a terminal in its folder and run:
+
+```sh
+sudo apt install ./Proteonator-1.2.1-linux-x64.deb
+```
+
+Open Proteonator from the applications menu, or run `proteonator`. The installer registers `.proteonator` projects and resolves desktop-library dependencies. Use the same command with the new package to update. Remove the application with `sudo apt remove proteonator`; projects and personal settings remain. Administrator permission is needed to install or remove the system package, not to run the application. Keep the normal application sandbox enabled.
+
+Compare downloads with the [SHA-256 checksums](https://github.com/fishhrbio/Proteonator/releases/download/v1.2.1/SHA256SUMS.txt). Save copies of important projects before an upgrade. Release verification uses native operating-system hosts; virtual Mac/Linux graphics and a physical Windows computer cover the recorded checks. Linux distributions other than Ubuntu 22.04/24.04 x64, Linux ARM64, Windows ARM64 and macOS releases outside the listed test targets are not verified. Manual screen-reader testing and Apple notarization remain unavailable. Read the [installation guide](docs/USER_GUIDE.md) for retention and first-opening details.
 
 ## Start a precursor review
 
 Choose **New construct project**. Import your actual protein or nucleotide record, then add exact, sourced components such as a fusion partner, linker, cleavage junction and target. Create the encoded construct. In **Processing**, declare the proposed cuts and mature terminal/bond requirements. Compare state identity, chemistry and mass; attach planned or observed evidence to the state it concerns. Generate coding RNA/DNA from the encoded state when that is the sequence you intend to represent. Retain a reviewed mapping before linking residues to a supplied structural chain.
 
-For molecular work, select a residue or ligand, inspect its neighborhood and contacts, and create a separate chemical scenario. Review preparation and convergence before interpreting a local relaxation. **Commands** (`Ctrl+K`) finds actions; **Settings** contains skins, layouts, shortcuts and accessibility controls.
+For molecular work, select a residue or ligand, inspect its neighborhood and contacts, and create a separate chemical scenario. Review preparation and convergence before interpreting a local relaxation. **Commands** (`Cmd+K` on Mac, `Ctrl+K` elsewhere) finds actions; **Settings** contains skins, layouts, shortcuts and accessibility controls.
 
 ## Scientific limits
 

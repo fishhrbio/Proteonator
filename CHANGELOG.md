@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.1
+
+- Added separate macOS disk images for Apple Silicon and Intel, with native scientific runtimes, fedora icons, document associations and Mac menu/keyboard conventions.
+- Added an Ubuntu x64 Debian package with native scientific libraries, an applications-menu entry, project association and sandbox-preserving installation.
+- Made project arguments, file URLs, runtime discovery and third-party notice collection portable across Windows, macOS and Linux.
+- Added native package installation, scientific/interaction checks, project/settings retention, reinstall and uninstall verification, with separate downloads and platform-specific guidance.
+- macOS applications are ad-hoc signed, without Apple Developer ID signing or notarization. The Windows installer remains unsigned. Platform and scientific limitations remain explicit.
+
 ## 1.2.0
 
 - Added a source-preserving construct/maturation workspace: FASTA/GenBank/CDS, modules, virtual processing, explicit mature chemistry, neutral masses, descriptive profiles, target requirements and state-specific evidence.

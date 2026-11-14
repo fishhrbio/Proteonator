@@ -3,7 +3,7 @@ import {electronExecutable,graphicsModes} from './native-environment.mjs';
 const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/graphics-probe');await mkdir(out,{recursive:true});
 const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;
 const report={platform:process.platform,architecture:process.arch,status:'failed',candidates:[]};
-const modes=process.platform==='darwin'?['native','metal','swiftshader-webgl','swiftshader','angle-gl']:['swiftshader-webgl','swiftshader','native'];
+const modes=process.platform==='darwin'?['native','metal','swiftshader-webgl','swiftshader','angle-gl','software-gl','swiftshader-vulkan']:['swiftshader-webgl','swiftshader','native'];
 for(const mode of modes){
  let app;const entry={mode,stderr:''};
  try{

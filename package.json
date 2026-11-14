@@ -36,7 +36,7 @@
     "test:chemistry": "python -m unittest discover -s compute -p \"test_*.py\"",
     "test:archives": "python scripts/verify-export-archives.py",
     "test:video": "python scripts/verify-video-decode.py",
-    "dist:mac": "electron-builder --mac dmg --publish never",
+    "dist:mac": "python3 scripts/prepare-mac-graphics.py && electron-builder --mac dmg --publish never",
     "dist:linux": "electron-builder --linux deb --publish never",
     "make:platform-icons": "node scripts/make-platform-icons.mjs"
   },
@@ -59,6 +59,7 @@
   "build": {
     "appId": "org.robertwaite.proteonator",
     "productName": "Proteonator",
+    "afterPack": "scripts/after-pack.cjs",
     "asar": true,
     "files": [
       "dist/**/*",

@@ -2,9 +2,21 @@
 
 ## Install, upgrade and start
 
-Use the Windows 11 x64 installer from the release page. Installation is for the current user; choose the destination and finish the wizard. The application includes its scientific runtime, examples, fonts, artwork, licenses and this offline guide. No separate Python environment is needed. The package is unsigned; compare its SHA-256 checksum with the release manifest when checking the download.
+Choose the Windows 11 x64 installer, the macOS 15 disk image for Apple Silicon or Intel, or the Ubuntu 22.04/24.04 x64 Debian package from the [release page](https://github.com/fishhrbio/Proteonator/releases/latest). Other operating-system/processor combinations are not verified. Each package includes its scientific runtime, examples, fonts, artwork, licenses and this offline guide. No separate Python environment is needed. Compare its SHA-256 checksum with the release manifest when checking the download.
 
-An upgrade uses the same Proteonator application identity. Save your work and close Proteonator before running an upgrade. Keep copies of your projects before upgrading and save changed work as a new `.proteonator` file. The application directory is separate from projects and personal settings. Uninstall through Windows Apps or the installed uninstaller. Uninstall removes application files and shortcuts while retaining personal projects/settings. An older, separately named application is not silently removed.
+**Windows:** installation is for the current user; choose the destination and finish the wizard. The installer is unsigned. Start from the Start menu or desktop shortcut. Uninstall through Windows Apps or the installed uninstaller.
+
+**macOS:** choose the disk image for your processor, open it, then drag Proteonator into Applications. In Finder, **About This Mac** identifies an Apple chip or Intel processor. The application has an ad-hoc signature and is **not signed with an Apple Developer ID or notarized**. macOS may block first opening. If you trust the source and have checked the checksum, follow [Apple’s instructions for opening an app from an unidentified developer](https://support.apple.com/en-us/102445). A signature-integrity check does not establish Gatekeeper approval. To update, quit the app and replace the copy in Applications. To uninstall, move that copy to Trash; projects and personal settings remain.
+
+**Ubuntu:** download the `.deb`, open a terminal in its folder and run:
+
+```sh
+sudo apt install ./Proteonator-1.2.1-linux-x64.deb
+```
+
+Open Proteonator from the applications menu, or run `proteonator`. The installer registers `.proteonator` projects and resolves desktop-library dependencies. Use the same command with the new package to update. Remove the application with `sudo apt remove proteonator`; projects and personal settings remain. Administrator permission is needed to install or remove the system package, not to run the application. Keep the normal application sandbox enabled.
+
+Save your work and close Proteonator before installing an update. Keep copies of important projects and save changed work as a new `.proteonator` file. Application files are separate from projects and personal settings. Removal retains those personal files. An older, separately named application is not silently removed. Native platform checks cover the listed operating systems; they do not establish every graphics driver, manual screen-reader compatibility or Gatekeeper approval.
 
 A local barnase–barstar example opens initially. Core viewing, sequence work, calculations, help, save/reopen and exports work offline. Retrieve coordinates, retrieve curated context and check the published version only when you choose those actions. No coordinate or sequence file is uploaded by these reference lookups.
 
@@ -12,7 +24,7 @@ A local barnase–barstar example opens initially. Core viewing, sequence work, 
 
 **Molecule** works with supplied coordinates. **Construct & RNA** works with sequences, chemical requirements and processing states; it can also retain a reviewed correspondence to an open molecular chain. **New construct project** starts without fabricated coordinates. Switching workspace does not convert a sequence into a fold.
 
-Use Save project, Open project, Recent projects and Recover autosave along the top. The project heading marks unsaved work. Commands (`Ctrl+K`) supports synonyms, favorites and recent actions, with reasons when an action is unavailable. Settings contains layout presets, panel controls, toolbar shortcuts and all three skins.
+Use Save project, Open project, Recent projects and Recover autosave along the top. The project heading marks unsaved work. Commands (`Cmd+K` on Mac, `Ctrl+K` elsewhere) supports synonyms, favorites and recent actions, with reasons when an action is unavailable. Settings contains layout presets, panel controls, toolbar shortcuts and all three skins.
 
 ## Build a construct from actual sequences
 

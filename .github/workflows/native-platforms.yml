@@ -75,6 +75,7 @@ jobs:
           pnpm make:icon
           pnpm make:platform-icons
           python scripts/freeze-compute.py
+          if [ "${{ matrix.os }}" = "mac" ]; then python scripts/prepare-mac-graphics.py; fi
           pnpm build
           pnpm exec electron-builder --${{ matrix.os }} --${{ matrix.arch }} --publish never
       - name: Install the native package
@@ -87,12 +88,14 @@ jobs:
         run: |
           node scripts/verify-native-integration.mjs
           node scripts/verify-release.mjs
+          node scripts/verify-offline-help.mjs
           python scripts/verify-export-archives.py
       - name: Test installed Linux application with sandbox enabled
         if: matrix.os == 'linux'
         run: |
           xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
           xvfb-run -a dbus-run-session -- node scripts/verify-release.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-offline-help.mjs
           python scripts/verify-export-archives.py
       - name: Reinstall and uninstall while retaining projects and settings
         run: python scripts/native-package.py finish
@@ -119,6 +122,9 @@ jobs:
             work/physics/verification.json
             work/physics/stereochemistry.json
             work/graphics-probe/result.json
+            work/mac-graphics/inventory.json
+            work/offline-help/result.json
+            work/export-archive-verification.json
           retention-days: 14
   ubuntu-24:
     name: linux-x64-ubuntu-24
@@ -155,6 +161,7 @@ jobs:
         run: |
           xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
           xvfb-run -a dbus-run-session -- node scripts/verify-release.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-offline-help.mjs
           python scripts/verify-export-archives.py
           python scripts/native-package.py finish
       - uses: actions/upload-artifact@v4
@@ -166,4 +173,6 @@ jobs:
             work/native-package/lifecycle.json
             work/native-package/integration-result.json
             work/native-package/native-workspace.png
+            work/offline-help/result.json
+            work/export-archive-verification.json
           retention-days: 14
