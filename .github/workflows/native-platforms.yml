@@ -79,6 +79,9 @@ jobs:
           pnpm exec electron-builder --${{ matrix.os }} --${{ matrix.arch }} --publish never
       - name: Install the native package
         run: python scripts/native-package.py install
+      - name: Select available Mac graphics backend
+        if: matrix.os == 'mac'
+        run: node scripts/probe-native-graphics.mjs
       - name: Test installed macOS application
         if: matrix.os == 'mac'
         run: |
@@ -94,6 +97,7 @@ jobs:
       - name: Reinstall and uninstall while retaining projects and settings
         run: python scripts/native-package.py finish
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: package-${{ matrix.id }}
           compression-level: 0
@@ -114,6 +118,7 @@ jobs:
             work/native-python.log
             work/physics/verification.json
             work/physics/stereochemistry.json
+            work/graphics-probe/result.json
           retention-days: 14
   ubuntu-24:
     name: linux-x64-ubuntu-24

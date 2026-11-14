@@ -7,7 +7,7 @@ import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/studio-verification');await mkdir(out,{recursive:true});
 const env={...process.env,PROTEONATOR_PYTHON:process.env.PROTEONATOR_PYTHON??'python'};delete env.ELECTRON_RUN_AS_NODE;const exe=process.env.PROTEONATOR_EXE;
 const report={status:'running',checks:[],errors:[],requests:[],startedAt:new Date().toISOString()};
-const app=await electron.launch({chromiumSandbox:true,executablePath:exe??electronExecutable,args:[...(exe?[]:[root]),...(process.env.PROTEONATOR_VERIFY_SOFTWARE_GL==='1'?['--use-gl=angle','--use-angle=swiftshader']:[]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
+const app=await electron.launch({chromiumSandbox:true,executablePath:exe??electronExecutable,args:[...(exe?[]:[root]),...softwareGraphicsArgs,'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
 let page;
 const check=async(name,fn)=>{await fn();report.checks.push(name);console.log('PASS',name);};
 const idle=()=>page.waitForFunction(()=>document.querySelector('main').getAttribute('aria-busy')!=='true',{timeout:120000});
