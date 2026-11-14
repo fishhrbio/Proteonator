@@ -1,3 +1,4 @@
+import {electronExecutable,systemPath,softwareGraphicsArgs,computeName,resourcesForExecutable} from './native-environment.mjs';
 import {spawn} from 'node:child_process';
 import {mkdir,readFile,writeFile,copyFile} from 'node:fs/promises';
 import path from 'node:path';
@@ -9,7 +10,7 @@ const selected=process.env.PROTEONATOR_VERIFY_SUITES?.split(',');
 const report={status:'running',startedAt:new Date().toISOString(),executable:process.env.PROTEONATOR_EXE,sha256:createHash('sha256').update(await readFile(process.env.PROTEONATOR_EXE)).digest('hex'),suites:[]};
 for(const [name,dir]of suites){
  if(selected&&!selected.includes(name))continue;
- const env={...process.env};if(name==='runtime')env.PROTEONATOR_COMPUTE_EXE=path.join(path.dirname(process.env.PROTEONATOR_EXE),'resources/compute/ProteonatorCompute.exe');
+ const env={...process.env};if(name==='runtime')env.PROTEONATOR_COMPUTE_EXE=path.join(resourcesForExecutable(process.env.PROTEONATOR_EXE),'compute',computeName);
  const startedAt=new Date().toISOString(),script=path.join(root,'scripts/verify-'+name+'.mjs');let log='';
  const exitCode=await new Promise((resolve,reject)=>{const child=spawn(process.execPath,[script],{cwd:root,env,windowsHide:true,stdio:['ignore','pipe','pipe']});child.stdout.on('data',d=>{log+=d;process.stdout.write(d);});child.stderr.on('data',d=>{log+=d;process.stderr.write(d);});child.on('error',reject);child.on('close',resolve);});
  let result=null;try{const bytes=await readFile(path.join(root,'work',dir,'result.json'));result=JSON.parse(bytes);await writeFile(path.join(out,name+'.json'),bytes);}catch{}

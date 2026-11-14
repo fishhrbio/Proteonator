@@ -20,6 +20,6 @@ tzdata==2026.6
 
 # Reproducible packaging tools (not application analysis dependencies)
 altgraph==0.17.5
-pefile==2024.8.26
-pywin32-ctypes==0.2.3
+pefile==2024.8.26; sys_platform == "win32"
+pywin32-ctypes==0.2.3; sys_platform == "win32"
 setuptools==84.2.1

@@ -1,3 +1,4 @@
+import {electronExecutable,systemPath,softwareGraphicsArgs,computeName,resourcesForExecutable} from './native-environment.mjs';
 import {_electron as electron} from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import assert from 'node:assert/strict';
@@ -5,9 +6,9 @@ import {mkdir,writeFile,readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/extended-verification');await mkdir(out,{recursive:true});
-const env={...process.env,PROTEONATOR_PYTHON:process.env.PROTEONATOR_PYTHON??'python'};delete env.ELECTRON_RUN_AS_NODE;if(process.env.PROTEONATOR_EXE){env.PATH='C:\\Windows\\System32';delete env.PYTHONPATH;delete env.PYTHONHOME;delete env.PROTEONATOR_PYTHON;}
-const exe=process.env.PROTEONATOR_EXE;if(exe){env.PATH='C:\\Windows\\System32';delete env.PYTHONPATH;delete env.PROTEONATOR_PYTHON;}
-const app=await electron.launch({executablePath:exe??path.join(root,'node_modules/electron/dist/electron.exe'),args:[...(exe?[]:[root]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
+const env={...process.env,PROTEONATOR_PYTHON:process.env.PROTEONATOR_PYTHON??'python'};delete env.ELECTRON_RUN_AS_NODE;if(process.env.PROTEONATOR_EXE){env.PATH=systemPath;delete env.PYTHONPATH;delete env.PYTHONHOME;delete env.PROTEONATOR_PYTHON;}
+const exe=process.env.PROTEONATOR_EXE;if(exe){env.PATH=systemPath;delete env.PYTHONPATH;delete env.PROTEONATOR_PYTHON;}
+const app=await electron.launch({chromiumSandbox:true,executablePath:exe??electronExecutable,args:[...softwareGraphicsArgs,...(exe?[]:[root]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
 let page;const report={status:'running',checks:[],errors:[],startedAt:new Date().toISOString(),installed:!!exe};
 const check=async(name,fn)=>{const start=performance.now();await fn();report.checks.push({name,ms:performance.now()-start});console.log('PASS',name);};
 const idle=()=>page.waitForFunction(()=>document.querySelector('main').getAttribute('aria-busy')!=='true',{},{timeout:180000});

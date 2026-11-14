@@ -1,10 +1,11 @@
+import {electronExecutable,systemPath,softwareGraphicsArgs,computeName,resourcesForExecutable} from './native-environment.mjs';
 import {_electron as electron} from 'playwright';
 import AxeBuilder from '@axe-core/playwright';
 import assert from 'node:assert/strict';
 import {mkdir,readFile,writeFile} from 'node:fs/promises';
 import path from 'node:path';
-const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/tools-verification');await mkdir(out,{recursive:true});const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;if(process.env.PROTEONATOR_EXE){env.PATH='C:\\Windows\\System32';delete env.PYTHONPATH;delete env.PYTHONHOME;delete env.PROTEONATOR_PYTHON;}
-const app=await electron.launch({executablePath:process.env.PROTEONATOR_EXE??path.join(root,'node_modules/electron/dist/electron.exe'),args:[...(process.env.PROTEONATOR_EXE?[]:[root]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env});
+const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/tools-verification');await mkdir(out,{recursive:true});const env={...process.env};delete env.ELECTRON_RUN_AS_NODE;if(process.env.PROTEONATOR_EXE){env.PATH=systemPath;delete env.PYTHONPATH;delete env.PYTHONHOME;delete env.PROTEONATOR_PYTHON;}
+const app=await electron.launch({chromiumSandbox:true,executablePath:process.env.PROTEONATOR_EXE??electronExecutable,args:[...softwareGraphicsArgs,...(process.env.PROTEONATOR_EXE?[]:[root]),'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env});
 let page;const report={status:'running',checks:[],errors:[]};const idle=()=>page.waitForFunction(()=>!document.querySelector('[aria-busy=true]'),{},{timeout:180000});const cmd=async(id)=>{await page.locator('[data-command='+id+']:visible').first().click();await idle();};const check=async(name,fn)=>{await fn();report.checks.push(name);console.log('PASS',name);};
 async function save(file){await app.evaluate(({dialog},file)=>{dialog.showSaveDialog=async()=>({canceled:false,filePath:file});},file);await cmd('save');return JSON.parse(await readFile(file,'utf8'));}
 try{

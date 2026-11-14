@@ -1,6 +1,6 @@
 {
   "name": "proteonator",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "type": "module",
   "description": "A local molecular workspace for structures, precursor chemistry, coding sequences and reproducible comparisons",
@@ -35,7 +35,10 @@
     "test:release": "node scripts/verify-release.mjs",
     "test:chemistry": "python -m unittest discover -s compute -p \"test_*.py\"",
     "test:archives": "python scripts/verify-export-archives.py",
-    "test:video": "python scripts/verify-video-decode.py"
+    "test:video": "python scripts/verify-video-decode.py",
+    "dist:mac": "electron-builder --mac dmg --publish never",
+    "dist:linux": "electron-builder --linux deb --publish never",
+    "make:platform-icons": "node scripts/make-platform-icons.mjs"
   },
   "dependencies": {
     "3dmol": "2.5.5",
@@ -119,14 +122,23 @@
           ]
         }
       ],
-      "icon": "assets/icon.ico"
+      "icon": "assets/icon.ico",
+      "fileAssociations": [
+        {
+          "ext": "proteonator",
+          "name": "Proteonator project",
+          "description": "Portable Proteonator molecular and sequence project",
+          "role": "Editor",
+          "icon": "assets/icon.ico"
+        }
+      ]
     },
     "nsis": {
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
       "shortcutName": "Proteonator",
-      "uninstallDisplayName": "Proteonator 1.2.0",
+      "uninstallDisplayName": "Proteonator 1.2.1",
       "deleteAppDataOnUninstall": false,
       "license": "LICENSE",
       "createDesktopShortcut": true,
@@ -143,15 +155,72 @@
     "publish": null,
     "artifactName": "Proteonator-Setup-${version}-${arch}.${ext}",
     "npmRebuild": false,
-    "fileAssociations": [
-      {
-        "ext": "proteonator",
-        "name": "Proteonator project",
-        "description": "Portable Proteonator molecular and sequence project",
-        "role": "Editor",
-        "icon": "assets/icon.ico"
-      }
-    ]
+    "mac": {
+      "target": [
+        "dmg"
+      ],
+      "icon": "assets/icon.icns",
+      "category": "public.app-category.education",
+      "minimumSystemVersion": "15.0",
+      "identity": "-",
+      "notarize": false,
+      "hardenedRuntime": false,
+      "fileAssociations": [
+        {
+          "ext": "proteonator",
+          "name": "Proteonator project",
+          "description": "Portable Proteonator molecular and sequence project",
+          "role": "Editor",
+          "icon": "assets/icon.icns"
+        }
+      ],
+      "artifactName": "Proteonator-${version}-mac-${arch}.${ext}"
+    },
+    "dmg": {
+      "title": "Proteonator ${version}",
+      "sign": false,
+      "contents": [
+        {
+          "x": 130,
+          "y": 160,
+          "type": "file"
+        },
+        {
+          "x": 410,
+          "y": 160,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "deb",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon-512.png",
+      "executableName": "proteonator",
+      "category": "Science",
+      "maintainer": "Robert Waite <fishhrbio@users.noreply.github.com>",
+      "fileAssociations": [
+        {
+          "ext": "proteonator",
+          "name": "Proteonator project",
+          "description": "Portable Proteonator molecular and sequence project",
+          "role": "Editor",
+          "icon": "assets/icon-512.png",
+          "mimeType": "application/x-proteonator-project"
+        }
+      ],
+      "artifactName": "Proteonator-${version}-linux-${arch}.${ext}",
+      "mimeTypes": [
+        "application/x-proteonator-project"
+      ]
+    }
   },
   "homepage": "https://github.com/fishhrbio/Proteonator",
   "repository": {

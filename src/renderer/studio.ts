@@ -530,7 +530,8 @@ async function init(){
 
  for(const id of ['left-width','right-width'])val(id).oninput=()=>applySettings(currentSettings());
 
- const defaults:Record<string,string>={open:'Ctrl+O',save:'Ctrl+S',undo:'Ctrl+Z',redo:'Ctrl+Shift+Z',commands:'Ctrl+K',settings:'Ctrl+,'};
+ const nativePlatform=await request('platform'),primaryKey=nativePlatform.platform==='darwin'?'Cmd':'Ctrl';
+ const defaults:Record<string,string>={open:primaryKey+'+O',save:primaryKey+'+S',undo:primaryKey+'+Z',redo:primaryKey+'+Shift+Z',commands:primaryKey+'+K',settings:primaryKey+'+,'};
 
  for(const [id,value] of Object.entries(defaults)){const row=node('label',undefined,'shortcut-row'),input=document.createElement('input');input.value=value;input.defaultValue=value;input.dataset.shortcut=id;input.setAttribute('aria-label',commands[id].label+' shortcut');input.onchange=()=>void perform(async()=>{const next={...customShortcuts,[id]:input.value};await request('shortcuts',next);customShortcuts=next;applySettings(currentSettings());notify('Shortcut updated.');});row.append(node('span',commands[id].label),input);$('shortcut-editor').append(row);}
 

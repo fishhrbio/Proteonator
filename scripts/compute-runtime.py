@@ -14,4 +14,10 @@ if getattr(sys,'frozen',False) and sys.platform=='win32':
     plugin.registerPlatforms()
     sys._proteonator_cpu_plugin=plugin
     openmm.Platform.getPlatformByName('CPU')
+elif getattr(sys,'frozen',False):
+    os.environ['OPENMM_PLUGIN_DIR']=''
+    import openmm
+    plugin_name='libOpenMMCPU.dylib' if sys.platform=='darwin' else 'libOpenMMCPU.so'
+    openmm.Platform.loadPluginLibrary(str(Path(sys._MEIPASS)/'OpenMM.libs/lib/plugins'/plugin_name))
+    openmm.Platform.getPlatformByName('CPU')
 os.environ['OPENMM_CPU_THREADS']='2'

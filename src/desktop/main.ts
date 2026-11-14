@@ -1,3 +1,4 @@
+import {projectPathFromArgument} from './platform';
 import {registerStudio,studioMenu,queueProjectOpen} from './studio';
 import { app, BrowserWindow, dialog, ipcMain, protocol, session, shell } from 'electron';
 import { readFile, stat, writeFile, rename, unlink } from 'node:fs/promises';
@@ -19,7 +20,9 @@ const verificationMode = process.argv.includes('--proview-verify-hidden');
 const MAX_INPUT_BYTES = 5 * 1024 * 1024;
 const MAX_ATOMS = 25000;
 let win: BrowserWindow | null = null;
-if(!verificationMode){if(!app.requestSingleInstanceLock()){app.quit();}app.on('second-instance',(_event,argv)=>{const file=argv.find(a=>!a.startsWith('--')&&/\.(proteonator|proview|ptmw)$/i.test(a));if(file)queueProjectOpen(path.resolve(file));if(win){if(win.isMinimized())win.restore();win.show();win.focus();if(file)win.webContents.send('proteonator:command','open-startup-project');}});}
+if(!verificationMode){if(!app.requestSingleInstanceLock()){app.quit();}app.on('second-instance',(_event,argv)=>{const file=argv.map(a=>projectPathFromArgument(a)).find((p):p is string=>p!==null);if(file)queueProjectOpen(path.resolve(file));if(win){if(win.isMinimized())win.restore();win.show();win.focus();if(file)win.webContents.send('proteonator:command','open-startup-project');}});}
+app.on('open-file',(event,filename)=>{event.preventDefault();const file=projectPathFromArgument(filename);if(!file)return;queueProjectOpen(file);if(win&&!win.isDestroyed()){if(win.isMinimized())win.restore();win.show();win.focus();if(!win.webContents.isLoadingMainFrame())win.webContents.send('proteonator:command','open-startup-project');}});
+app.on('activate',()=>{if(win&&!win.isDestroyed()){if(win.isMinimized())win.restore();win.show();}});
 let current: NormalizedStructure | null = null;
 let comparison: NormalizedStructure | null = null;
 let currentText: string | null = null;

@@ -1,3 +1,5 @@
+import {computeExecutableName,projectPathFromArgument} from './platform';
+import type {MenuItemConstructorOptions} from 'electron';
 import {LocalResponseSettings} from '../engine/local-response-settings';
 import {MolecularToolsState,CameraSnapshot} from '../engine/saved-views';
 import {TrajectoryRecord} from '../engine/trajectories';
@@ -78,7 +80,7 @@ async function compute(req:any){
  if(req.operation==='construct')z.array(Edit).max(32).parse(req.edits);
  const id=typeof req.jobId==='string'?req.jobId:crypto.randomUUID();
  if(running.size>=2)throw new Error('Two local calculations are already running. Cancel or wait.');
- const cmd=app.isPackaged?path.join(process.resourcesPath,'compute','ProteonatorCompute.exe'):(process.env.PROTEONATOR_PYTHON??'python');
+ const cmd=app.isPackaged?path.join(process.resourcesPath,'compute',computeExecutableName()):(process.env.PROTEONATOR_PYTHON??'python');
  return new Promise<any>((resolve,reject)=>{
   const child=spawn(cmd,app.isPackaged?[]:[path.join(root(),'compute/molecule.py')],{windowsHide:true,env:{...process.env,...(!app.isPackaged?{PYTHONPATH:[path.join(root(),'compute-addons'),path.join(root(),'compute-libs')].join(path.delimiter)}:{} )},stdio:['pipe','pipe','pipe']});running.set(id,child);
   let stdout='',stderr='',settled=false;const timeout=setTimeout(()=>{child.kill();finish(new Error('Molecular calculation exceeded its 300-second deadline.'));},300000);
@@ -96,7 +98,7 @@ async function jsonFetch(url:string,limit=12*1024*1024){
  const response=await fetch(url,{signal:AbortSignal.timeout(15000),redirect:'error',headers:{Accept:'application/json'}});if(!response.ok)throw new Error(`Reference service returned HTTP ${response.status}.`);let size=0;const chunks=[];for await(const b of response.body!){size+=b.length;if(size>limit)throw new Error('Reference response is too large.');chunks.push(b);}return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
 
-let pendingProjectPath=process.argv.find(a=>!a.startsWith('--')&&/\.(proteonator|proview|ptmw)$/i.test(a))??null;
+let pendingProjectPath=process.argv.map(a=>projectPathFromArgument(a)).find((p):p is string=>p!==null)??null;
 export function queueProjectOpen(filename:string){pendingProjectPath=filename;}
 async function readProjectFile(filename:string,remember:boolean){let value:any;if((await stat(filename)).size>200*1024*1024)throw new Error('Project exceeds 200 MiB.');const parsed=await decodeProject(await readFile(filename));
      if(parsed.format==='proteonator-project')value=validateProject(Project.parse(parsed));
@@ -116,7 +118,8 @@ export function registerStudio(win:()=>BrowserWindow|null){
   const w=win();const url=new URL(event.senderFrame?.url??'about:blank');if(!w||event.sender.id!==w.webContents.id||event.senderFrame!==w.webContents.mainFrame||url.protocol!=='proteonator:'||url.hostname!=='app'||url.pathname!=='/index.html')return {ok:false,error:'Untrusted application request.'};
   try{
    const req=z.object({action:z.string(),data:z.unknown().optional()}).strict().parse(raw);const d:any=req.data;let value:any;
-   if(req.action==='shortcuts'){const shortcuts=z.record(z.string(),z.string().regex(/^(CmdOrCtrl|Ctrl|Alt|Shift)(\+(CmdOrCtrl|Ctrl|Alt|Shift))*\+[A-Za-z0-9,]$/)).parse(d);studioMenu(w,shortcuts);value=true;}
+   if(req.action==='platform')value={platform:process.platform,arch:process.arch,version:app.getVersion()};
+   else if(req.action==='shortcuts'){const shortcuts=z.record(z.string(),z.string().regex(/^(CmdOrCtrl|Cmd|Ctrl|Alt|Shift)(\+(CmdOrCtrl|Cmd|Ctrl|Alt|Shift))*\+[A-Za-z0-9,]$/)).parse(d);studioMenu(w,shortcuts);value=true;}
    else if(req.action==='compute')value=await compute(d);
    else if(req.action==='cancel'){const p=running.get(String(d));if(p){cancelled.add(String(d));p.kill();}value=!!p;}
    else if(req.action==='example'){if(!['1BRS','1CRN','1CRN.cif','1UBQ','4HHB','1BNA','1HZH'].includes(d))throw new Error('Unknown example.');const f=path.join(root(),'fixtures/structures',d==='1CRN.cif'?d:d+'.pdb');value=await sourceFile(app.isPackaged?path.join(process.resourcesPath,'examples',path.basename(f)):f);}
@@ -163,8 +166,8 @@ export function registerStudio(win:()=>BrowserWindow|null){
 }
 export function studioMenu(w:BrowserWindow,shortcuts:Record<string,string>={}){
  const item=(label:string,id:string,accelerator?:string)=>({label,accelerator:shortcuts[id]||accelerator,click:()=>w.webContents.send('proteonator:command',id)});
- Menu.setApplicationMenu(Menu.buildFromTemplate([
-  {label:'File',submenu:[item('Open coordinates…','open','CmdOrCtrl+O'),item('Open project…','open-project','CmdOrCtrl+Shift+O'),item('Save project…','save','CmdOrCtrl+S'),item('Export coordinates…','export-coordinates'),item('Export report…','export-report'),item('Export image…','export-image'),{type:'separator'},{role:'quit'}]},
+ const template:MenuItemConstructorOptions[]=[
+  {label:'File',submenu:[item('Open coordinates…','open','CmdOrCtrl+O'),item('Open project…','open-project','CmdOrCtrl+Shift+O'),item('Save project…','save','CmdOrCtrl+S'),item('Export coordinates…','export-coordinates'),item('Export report…','export-report'),item('Export image…','export-image'),{type:'separator'},...(process.platform==='darwin'?[{role:'close' as const}]:[{role:'quit' as const}])]},
   {label:'Edit',submenu:[item('Undo chemical edit','undo','CmdOrCtrl+Z'),item('Redo chemical edit','redo','CmdOrCtrl+Shift+Z'),{type:'separator'},{role:'copy'},{role:'paste'},{role:'selectAll'}]},
   {label:'View',submenu:[item('Fit structure','fit'),item('Settings…','settings','CmdOrCtrl+,'),item('Search commands…','commands','CmdOrCtrl+K'),{role:'togglefullscreen'},{role:'resetZoom'},{role:'zoomIn'},{role:'zoomOut'}]},
   {label:'Select',submenu:[item('Toggle residue label','label-selection'),item('Clear selection','clear-selection'),item('Show selected neighborhood','neighbors')]},
@@ -172,5 +175,5 @@ export function studioMenu(w:BrowserWindow,shortcuts:Record<string,string>={}){
   {label:'PTM',submenu:[item('Construct selected modification','apply-ptm'),item('Relax local environment','relax'),item('New scenario','new-scenario')]},
   {label:'Analysis',submenu:[item('Compare environments','compare'),item('Open comparison coordinates…','open-mobile'),item('Open density map…','open-map')]},
   {label:'Help',submenu:[item('User guide','guide'),item('Quick tour','tour'),item('Scientific methods','methods')]}
- ]));w.setMenuBarVisibility(true);
+ ];if(process.platform==='darwin')template.unshift({label:'Proteonator',role:'appMenu'});Menu.setApplicationMenu(Menu.buildFromTemplate(template));w.setMenuBarVisibility(true);
 }

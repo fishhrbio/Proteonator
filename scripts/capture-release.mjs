@@ -1,9 +1,10 @@
+import {electronExecutable,systemPath,softwareGraphicsArgs,computeName,resourcesForExecutable} from './native-environment.mjs';
 import {_electron as electron} from 'playwright';
 import {mkdir,writeFile} from 'node:fs/promises';
 import path from 'node:path';
 const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'docs/images'),evidence=[];await mkdir(out,{recursive:true});
-const env={...process.env,PATH:'C:\\Windows\\System32'};for(const key of ['ELECTRON_RUN_AS_NODE','PROTEONATOR_PYTHON','PYTHONPATH','PYTHONHOME'])delete env[key];
-const app=await electron.launch({executablePath:process.env.PROTEONATOR_EXE??path.join(root,'release/win-unpacked/Proteonator.exe'),args:['--proview-verify-hidden','--user-data-dir='+path.join(root,'work/screenshots/profile-'+Date.now())],env});
+const env={...process.env,PATH:systemPath};for(const key of ['ELECTRON_RUN_AS_NODE','PROTEONATOR_PYTHON','PYTHONPATH','PYTHONHOME'])delete env[key];
+const app=await electron.launch({chromiumSandbox:true,executablePath:process.env.PROTEONATOR_EXE??path.join(root,'release/win-unpacked/Proteonator.exe'),args:[...softwareGraphicsArgs,'--proview-verify-hidden','--user-data-dir='+path.join(root,'work/screenshots/profile-'+Date.now())],env});
 try{
  const page=await app.firstWindow();page.on('dialog',d=>d.accept());await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Proteonator is ready'),{},{timeout:60000});await app.evaluate(({BrowserWindow})=>BrowserWindow.getAllWindows()[0].setSize(1600,1100));
  const idle=()=>page.waitForFunction(()=>!document.querySelector('[aria-busy=true]'),{},{timeout:180000}),cmd=async id=>{await page.locator('[data-command='+id+']:visible').first().click();await idle();};

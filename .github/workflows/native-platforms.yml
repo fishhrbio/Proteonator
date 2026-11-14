@@ -1,0 +1,164 @@
+name: Native platform packages
+on:
+  push:
+    branches: [codex/native-platforms]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    name: ${{ matrix.id }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: linux-x64
+            runner: ubuntu-22.04
+            arch: x64
+            os: linux
+          - id: mac-arm64
+            runner: macos-15
+            arch: arm64
+            os: mac
+          - id: mac-x64
+            runner: macos-15-intel
+            arch: x64
+            os: mac
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 60
+    defaults:
+      run:
+        shell: bash
+    env:
+      CSC_IDENTITY_AUTO_DISCOVERY: "false"
+      PYTHONNOUSERSITE: "1"
+      PROTEONATOR_VERIFY_SOFTWARE_GL: "1"
+      PROTEONATOR_TARGET_ARCH: ${{ matrix.arch }}
+      PROTEONATOR_VERIFY_LABEL: native-result
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Create a clean scientific environment
+        run: |
+          python -m venv .native-env
+          echo "$GITHUB_WORKSPACE/.native-env/bin" >> "$GITHUB_PATH"
+          .native-env/bin/python -m pip install -r requirements-compute.txt
+      - name: Install desktop dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm setup:electron
+          mkdir -p work
+      - name: Install Linux desktop system libraries
+        if: matrix.os == 'linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb dbus-x11 libgtk-3-0 libnss3 libxss1 libxtst6 libgbm1 libasound2 xdg-utils desktop-file-utils
+      - name: Validate source and scientific calculations
+        run: |
+          pnpm typecheck
+          pnpm test > work/native-unit.log
+          python -m unittest discover -s compute -p 'test_*.py' -v > work/native-python.log 2>&1
+          python compute/verify_physics.py
+          python compute/verify_stereochemistry.py
+      - name: Package native runtime and desktop
+        run: |
+          python scripts/render-guides.py
+          pnpm make:icon
+          pnpm make:platform-icons
+          python scripts/freeze-compute.py
+          pnpm build
+          pnpm exec electron-builder --${{ matrix.os }} --${{ matrix.arch }} --publish never
+      - name: Install the native package
+        run: python scripts/native-package.py install
+      - name: Test installed macOS application
+        if: matrix.os == 'mac'
+        run: |
+          node scripts/verify-native-integration.mjs
+          node scripts/verify-release.mjs
+          python scripts/verify-export-archives.py
+      - name: Test installed Linux application with sandbox enabled
+        if: matrix.os == 'linux'
+        run: |
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-release.mjs
+          python scripts/verify-export-archives.py
+      - name: Reinstall and uninstall while retaining projects and settings
+        run: python scripts/native-package.py finish
+      - uses: actions/upload-artifact@v4
+        with:
+          name: package-${{ matrix.id }}
+          compression-level: 0
+          path: |
+            release/*.dmg
+            release/*.deb
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-${{ matrix.id }}
+          path: |
+            work/native-result/
+            work/native-package/lifecycle.json
+            work/native-package/integration-result.json
+            work/native-package/native-workspace.png
+            work/native-unit.log
+            work/native-python.log
+            work/physics/verification.json
+            work/physics/stereochemistry.json
+          retention-days: 14
+  ubuntu-24:
+    name: linux-x64-ubuntu-24
+    needs: native
+    if: always()
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      PROTEONATOR_VERIFY_SOFTWARE_GL: "1"
+      PROTEONATOR_TARGET_ARCH: x64
+      PROTEONATOR_VERIFY_LABEL: native-result
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pnpm install --frozen-lockfile && pnpm setup:electron
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-linux-x64
+          path: release
+      - name: Install Linux desktop system libraries
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb dbus-x11 libgtk-3-0t64 libnss3 libxss1 libxtst6 libgbm1 libasound2t64 xdg-utils desktop-file-utils
+      - run: python scripts/native-package.py install
+      - name: Verify the same DEB on Ubuntu 24.04
+        run: |
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-release.mjs
+          python scripts/verify-export-archives.py
+          python scripts/native-package.py finish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-linux-x64-ubuntu-24
+          path: |
+            work/native-result/
+            work/native-package/lifecycle.json
+            work/native-package/integration-result.json
+            work/native-package/native-workspace.png
+          retention-days: 14
