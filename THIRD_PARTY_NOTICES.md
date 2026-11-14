@@ -17,7 +17,7 @@ Original Proteonator code and the emerald fedora icon are copyright © 2026 Robe
 | PyInstaller 6.17.0 bootloader | Standalone executable | GPL with application-distribution exception; `licenses/PyInstaller-license-and-exception.txt` |
 | charset-normalizer 3.5.2 | Runtime text support | MIT; `licenses/charset-normalizer-MIT.txt` |
 | Electron 45.3.0 | Desktop runtime | MIT; `licenses/electron-LICENSE.txt`; installed `LICENSE.electron.txt` |
-| Khronos Vulkan Loader 1.4.363 (macOS only) | Loader for Chromium's bundled software graphics renderer | Apache-2.0; `licenses/Vulkan-Loader.txt`; source revision and native binary hash in installed `mac-graphics-inventory.json` |
+| Khronos Vulkan Loader 1.4.363 (macOS only) | Loader for Chromium's bundled software graphics renderer | Apache-2.0 with included MIT components; `licenses/Vulkan-Loader.txt` and `licenses/Vulkan-Loader-components.txt`; source revision and native binary hash in installed `mac-graphics-inventory.json` |
 | Chromium, Node.js and Electron runtime components | Embedded desktop services | Installed `LICENSES.chromium.html` and runtime notice files |
 | 3Dmol.js 2.5.5 | Compatibility source dependency | BSD-3-Clause; `licenses/3dmol-LICENSE.txt` |
 | Zod 4.6.7 | Project/input validation | MIT; `licenses/zod-LICENSE.txt` |
