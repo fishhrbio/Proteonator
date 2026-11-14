@@ -2,7 +2,7 @@ name: Native document and compatibility checks
 on:
   push:
     branches: [codex/native-platforms]
-    paths: [.github/workflows/native-compatibility.yml, scripts/verify-native-document.mjs]
+    paths: ['src/**', 'compute/**', 'data/**', 'fixtures/**', 'assets/**', 'licenses/**', 'scripts/**', 'package.json', 'pnpm-lock.yaml', 'requirements-compute.txt', 'THIRD_PARTY_NOTICES.md', 'docs/USER_GUIDE.*', 'docs/SCIENCE.*', '.github/workflows/native-platforms.yml', '.github/workflows/native-compatibility.yml']
   workflow_dispatch:
     inputs:
       package_run_id:
