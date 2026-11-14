@@ -2,7 +2,7 @@ name: Native package acceptance
 on:
   push:
     branches: [codex/native-platforms]
-    paths: [.github/workflows/native-retest.yml, scripts/verify-media.mjs]
+    paths: [.github/workflows/native-retest.yml, scripts/verify-media.mjs, scripts/verify-studio-desktop.mjs]
   workflow_dispatch:
 permissions:
   contents: read
@@ -81,6 +81,7 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           node scripts/verify-native-integration.mjs
+          node scripts/verify-studio-desktop.mjs
           node scripts/verify-native-release.mjs
           node scripts/verify-native-document.mjs
           node scripts/verify-offline-help.mjs
