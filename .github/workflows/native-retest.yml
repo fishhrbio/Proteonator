@@ -1,8 +1,5 @@
 name: Native package acceptance
 on:
-  push:
-    branches: [codex/native-platforms]
-    paths: [.github/workflows/native-retest.yml, scripts/verify-media.mjs, scripts/verify-studio-desktop.mjs]
   workflow_dispatch:
 permissions:
   contents: read
