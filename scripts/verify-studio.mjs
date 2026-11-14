@@ -10,7 +10,7 @@ const report={status:'running',checks:[],errors:[],requests:[],startedAt:new Dat
 const app=await electron.launch({chromiumSandbox:true,executablePath:exe??electronExecutable,args:[...(exe?[]:[root]),...softwareGraphicsArgs,'--proview-verify-hidden','--force-renderer-accessibility','--user-data-dir='+path.join(out,'profile-'+Date.now())],env,timeout:30000});
 let page;
 const check=async(name,fn)=>{await fn();report.checks.push(name);console.log('PASS',name);};
-const idle=()=>page.waitForFunction(()=>document.querySelector('main').getAttribute('aria-busy')!=='true',{timeout:120000});
+const idle=()=>page.waitForFunction(()=>document.querySelector('main').getAttribute('aria-busy')!=='true',{},{timeout:120000});
 async function capture(name){await app.evaluate(async({BrowserWindow})=>{await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined,{stayHidden:true,stayAwake:true});});await page.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));const bytes=await app.evaluate(async({BrowserWindow})=>(await BrowserWindow.getAllWindows()[0].webContents.capturePage(undefined,{stayHidden:true,stayAwake:true})).toPNG().toString('base64'));await writeFile(path.join(out,name+'.png'),Buffer.from(bytes,'base64'));}
 const cmd=async(id)=>{await page.locator('[data-command="'+id+'"]').first().click();await idle();};
 const status=()=>page.locator('#status').innerText();
