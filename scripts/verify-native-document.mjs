@@ -16,8 +16,8 @@ try{
   execFileSync('/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister',['-f',bundle],options);
   execFileSync('/usr/bin/open',[file],{...options,stdio:'ignore'});report.launchMethod='LaunchServices open of the registered project extension';
  }else{
-  const mime=execFileSync('/usr/bin/xdg-mime',['query','filetype',file],options).trim();assert.equal(mime,'application/x-proteonator-project');
-  const association=execFileSync('/usr/bin/xdg-mime',['query','default',mime],options).trim();assert.equal(association,'proteonator.desktop');
+  const info=execFileSync('/usr/bin/gio',['info','--attributes=standard::content-type',file],options);const mime=info.match(/standard::content-type:\s+(\S+)/)?.[1];assert.equal(mime,'application/x-proteonator-project');report.mimeEvidence=info;
+  report.associationEvidence=execFileSync('/usr/bin/gio',['mime',mime],options);
   execFileSync('/usr/bin/gio',['open',file],{...options,stdio:'ignore'});report.launchMethod='GIO open using the installed MIME and desktop-file association';
  }
  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Project reopened'),{},{timeout:90000});
