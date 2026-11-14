@@ -966,8 +966,8 @@
     },
     {
       "path": "scripts/verify-new-workflows.mjs",
-      "bytes": 7780,
-      "sha256": "9a33483274f396820a57f50377a832e82792e4b06bc3b7bc406195c6df322d30"
+      "bytes": 8267,
+      "sha256": "c5238c2f281c09f7c2c57ce755f671eee8a91f700f0f1181c1ae84914436c59a"
     },
     {
       "path": "scripts/verify-project-startup.mjs",
@@ -991,8 +991,8 @@
     },
     {
       "path": "scripts/verify-sequence.mjs",
-      "bytes": 7291,
-      "sha256": "f4fd4ddb0ebe3bb5ec579b888f3c51c163869c99cdcb145d78c72b7493d75ca7"
+      "bytes": 7778,
+      "sha256": "d4837c5068ae9c40228f5cfe07a8d86c5c9510cad0db9a89d6175d3667aa5ba1"
     },
     {
       "path": "scripts/verify-studio-desktop.mjs",
