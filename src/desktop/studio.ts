@@ -84,9 +84,9 @@ async function compute(req:any){
  return new Promise<any>((resolve,reject)=>{
   const child=spawn(cmd,app.isPackaged?[]:[path.join(root(),'compute/molecule.py')],{windowsHide:true,env:{...process.env,...(!app.isPackaged?{PYTHONPATH:[path.join(root(),'compute-addons'),path.join(root(),'compute-libs')].join(path.delimiter)}:{} )},stdio:['pipe','pipe','pipe']});running.set(id,child);
   let stdout='',stderr='',settled=false;const timeout=setTimeout(()=>{child.kill();finish(new Error('Molecular calculation exceeded its 300-second deadline.'));},300000);
-  function finish(error:Error|null,value?:unknown){if(settled)return;settled=true;clearTimeout(timeout);running.delete(id);if(error)reject(error);else resolve(value);}
+  function finish(error:Error|null,value?:unknown){if(settled)return;settled=true;if(cancelled.delete(id))error=new Error('Calculation cancelled. The previous molecular state was retained.');clearTimeout(timeout);running.delete(id);if(error)reject(error);else resolve(value);}
   child.stdout!.on('data',b=>{stdout+=b;if(stdout.length>200*1024*1024){child.kill();finish(new Error('Molecular output exceeded its limit.'));}});child.stderr!.on('data',b=>{stderr=(stderr+b).slice(-6000);});
-  child.on('error',e=>finish(e));child.on('close',code=>{if(settled)return;if(cancelled.delete(id)){finish(new Error('Calculation cancelled. The previous molecular state was retained.'));return;}let reply;try{reply=JSON.parse(stdout);}catch{finish(new Error(stderr||'The molecular service did not return a result.'));return;}if(code!==0||!reply.ok)finish(new Error(reply.error??stderr??'Calculation failed.'));else finish(null,reply.value);});
+  child.on('error',e=>finish(e));child.on('close',code=>{if(settled)return;if(cancelled.has(id)){finish(null);return;}let reply;try{reply=JSON.parse(stdout);}catch{finish(new Error(stderr||'The molecular service did not return a result.'));return;}if(code!==0||!reply.ok)finish(new Error(reply.error??stderr??'Calculation failed.'));else finish(null,reply.value);});
   child.stdin!.on('error',e=>finish(e));child.stdin!.end(JSON.stringify(req));
  });
 }

@@ -5,6 +5,7 @@
 - Added separate macOS disk images for Apple Silicon and Intel, with native scientific runtimes, fedora icons, document associations and Mac menu/keyboard conventions.
 - Added an Ubuntu x64 Debian package with native scientific libraries, an applications-menu entry, project association and sandbox-preserving installation.
 - Made project arguments, file URLs, runtime discovery and third-party notice collection portable across Windows, macOS and Linux.
+- Fixed an early-cancellation race that could report a pipe error instead of a cancelled job while preserving the original molecular state.
 - Added native package installation, scientific/interaction checks, project/settings retention, reinstall and uninstall verification, with separate downloads and platform-specific guidance.
 - macOS applications are ad-hoc signed, without Apple Developer ID signing or notarization. The Windows installer remains unsigned. Platform and scientific limitations remain explicit.
 

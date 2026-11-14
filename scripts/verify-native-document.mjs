@@ -14,11 +14,11 @@ try{
  if(process.platform==='darwin'){
   const bundle=path.resolve(path.dirname(executable),'../..');
   execFileSync('/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister',['-f',bundle],options);
-  execFileSync('/usr/bin/open',[file],options);report.launchMethod='LaunchServices open of the registered project extension';
+  execFileSync('/usr/bin/open',[file],{...options,stdio:'ignore'});report.launchMethod='LaunchServices open of the registered project extension';
  }else{
   const mime=execFileSync('/usr/bin/xdg-mime',['query','filetype',file],options).trim();assert.equal(mime,'application/x-proteonator-project');
   const association=execFileSync('/usr/bin/xdg-mime',['query','default',mime],options).trim();assert.equal(association,'proteonator.desktop');
-  execFileSync('/usr/bin/gio',['open',file],options);report.launchMethod='GIO open using the installed MIME and desktop-file association';
+  execFileSync('/usr/bin/gio',['open',file],{...options,stdio:'ignore'});report.launchMethod='GIO open using the installed MIME and desktop-file association';
  }
  await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Project reopened'),{},{timeout:90000});
  assert.ok(await page.locator('#edit-list .edit-card').count()>0);assert.equal(createHash('sha256').update(await readFile(file)).digest('hex'),original);
