@@ -3,7 +3,7 @@ const root=path.resolve(import.meta.dirname,'..'),out=path.join(root,'work/nativ
 const groups={molecular:'studio,workspace-tools,analysis-tools,studio-extended,completion,faults',sequence:'sequence,new-workflows,integrated-chemistry,media,studio-physics,migration,project-startup,runtime',desktop:'studio-desktop'};
 const startedAt=new Date().toISOString();
 async function group(name){return await new Promise(resolve=>{const child=spawn(process.execPath,[path.join(root,'scripts/verify-release.mjs')],{cwd:root,env:{...process.env,PROTEONATOR_VERIFY_LABEL:'native-'+name,PROTEONATOR_VERIFY_SUITES:groups[name]},windowsHide:true,stdio:['ignore','pipe','pipe']});child.stdout.pipe(process.stdout);child.stderr.pipe(process.stderr);child.on('error',e=>{console.error(e);resolve(-1);});child.on('close',resolve);});}
-const exits=await Promise.all([group('molecular'),group('sequence')]);
+const exits=process.platform==='darwin'&&process.arch==='x64'?[await group('molecular'),await group('sequence')]:await Promise.all([group('molecular'),group('sequence')]);
 if(exits.every(code=>code===0))exits.push(await group('desktop'));
 const report={status:exits.length===3&&exits.every(code=>code===0)?'passed':'failed',startedAt,finishedAt:new Date().toISOString(),groups:[],suites:[]};
 for(const name of Object.keys(groups)){
