@@ -175,6 +175,141 @@
       "sha256": "de78a1e4a9860baaefc17c5e509fad96b0b25e0b62f90352976f9079cd4b051b",
       "source": "https://files.rcsb.org/ligands/download/U.cif",
       "license": "CC0-1.0"
+    },
+    {
+      "path": "data/components/ALA.cif",
+      "bytes": 6071,
+      "sha256": "6d32b34d4f7b3ddf0cd3dff3f98ddaf7649bc5303ff9a8bd95ba62283f47a1ca",
+      "source": "https://files.rcsb.org/ligands/download/ALA.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:40.756558+00:00"
+    },
+    {
+      "path": "data/components/ARG.cif",
+      "bytes": 7937,
+      "sha256": "191c437cfa501e0a87d275ca3d39974a1a9c8dc704df61bfc442a4c314e196ac",
+      "source": "https://files.rcsb.org/ligands/download/ARG.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:40.802118+00:00"
+    },
+    {
+      "path": "data/components/ASN.cif",
+      "bytes": 6806,
+      "sha256": "81491bbdb49f96e2945192c07510324d206298d3479029b76defba2ed6ab2dc7",
+      "source": "https://files.rcsb.org/ligands/download/ASN.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:40.865989+00:00"
+    },
+    {
+      "path": "data/components/ASP.cif",
+      "bytes": 6574,
+      "sha256": "82c4a2d0b5eda0a32c36f106f0bb00edbc5bc51172db414fdc494025b7b8c858",
+      "source": "https://files.rcsb.org/ligands/download/ASP.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:40.932138+00:00"
+    },
+    {
+      "path": "data/components/CYS.cif",
+      "bytes": 6155,
+      "sha256": "b28c79381f9f41fe57a9e97468fc8101d5fd1064272a22da1eed6d05d27a24cc",
+      "source": "https://files.rcsb.org/ligands/download/CYS.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:40.975693+00:00"
+    },
+    {
+      "path": "data/components/GLN.cif",
+      "bytes": 7124,
+      "sha256": "b542ea5c013fbe0c7acee8e3f42d5dc4e392bd16c0aa545edbf6cb3c335ca30f",
+      "source": "https://files.rcsb.org/ligands/download/GLN.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.043057+00:00"
+    },
+    {
+      "path": "data/components/GLU.cif",
+      "bytes": 7120,
+      "sha256": "99fa19054d31b07e7101b33ad9cc847cc6a209da60de279aed5e6a9236bb6da4",
+      "source": "https://files.rcsb.org/ligands/download/GLU.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.090829+00:00"
+    },
+    {
+      "path": "data/components/GLY.cif",
+      "bytes": 5615,
+      "sha256": "c49458946b0ebc057db6ad0a4e1557a1caaed4c80a203accd458efddccbf92ff",
+      "source": "https://files.rcsb.org/ligands/download/GLY.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.201724+00:00"
+    },
+    {
+      "path": "data/components/HIS.cif",
+      "bytes": 6467,
+      "sha256": "89355e09d9c622dd514738e559d7a75ab0a1659df9a179978e88e1a44704a46f",
+      "source": "https://files.rcsb.org/ligands/download/HIS.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.269344+00:00"
+    },
+    {
+      "path": "data/components/ILE.cif",
+      "bytes": 6487,
+      "sha256": "8166adcc6acb4661f4a167b0a4295879612dfad3f1a6b6f1b7bd0589c5bded93",
+      "source": "https://files.rcsb.org/ligands/download/ILE.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.337221+00:00"
+    },
+    {
+      "path": "data/components/LEU.cif",
+      "bytes": 7251,
+      "sha256": "fc56e022bc8baa25dc6e543b2c46664e365779aa1dda9831576fdf10b30ab84b",
+      "source": "https://files.rcsb.org/ligands/download/LEU.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.402869+00:00"
+    },
+    {
+      "path": "data/components/MET.cif",
+      "bytes": 6961,
+      "sha256": "a89adea8738d069b0a7bb0c3efc26b362dcc624ef9abd3b3f4bfaedd785f3afd",
+      "source": "https://files.rcsb.org/ligands/download/MET.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.491219+00:00"
+    },
+    {
+      "path": "data/components/PHE.cif",
+      "bytes": 7335,
+      "sha256": "002c626d24aec78fd622459d4f4470c682c7c3f9f97d32414fec4313d780496e",
+      "source": "https://files.rcsb.org/ligands/download/PHE.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.535644+00:00"
+    },
+    {
+      "path": "data/components/PRO.cif",
+      "bytes": 6591,
+      "sha256": "08674e4d60bc40ad5702b8de6e5e4abb66c2bbb603832c021c31194f4b4e593c",
+      "source": "https://files.rcsb.org/ligands/download/PRO.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.656058+00:00"
+    },
+    {
+      "path": "data/components/TRP.cif",
+      "bytes": 7190,
+      "sha256": "4cea7e281ee404f3e72fc20d3ba98064373cdd9309a7f5c75479a04c4b6e36d6",
+      "source": "https://files.rcsb.org/ligands/download/TRP.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.715576+00:00"
+    },
+    {
+      "path": "data/components/VAL.cif",
+      "bytes": 6068,
+      "sha256": "9c3c807970c817b1e1a4b43164db91a5bf1e7bf438b3269c5649f6ce84d4c0ed",
+      "source": "https://files.rcsb.org/ligands/download/VAL.cif",
+      "license": "CC0-1.0",
+      "retrievedAt": "2026-11-13T19:25:41.800458+00:00"
+    },
+    {
+      "path": "data/components/HYP.cif",
+      "bytes": 7165,
+      "sha256": "4150e8042bfe6d386eec2ca80ff0dfbeea3c67284d84b84c19c2aa90257d912d",
+      "source": "https://files.rcsb.org/ligands/download/HYP.cif",
+      "license": "CC0-1.0"
     }
   ]
 }

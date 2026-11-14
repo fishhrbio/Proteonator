@@ -1,0 +1,81 @@
+[
+  {
+    "distribution": "biopython-1.86",
+    "noticeFiles": [
+      "licenses/python-additions/biopython-1.86.dist-info/licenses/LICENSE",
+      "licenses/python-additions/biopython-1.86.dist-info/licenses/LICENSE.rst"
+    ]
+  },
+  {
+    "distribution": "contourpy-1.4.0",
+    "noticeFiles": [
+      "licenses/python-additions/contourpy-1.4.0.dist-info/licenses/LICENSE"
+    ]
+  },
+  {
+    "distribution": "cycler-0.12.1",
+    "noticeFiles": [
+      "licenses/python-additions/cycler-0.12.1.dist-info/LICENSE"
+    ]
+  },
+  {
+    "distribution": "fonttools-4.68.0",
+    "noticeFiles": [
+      "licenses/python-additions/fonttools-4.68.0.dist-info/licenses/LICENSE",
+      "licenses/python-additions/fonttools-4.68.0.dist-info/licenses/LICENSE.external"
+    ]
+  },
+  {
+    "distribution": "kiwisolver-1.5.1",
+    "noticeFiles": [
+      "licenses/python-additions/kiwisolver-1.5.1.dist-info/licenses/LICENSE"
+    ]
+  },
+  {
+    "distribution": "matplotlib-3.10.8",
+    "noticeFiles": [
+      "licenses/python-additions/matplotlib-3.10.8.dist-info/LICENSE"
+    ]
+  },
+  {
+    "distribution": "packaging-26.3",
+    "noticeFiles": [
+      "licenses/python-additions/packaging-26.3.dist-info/licenses/LICENSE",
+      "licenses/python-additions/packaging-26.3.dist-info/licenses/LICENSE.APACHE",
+      "licenses/python-additions/packaging-26.3.dist-info/licenses/LICENSE.BSD"
+    ]
+  },
+  {
+    "distribution": "pillow-13.0.0",
+    "noticeFiles": [
+      "licenses/python-additions/pillow-13.0.0.dist-info/licenses/LICENSE"
+    ]
+  },
+  {
+    "distribution": "pyparsing-3.3.3",
+    "noticeFiles": [
+      "licenses/python-additions/pyparsing-3.3.3.dist-info/licenses/LICENSE"
+    ]
+  },
+  {
+    "distribution": "python_dateutil-4.0.0",
+    "noticeFiles": [
+      "licenses/python-additions/python_dateutil-4.0.0.dist-info/licenses/AUTHORS.md",
+      "licenses/python-additions/python_dateutil-4.0.0.dist-info/licenses/LICENSE"
+    ]
+  },
+  {
+    "distribution": "tzdata-2026.6",
+    "noticeFiles": [
+      "licenses/python-additions/tzdata-2026.6.dist-info/licenses/LICENSE",
+      "licenses/python-additions/tzdata-2026.6.dist-info/licenses/licenses/LICENSE_APACHE"
+    ]
+  },
+  {
+    "distribution": "viennarna-2.7.2",
+    "noticeFiles": [
+      "licenses/python-additions/viennarna-2.7.2.dist-info/licenses/AUTHORS",
+      "licenses/python-additions/viennarna-2.7.2.dist-info/licenses/COPYING"
+    ]
+  }
+]

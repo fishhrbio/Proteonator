@@ -1,0 +1,8 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {CameraSnapshot,MolecularToolsState,SavedViewData} from '../src/engine/saved-views';
+const camera={mode:'perspective',fov:Math.PI/4,position:[0,0,10],target:[0,0,0],up:[0,1,0],radius:5,radiusMax:10,fog:15,clipFar:true,minNear:1,minFar:0};
+const view={sourceHash:'a'.repeat(64),model:0,assembly:'source',activeId:'source',camera,displayState:{},selectedResidue:'A/1',selectionResidues:['A/1'],labelResidues:[],measurementRecords:[],measurementOptions:{},representation:'cartoon',coloring:'chain-id',isolatedIds:null};
+test('Saved molecular views retain their exact source, camera and scientific selections',()=>{assert.deepEqual(SavedViewData.parse(view),view);assert.equal(MolecularToolsState.safeParse({views:[{id:'v1',name:'Overview',data:view}],recentQueries:[]}).success,true);});
+test('Malformed or degenerate saved cameras reject before changing the scene',()=>{for(const bad of [{...camera,position:[0,0,0]},{...camera,up:[0,0,1]},{...camera,position:[NaN,0,10]},{...camera,fov:0},{...camera,radius:-1}])assert.equal(CameraSnapshot.safeParse(bad).success,false);assert.equal(SavedViewData.safeParse({...view,measurementRecords:[['only-one-atom']]}).success,false);});
+test('Saved-view imports reject duplicate identities and unbounded query/selection settings',()=>{const v={id:'v1',name:'Overview',data:view};assert.equal(MolecularToolsState.safeParse({views:[v,v],recentQueries:[]}).success,false);assert.equal(MolecularToolsState.safeParse({views:[],recentQueries:[],neighborhood:{radius:21,kind:'',seedResidues:[]}}).success,false);assert.equal(SavedViewData.safeParse({...view,sourceHash:'wrong'}).success,false);});

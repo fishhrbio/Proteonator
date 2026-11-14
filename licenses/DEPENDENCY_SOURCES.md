@@ -11,3 +11,9 @@ The application redistributes unmodified libraries separately from its MIT origi
 - [PyInstaller v6.17.0](https://github.com/pyinstaller/pyinstaller/archive/refs/tags/v6.17.0.tar.gz), GPL with application-distribution exception.
 
 JavaScript dependency versions, repositories and full texts are in JavaScript-dependencies.json and JavaScript-dependencies.txt. The offline package retains dynamic runtime files rather than statically incorporating Gemmi into Proteonator's original source.
+
+- [Biopython 1.86 distributions and source](https://pypi.org/project/biopython/1.86/#files), dual Biopython/BSD terms.
+- [ViennaRNA 2.7.2 distributions and source](https://pypi.org/project/ViennaRNA/2.7.2/#files), upstream permission terms and separate NAVIEW notice.
+- [Matplotlib 3.10.8 distributions and source](https://pypi.org/project/matplotlib/3.10.8/#files), Matplotlib/PSF-based terms.
+
+Exact added-library versions and complete notice files are listed in python-additions/inventory.json. Microsoft Visual C++ runtime provenance and version hashes are included in Microsoft-Visual-Cpp-Runtime.txt.

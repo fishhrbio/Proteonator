@@ -1,0 +1,10 @@
+{
+  "resource": "Synthetic sequence verification fixture",
+  "files": [
+    {
+      "path": "coding-sources.gb",
+      "sha256": "a03dccf5e4a992cbb7e97a62381860b80fa11c50f13a1fb5cb9bb2f76bb1905d",
+      "purpose": "Duplicate GenBank names, reverse CDS and alternate bacterial initiation; no natural transcript or production-construct claim."
+    }
+  ]
+}

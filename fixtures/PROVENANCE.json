@@ -177,5 +177,16 @@
     }
   ],
   "currentChemistry": "data/PROVENANCE.json",
-  "license": "CC0-1.0 for archive data; synthetic fixtures are explicitly identified."
+  "license": "CC0-1.0 for archive data; synthetic fixtures are explicitly identified.",
+  "sequenceReferences": [
+    {
+      "path": "fixtures/sequences/ncbi-gc.prt",
+      "bytes": 16444,
+      "sha256": "2aecbdd09ecc5e0d233c105090a593737298ef93d88f6bc0c1bef26df6051a04",
+      "source": "https://ftp.ncbi.nih.gov/entrez/misc/data/gc.prt",
+      "version": "NCBI gc.prt 4.6",
+      "purpose": "Independent expected genetic-code assignments, initiation and stop semantics; not generated from the application code.",
+      "retrievedAt": "2026-11-13"
+    }
+  ]
 }

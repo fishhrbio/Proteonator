@@ -1,3 +1,2 @@
-# Optional independent scientific verification only; never needed by the installed app.
-gemmi==0.7.5
-numpy==2.3.5
+# Independent media decoder for optional release QA; not part of the application.
+av==16.0.1

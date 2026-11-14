@@ -1,0 +1,32 @@
+LOCUS       DUPLICATE                  9 bp    DNA              UNK 01-JAN-1980
+DEFINITION  Synthetic parser and provenance fixture.
+ACCESSION   DUPLICATE
+VERSION     DUPLICATE
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     CDS             complement(1..9)
+                     /transl_table=11
+                     /translation="MK"
+                     /label="Reverse alternate initiation"
+ORIGIN
+        1 ttatttcac
+//
+LOCUS       DUPLICATE                  9 bp    DNA              UNK 01-JAN-1980
+DEFINITION  Synthetic parser and provenance fixture.
+ACCESSION   DUPLICATE
+VERSION     DUPLICATE
+KEYWORDS    .
+SOURCE      .
+  ORGANISM  .
+            .
+FEATURES             Location/Qualifiers
+     CDS             1..9
+                     /transl_table=1
+                     /translation="MK"
+                     /label="Forward coding source"
+ORIGIN
+        1 atgaaataa
+//

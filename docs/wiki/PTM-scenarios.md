@@ -1,11 +1,11 @@
-# PTM scenarios
+# Chemical scenarios
 
-Version 1.1 constructs SEP, TPO and PTR phosphorylation, ALY acetyllysine, and MLZ/MLY/M3L methyllysines from supported parent residues. Source heavy atoms remain fixed during construction; added atoms are attached using CCD ideal geometry. Phosphates use a monoanionic state; methyllysines use cationic states. Review the chemical-state description before interpreting a scenario.
+Create a separate scenario for supported phosphorylation, acetylation, methylation or trans-4-hydroxyproline. Preflight distinguishes construction eligibility from parameter/preparation requirements. Reviewed multi-site edits commit atomically. Undo/redo stays with the scenario; folders, tags and pins organize alternatives. Edit tables require exact source/model/assembly and reviewed sites.
 
-Edits live in separate scenarios. Undo/redo, remove, duplicate and rename help compare alternatives. New/lost 4 Å heavy-atom contacts, bond geometry, torsions, added-atom overlaps and displacement are geometric descriptors. New angles have no measured baseline counterpart. A zero initial common-heavy-atom RMSD is expected when construction preserves those coordinates.
+Canonical substitutions use CCD L-residue side chains in a retained N/CA/C frame. Explicit side-chain links, alternates, incomplete backbone and incompatible stereochemistry reject construction. This does not predict a new fold.
 
-Internal complete SEP/TPO/PTR sites can use the bundled CHARMM36m parameters; internal ALY uses legacy CHARMM36. Methyllysine relaxation parameters are not bundled. Missing heavy atoms, modified termini, unresolved alternate sites or unparameterized partners can stop preparation without preventing visualization.
+Primary terminal amides require the observed complete canonical carboxyl terminus of a chain with at least two residues. CT2 preparation uses legacy CHARMM36, explicit C–NT topology and two amide hydrogens. Explicit disulfides require unpaired cysteines already1.8–2.3 Å apart; distant cysteines are not folded together.
 
-Local response is restricted vacuum minimization with explicit pH, neighborhood, harmonic restraints, iteration budget, force tolerance and seed. The prepared baseline is calculated separately. Review convergence; a completed but unconverged result remains unconverged in the report. Return to constructed state restores the unrelaxed chemistry. Re-running begins from that constructed state.
+Local response uses complete supported chemistry, explicit pH/forcefield/radius/restraints/iteration/tolerance/seed and a separately prepared baseline control. Covalent/disulfide identity is transferred before hydrogen preparation. Legacy CHARMM36 covers supported ALY/HYP/CT2 cases; listed monoanionic phosphate templates use CHARMM36m. Methyllysine relaxation parameters and incompatible mixed parameter requirements are unavailable.
 
-Source, constructed and locally relaxed states have distinct evidence labels. None establishes global equilibrium folding, biological modification of the site or binding affinity. Potential-energy differences across different chemical systems are not binding free energies.
+Review convergence and provenance. Unconverged results are labeled. Potential-energy differences across chemically different systems are not binding free energies. Short vacuum minimization does not establish equilibrium folding, biological activity or expression yield. Read the [full method](https://github.com/fishhrbio/Proteonator/blob/main/docs/SCIENCE.md).

@@ -1,4 +1,4 @@
-import {registerStudio,studioMenu} from './studio';
+import {registerStudio,studioMenu,queueProjectOpen} from './studio';
 import { app, BrowserWindow, dialog, ipcMain, protocol, session, shell } from 'electron';
 import { readFile, stat, writeFile, rename, unlink } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
@@ -19,6 +19,7 @@ const verificationMode = process.argv.includes('--proview-verify-hidden');
 const MAX_INPUT_BYTES = 5 * 1024 * 1024;
 const MAX_ATOMS = 25000;
 let win: BrowserWindow | null = null;
+if(!verificationMode){if(!app.requestSingleInstanceLock()){app.quit();}app.on('second-instance',(_event,argv)=>{const file=argv.find(a=>!a.startsWith('--')&&/\.(proteonator|proview|ptmw)$/i.test(a));if(file)queueProjectOpen(path.resolve(file));if(win){if(win.isMinimized())win.restore();win.show();win.focus();if(file)win.webContents.send('proteonator:command','open-startup-project');}});}
 let current: NormalizedStructure | null = null;
 let comparison: NormalizedStructure | null = null;
 let currentText: string | null = null;
@@ -114,7 +115,7 @@ async function atomicJson(filename:string,value:unknown){await atomicWrite(filen
 app.whenReady().then(async () => {
   registerStudio(()=>win);
   const assets: Record<string, string> = {
-    '/index.html': 'text/html', '/app.js': 'text/javascript', '/style.css': 'text/css', '/3Dmol-min.js': 'text/javascript', '/icon.png':'image/png', '/logo.svg':'image/svg+xml', '/molstar.css':'text/css', '/molstar.js':'text/javascript', '/pixel.ttf':'font/ttf', '/painted-world.png':'image/png',
+    '/index.html': 'text/html', '/app.js': 'text/javascript', '/style.css': 'text/css', '/workbench.css':'text/css', '/3Dmol-min.js': 'text/javascript', '/icon.png':'image/png', '/logo.svg':'image/svg+xml', '/molstar.css':'text/css', '/molstar.js':'text/javascript', '/pixel.ttf':'font/ttf', '/painted-world.png':'image/png',
   };
   protocol.handle('proteonator', async (request) => {
     const url = new URL(request.url);
@@ -295,4 +296,3 @@ app.whenReady().then(async () => {
 
 app.on('before-quit', () => { for (const worker of workers) void worker.terminate(); workers.clear(); });
 app.on('window-all-closed', () => app.quit());
-

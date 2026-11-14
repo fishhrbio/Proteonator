@@ -1,0 +1,7 @@
+export function neighborhood(atoms:{residue:string;position:number[]}[],selected:string[],radius:number,kindByResidue:Map<string,string>,kind=''){
+ if(!Number.isFinite(radius)||radius<1||radius>20)throw new Error('Neighborhood radius must be 1–20 Å.');
+ const selectedSet=new Set(selected),seeds=atoms.filter(a=>selectedSet.has(a.residue));if(!seeds.length)throw new Error('Select a resolved residue or ligand first.');
+ const grid=new Map<string,typeof atoms>();for(const a of atoms){if(a.position.length!==3||a.position.some(x=>!Number.isFinite(x)))throw new Error('Invalid neighborhood coordinate.');if(kind&&kindByResidue.get(a.residue)!==kind)continue;const key=a.position.map(v=>Math.floor(v/radius)).join(',');const items=grid.get(key)??[];items.push(a);grid.set(key,items);}
+ const found=new Set<string>();let comparisons=0;for(const seed of seeds){const cell=seed.position.map(v=>Math.floor(v/radius));for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(let dz=-1;dz<=1;dz++)for(const a of grid.get([cell[0]+dx,cell[1]+dy,cell[2]+dz].join(','))??[]){if(found.has(a.residue))continue;if(++comparisons>5000000)throw new Error('Neighborhood search exceeded its bounded comparison budget. Narrow the seed selection or radius.');if(a.position.reduce((s,v,i)=>s+(v-seed.position[i])**2,0)<=radius*radius)found.add(a.residue);}}
+ return {residues:[...found],radiusAngstrom:radius,componentFilter:kind||'all',seedResidues:[...selectedSet],method:'Inclusive minimum interatomic distance from the selected residues; spatial grid; displayed atom set'};
+}

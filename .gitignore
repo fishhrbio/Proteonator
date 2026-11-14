@@ -1,5 +1,6 @@
 node_modules/
 compute-libs/
+compute-addons/
 compute-dist/
 dist/
 release/

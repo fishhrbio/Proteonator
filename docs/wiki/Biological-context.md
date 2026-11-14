@@ -1,7 +1,11 @@
-# Biological context
+# Biological context and evidence
 
-Retrieve context explicitly after checking the UniProt accession. UniProt supplies available gene, organism, isoform, function, maturation and PTM annotations. PDBe SIFTS supplies structure-to-sequence segments. Available Ensembl transcript records add genomic exon summaries; introns are compressed and the bars are not a structure-to-genome registration.
+Explicitly retrieve UniProt, PDBe SIFTS and available Ensembl records. Accession, source, retrieval time and service errors remain in the project. Cached context remains usable offline. These services do not receive the open coordinate file.
 
-Selected structural residues map through a matching chain and SEQRES segment, then their residue identity is checked against the retrieved protein. The application does not assume a constant author-number offset. Missing coverage, engineered changes, ambiguous genes and incomplete cross-references can prevent a unique mapping. A local coordinate file may remain unmapped even after retrieving a plausible accession.
+Source annotations may describe genes, transcripts/isoforms, domains, active/binding sites, processing and PTMs. SIFTS segment and resolved sequence identities are checked before structural correspondence is reported. A source without trustworthy references can remain unmapped; no unique transcript is invented.
 
-Cached records include retrieval time, sources and service errors and reopen offline. A service failure does not substitute invented annotations. Splice isoforms and PTMs represent different biological processes; selecting an isoform sequence does not produce a three-dimensional conformation. Enzyme mechanisms are shown only to the extent supplied by curated annotations.
+Features keeps native source annotations separate from engineered modules. Sequence-bound domain/feature imports require an exact record/hash and supplied evidence. Compare supplied sequences/isoforms without promoting similarity into gene identity or creating missing structure.
+
+Confidence/validation profiles require an exact coordinate/source/model/assembly binding, explicit metric, units, source and method. B factors do not become pLDDT automatically. Changed/stale structures do not acquire fresh validation from an older imported profile.
+
+State-specific evidence distinguishes planned, observed and interpreted outcomes. Sequence, maturation, chemical pairing, purity and activity records remain separate. Scientific limitations and third-party credit remain attached to reports and methods.

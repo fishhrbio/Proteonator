@@ -1,85 +1,86 @@
-<p align="center"><img src="assets/logo.svg" width="112" alt="Proteonator fedora and bill outline"></p>
+<p align="center"><img src="assets/wordmark.svg" width="520" alt="Proteonator emerald fedora and wordmark"></p>
 
-# Proteonator
+# Proteonator 1.2
 
-**A local molecular workspace for exploring protein structures and post-translational modifications.**
+**A standalone molecular and sequence workspace for protein structures, precursor designs and explicit product chemistry.**
 
-Proteonator brings molecular inspection, supported PTM construction and structural comparison into one desktop application. Open a structure, choose its biological assembly, inspect a residue or ligand, and construct a modification in a separate scenario. See the added atoms, inspect changes in local contacts and geometry, and compare the result with the original coordinates. Save the complete workspace for another session or share a portable project.
+Proteonator connects an encoded construct, its proposed processing steps, mature chemical requirements, coding RNA/DNA and supplied three-dimensional structures. Assemble sourced protein components, retain the identities of residues through virtual cleavage and maturation, and compare the resulting products without losing the original inputs. The molecular workspace lets you inspect residues and ligands, construct supported chemical scenarios and review geometric changes or a bounded local relaxation.
 
-Version 1.1 includes a redesigned toolbar, a Mol* molecular viewport, three interchangeable skins, gene and isoform context, and a bundled CPU runtime for supported local minimization. Core viewing, editing, calculations, projects and exports run locally. A separate Python installation, browser account or subscription is not required.
+Everything needed for core work is included in the Windows application: scientific libraries, example structures, fonts, licenses and offline help. No separate Python installation, account or subscription is required. Online reference retrieval and checking the published version are explicit actions.
 
-[Download the Windows installer](https://github.com/fishhrbio/Proteonator/releases/download/v1.1.0/Proteonator-Setup-1.1.0-x64.exe) · [User guide](docs/USER_GUIDE.md) · [Scientific methods](docs/SCIENCE.md) · [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
+[Download for Windows](https://github.com/fishhrbio/Proteonator/releases/latest) · [User guide](docs/USER_GUIDE.md) · [Scientific methods](docs/SCIENCE.md) · [Wiki](https://github.com/fishhrbio/Proteonator/wiki) · [Changelog](CHANGELOG.md) · [Roadmap](ROADMAP.md)
 
 ## See the workspace
 
-![Proteonator Midnight workspace](docs/images/midnight.png)
-*Midnight: the default molecular workspace. A supported PTM is constructed as a separate scenario; the comparison reports geometric changes while preserving the source.*
+![Proteonator molecular inspection in Midnight](docs/images/midnight.png)
+*Midnight: real molecular coordinates, linked residue selection and a separate chemical scenario. Contact and displacement results describe geometry.*
 
-![Proteonator Liquid Glass workspace](docs/images/liquid-glass.png)
-*Liquid Glass: frosted translucent panels, luminous edges and softly raised controls around the same scientific tools and data.*
+![Proteonator construct and maturation workspace](docs/images/construct-workspace.png)
+*Construct and maturation: a generic example links encoded and processed states, explicit terminal chemistry, disulfide requirements and neutral mass calculations.*
 
-![Proteonator Painted Pixels workspace](docs/images/painted-pixels.png)
-*Painted Pixels: original atmospheric artwork and pixel typography. Standard readable text, reduced transparency and high contrast are available in Settings.*
+![Proteonator RNA workspace](docs/images/rna-workspace.png)
+*Coding RNA/DNA: generated coding segments remain separate from imported nucleotide records. The RNA diagram shows a calculated secondary-structure hypothesis.*
 
-These are captures of the running application. Constructed modifications illustrate hypotheses, rather than experimental observations of a PTM-induced change.
+![Proteonator Liquid Glass skin](docs/images/liquid-glass.png)
+*Liquid Glass: frosted panels and luminous edges around the same local scientific tools.*
 
-## What you can do
+![Proteonator Painted Pixels skin](docs/images/painted-pixels.png)
+*Painted Pixels: atmospheric artwork and pixel typography, with standard readable text available in Settings.*
 
-- **Inspect complete structures.** Choose coordinate models and biological assemblies; view proteins, DNA/RNA, ligands, heme, ions, waters and glycans. Switch between cartoons, backbone, bonds, sticks, spheres and surfaces. Adjust component visibility, opacity, clipping and lighting.
-- **Work directly with residues and atoms.** Pick in the viewport or linked sequence, inspect an exact chain/residue/atom identity, focus a neighborhood, save named selections and attach residue notes. Measure distances, angles and torsions.
-- **Construct supported PTMs.** Phosphorylate serine, threonine or tyrosine; acetylate lysine; or construct mono-, di- and trimethyllysine. Added atoms appear in the viewport. Undo, redo, duplicate, name and switch scenarios.
-- **Compare structural environments.** Inspect gained/lost heavy-atom contacts, bond geometry, torsions, added-atom steric overlaps and common-atom displacement. Use linked views or overlays; fit supplied comparison structures with reviewed exact or sequence-assisted correspondence.
-- **Calculate a bounded local response.** Run supported OpenMM minimization with explicit preparation, force-field, pH, neighborhood, restraints and stopping criteria. Compare with a separately prepared baseline control. Convergence and calculation provenance remain visible.
-- **Connect structure to biology.** Explicitly retrieve UniProt, PDBe SIFTS and available Ensembl records. Inspect gene, organism, transcript/isoform and processing annotations, with verified residue mappings and cached offline context.
-- **Keep a portable record.** Save embedded sources, scenarios, maps, notes, measurements, reviewed alignment, cached context and scene settings. Export mmCIF coordinates, structured JSON reports and captioned PNG images.
-- **Choose your workspace.** Midnight, Liquid Glass and Painted Pixels share the same functions. Customize shortcuts, toolbar actions, panel widths and accessibility preferences.
+These are captures of the running application. Constructed chemistry and generic sequence examples are identified as proposals, not experimental observations of changed folding.
 
-## Supported inputs and outputs
+## Features
 
-| Item | Support |
+- **Construct and maturation planning:** protein/DNA/RNA imports, GenBank CDS translation, sourced/editable modules, named sequence substitutions/insertions/deletions, sourced recognition-rule checks, virtual cleavage, trimming, glycine-donor amidation, desired disulfide pairs, elemental composition, neutral masses and state-specific evidence.
+- **Coding sequences and RNA:** reproducible protein back-translation under a declared genetic code, exact synonymous alternatives, supplied codon-usage policies, source CDS/codon links, local RNA folding, probabilities and two-dimensional SVG diagrams. Imported RNA-family evidence retains its actual method and thresholds.
+- **Molecular inspection:** proteins, nucleic acids, ligands, ions, waters, glycans, assemblies and coordinate models; component styles, surfaces, opacity, clipping, labels and editable measurements.
+- **Selection and navigation:** ranges, set operations, queries, adjustable distance neighborhoods, isolated selections, paged sequences, focus back/forward, dimmed surroundings, keyboard controls and saved views.
+- **Chemical scenarios:** supported phosphorylation, acetylation, methylation and hydroxyproline construction; canonical amino-acid substitutions; bounded terminal-amide and compatible disulfide construction. Review multi-site edits, organize folders/tags/pins and preserve per-scenario undo/redo across assembly branches.
+- **Comparison and evidence:** complete contact tables/CSV, typed geometric interactions, reviewed alignment tables, separate fit/evaluation regions, displacement plots, imported confidence/validation, curated features and supplied sequence/isoform comparisons.
+- **Frames and communication:** topology-registered imported trajectories/ensembles, unaligned RMSD/RMSF, figure presets, transparent PNG, processing/profile SVG, readable reports, review ZIPs, saved-view storyboards and camera-presentation WebM.
+- **Reliable local work:** portable compressed projects, embedded immutable sources, integrity checks, recent previews, retained recovery generations, cancellation, method/settings history, read-only inspection during calculations and three consistent skins with accessibility preferences.
+
+## Inputs and outputs
+
+| Area | Supported inputs |
 | --- | --- |
-| Coordinates | Local PDB, `.cif` and `.mmcif`; optional retrieval by four-character PDB accession |
-| Assemblies | Assembly operators supplied in the coordinate file; explicit asymmetric-unit view |
-| Coordinate models | One selected model at a time |
-| Local maps | CCP4/MRC and single-dataset density Cube with positive grid counts in Bohr; no automatic map-to-coordinate registration |
-| Projects | `.proteonator`; imports of earlier `.proview` and `.ptmw` projects |
-| Exports | Current mmCIF, JSON comparison/provenance, captioned PNG |
-| Sequence-only input | Does not create a three-dimensional structure; FASTA-to-fold conversion is unavailable |
+| Structure | PDB, CIF/mmCIF; deposited assembly operators and coordinate models; optional PDB accession retrieval |
+| Sequence | Declared protein, DNA or RNA text/FASTA; annotated GenBank with explicit CDS semantics |
+| Maps | CCP4/MRC and supported single-dataset Cube grids; supplied frame, origin and contour settings |
+| Annotations | Sequence-bound feature/domain JSON, residue-evidence JSON, RNA-analysis JSON, Infernal tblout format 1/3 and standard tRNAscan-SE tables |
+| Frames | Registered trajectory JSON with exact topology hash, ordered atom identities, declared units and supplied time information |
+| Project | Portable `.proteonator`, including imports of earlier `.proview` and `.ptmw` files |
 
-The coordinate guard is 32 MiB and 100,000 recorded atoms per model or expanded assembly. Local relaxation has a separate 5,000-atom limit before hydrogen preparation. Map files are limited to 128 MiB each, two per project; portable projects are limited to 200 MiB. Performance depends on the structure, representation, graphics driver and calculation. These limits do not guarantee that every unusual chemical component can be parameterized.
+Exports include mmCIF, FASTA with chemistry/method sidecars, original GenBank, full CSV/JSON, readable HTML, true vector diagrams/profiles, raster molecular PNG, WebM camera presentations and checksummed review ZIPs. A sequence alone does not create a three-dimensional structure.
 
-## Install and start
+## Install
 
-**Supported release platform: Windows 11 x64.** macOS, Linux and Windows ARM installers are not supplied or verified for this release.
+**Release platform: Windows 11 x64, verified on build 26200.** Other Windows versions, macOS, Linux and ARM64 do not have verified native packages in this release.
 
-1. Download `Proteonator-Setup-1.1.0-x64.exe` from the [1.1 release](https://github.com/fishhrbio/Proteonator/releases/tag/v1.1.0).
-2. Run the installer, choose the installation location, and finish the setup wizard.
-3. Open **Proteonator** from the Start menu or desktop shortcut. A local barnase–barstar example opens automatically.
+1. Download `Proteonator-Setup-1.2.0-x64.exe` from the [release page](https://github.com/fishhrbio/Proteonator/releases/latest).
+2. Run the installer and choose a location for the current-user installation.
+3. Start Proteonator from the Start menu or desktop shortcut. A bundled barnase–barstar structure opens locally.
 
-The installer contains the molecular runtime, examples, fonts, artwork, licenses and offline guide. The Windows package is unsigned; there is no publisher certificate in this release. Verify the download against the release's `SHA256SUMS.txt` if Windows displays an unfamiliar-app prompt. An earlier ProView installation is a separate application; open its saved projects in Proteonator and save new `.proteonator` copies before removing the old application.
+The package is unsigned because no publisher signing credential is available. Its release includes SHA-256 checksums. The installer includes the scientific runtime and works offline; it does not require a system Python installation. Saved projects and personal settings are kept separately from the application files. Read the [guide](docs/USER_GUIDE.md) for upgrade, recovery and uninstall behavior.
 
-## First PTM comparison
+## Start a precursor review
 
-1. Choose **Crambin · 1CRN** in **Example**, or open your own PDB/mmCIF file. Select the desired assembly and coordinate model before creating scenarios.
-2. Choose a serine in the linked sequence. Open **PTM**, review the modification and chemical state, then select **Construct modification**.
-3. Inspect the added atoms and the **Environment & comparison** results. Enable **Overlay** or **Linked comparison** to compare states.
-4. If the complete structure and modified residue have compatible parameters, choose the local-response settings and calculate relaxation. Review the convergence result and prepared baseline control.
-5. Save the portable project. Export the coordinates, scientific report or captioned image as needed.
+Choose **New construct project**. Import your actual protein or nucleotide record, then add exact, sourced components such as a fusion partner, linker, cleavage junction and target. Create the encoded construct. In **Processing**, declare the proposed cuts and mature terminal/bond requirements. Compare state identity, chemistry and mass; attach planned or observed evidence to the state it concerns. Generate coding RNA/DNA from the encoded state when that is the sequence you intend to represent. Retain a reviewed mapping before linking residues to a supplied structural chain.
 
-Drag to orbit, use the wheel to zoom and right-drag to pan. Arrow keys rotate; Shift+arrows pan; `+`/`−` zoom. `F` fits the molecule. **Commands** (`Ctrl+K`) finds actions; **Settings** contains themes, layout, input and accessibility preferences. The Help menu opens the offline guide.
+For molecular work, select a residue or ligand, inspect its neighborhood and contacts, and create a separate chemical scenario. Review preparation and convergence before interpreting a local relaxation. **Commands** (`Ctrl+K`) finds actions; **Settings** contains skins, layouts, shortcuts and accessibility controls.
 
-## Scientific scope
+## Scientific limits
 
-A constructed PTM changes chemistry and local geometry. It does **not** uniquely predict a protein's equilibrium fold, biological activity or binding affinity. Restricted minimization finds a nearby configuration under the selected preparation and restraints; it does not sample an equilibrium ensemble. Raw potential-energy differences between chemically different systems are not binding free energies.
+Proteonator does not predict equilibrium folding, binding affinity, expression yield or biological activity from an arbitrary edit. A local minimum, proximity contact, desired chemical state or camera movie does not establish those outcomes. Sequence mass is neutral mass, not an adduct-specific mass-to-charge measurement. Desired disulfides and amidation require experimental support for actual product identity.
 
-The initial local-response scope covers internal SEP/TPO/PTR residues with the bundled CHARMM36m parameters and internal ALY with the legacy CHARMM36 parameters. Methyllysine construction is available, but compatible relaxation parameters are not bundled. Terminal modifications, missing heavy atoms, unresolved alternates, incomplete chains or unparameterized partners can stop preparation. Display and static comparison remain available. Severe clashes or inverted retained stereocenters reject local response. Construction is a heavy-atom hypothesis; complete protonation and force-field charges belong to the supported preparation and its report. Phosphate templates are **monoanionic**; changing the preparation pH does not switch the phosphate state.
+Back-translation produces possible coding segments; it cannot recover original synonymous choices, UTRs, native transcript provenance or the historical tRNAs that translated a protein. RNA secondary-structure calculations do not identify RNA family or translation yield. Native Infernal/tRNAscan-SE engines and family databases are not bundled; actual external results can be imported and reviewed.
 
-Contacts, overlaps and displacement are geometric descriptors. Biological assemblies follow deposited author assignments. Gene, isoform and processing annotations depend on curated references and successful mapping; a coordinate file alone may not identify a unique gene or transcript. Read the [methods and limitations](docs/SCIENCE.md) before interpreting results.
+Important guards include 100,000 recorded atoms and 32 MiB per coordinate input, 5,000 atoms before hydrogen preparation for local relaxation, 10,000 amino acids per sequence state, 1,500 bases for RNA folding, 200 trajectory frames with at most 5,000 registered atoms, two maps of at most 128 MiB each, and 200 MiB expanded portable projects. Chemistry and format-specific restrictions are described in the [methods](docs/SCIENCE.md).
 
 ## Credits and license
 
 I’m Robert Waite, an M.S. Biotechnology student at the University of South Florida. Proteonator is a small independent project I’ve been developing in my free time.
 
-This project is independent and is not endorsed by the University of South Florida. Molecular visualization and calculations depend on the work of the Mol*, Gemmi, OpenMM, NumPy, wwPDB, RCSB PDB, UniProt, PDBe SIFTS and Ensembl communities. The Silkscreen typeface is by Jason Kottke. Original coordinate depositors retain their scientific credit; bundled examples link to their archive records.
+This project is independent and is not endorsed by the University of South Florida. It depends on the work of the Mol*, Gemmi, OpenMM, NumPy, Biopython, ViennaRNA, Matplotlib, wwPDB, RCSB PDB, UniProt, PDBe SIFTS and Ensembl communities. Silkscreen is by Jason Kottke. Original structure depositors retain their scientific credit.
 
-Original Proteonator code is available under the [MIT license](LICENSE). Dependency and data terms are listed in [Third-party notices](THIRD_PARTY_NOTICES.md), with full license texts included in the application. Hilbert Curve implementation copyright 1998, Rice University.
+Original Proteonator code is [MIT licensed](LICENSE). Bundled libraries, data, fonts and runtime components retain their own terms. ViennaRNA and its NAVIEW component have additional distribution restrictions; see the complete [third-party notices](THIRD_PARTY_NOTICES.md) before redistribution.

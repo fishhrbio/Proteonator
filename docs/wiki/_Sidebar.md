@@ -1,13 +1,12 @@
-**Proteonator 1.1**
+## Proteonator
 
-[[Home]]
-
-[[Getting started]]
-
-[[Molecular inspection]]
-
-[[PTM scenarios]]
-
-[[Biological context]]
-
-[[Projects and scientific interpretation]]
+- [[Home]]
+- [[Getting-started]]
+- [[Construct-and-maturation]]
+- [[Coding-sequences-and-RNA]]
+- [[Molecular-inspection]]
+- [[PTM-scenarios]]
+- [[Biological-context]]
+- [[Projects-and-scientific-interpretation]]
+- [[Trajectories-and-figures]]
+- [[Interchange-formats]]

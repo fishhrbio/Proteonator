@@ -10,6 +10,7 @@ await build({ entryPoints: ['src/desktop/analysis-worker.ts'], outfile: 'dist/an
 await build({ entryPoints: ['src/renderer/studio.ts'], outfile: 'dist/renderer/app.js', bundle: true, platform: 'browser', format: 'iife', target: 'chrome140', sourcemap: true });
 await copyFile('src/renderer/studio.html', 'dist/renderer/index.html');
 await copyFile('src/renderer/studio.css', 'dist/renderer/style.css');
+await copyFile('src/renderer/workbench.css', 'dist/renderer/workbench.css');
 await copyFile('assets/icon.png','dist/renderer/icon.png');
 await copyFile('node_modules/3dmol/build/3Dmol-min.js', 'dist/renderer/3Dmol-min.js');
 await copyFile('node_modules/3dmol/LICENSE', 'dist/renderer/3Dmol-LICENSE.txt');

@@ -29,7 +29,11 @@ jobs:
       - run: pnpm setup:electron
       - run: pnpm typecheck
       - run: pnpm test
-      - run: python compute/test_molecule.py
+      - run: python -m unittest discover -s compute -p "test_*.py" -v
+      - run: python compute/verify_physics.py
+      - run: python compute/verify_stereochemistry.py
+      - run: python scripts/render-guides.py
+      - run: pnpm make:icon
       - run: python scripts/freeze-compute.py
       - run: pnpm build
       - run: pnpm dist:win
@@ -37,5 +41,11 @@ jobs:
         env:
           PROTEONATOR_EXE: ${{ github.workspace }}/release/win-unpacked/Proteonator.exe
       - run: pnpm test:studio-physics
+        env:
+          PROTEONATOR_EXE: ${{ github.workspace }}/release/win-unpacked/Proteonator.exe
+      - run: pnpm test:sequence
+        env:
+          PROTEONATOR_EXE: ${{ github.workspace }}/release/win-unpacked/Proteonator.exe
+      - run: pnpm test:workflows
         env:
           PROTEONATOR_EXE: ${{ github.workspace }}/release/win-unpacked/Proteonator.exe

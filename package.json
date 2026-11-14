@@ -1,9 +1,9 @@
 {
   "name": "proteonator",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "type": "module",
-  "description": "A local molecular structure and PTM scenario explorer",
+  "description": "A local molecular workspace for structures, precursor chemistry, coding sequences and reproducible comparisons",
   "author": "Robert Waite",
   "main": "dist/main.cjs",
   "license": "MIT",
@@ -29,7 +29,13 @@
     "freeze:compute": "python scripts/freeze-compute.py",
     "guides": "python scripts/render-guides.py",
     "test:desktop": "node scripts/verify-studio-desktop.mjs",
-    "test:stereochemistry": "python compute/verify_stereochemistry.py"
+    "test:stereochemistry": "python compute/verify_stereochemistry.py",
+    "test:sequence": "node scripts/verify-sequence.mjs",
+    "test:workflows": "node scripts/verify-new-workflows.mjs",
+    "test:release": "node scripts/verify-release.mjs",
+    "test:chemistry": "python -m unittest discover -s compute -p \"test_*.py\"",
+    "test:archives": "python scripts/verify-export-archives.py",
+    "test:video": "python scripts/verify-video-decode.py"
   },
   "dependencies": {
     "3dmol": "2.5.5",
@@ -56,7 +62,8 @@
       "package.json",
       "LICENSE",
       "licenses/**/*",
-      "!node_modules/**/*"
+      "!node_modules/**/*",
+      "!dist/**/*.map"
     ],
     "extraResources": [
       {
@@ -119,7 +126,7 @@
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
       "shortcutName": "Proteonator",
-      "uninstallDisplayName": "Proteonator 1.1.0",
+      "uninstallDisplayName": "Proteonator 1.2.0",
       "deleteAppDataOnUninstall": false,
       "license": "LICENSE",
       "createDesktopShortcut": true,
@@ -135,7 +142,16 @@
     },
     "publish": null,
     "artifactName": "Proteonator-Setup-${version}-${arch}.${ext}",
-    "npmRebuild": false
+    "npmRebuild": false,
+    "fileAssociations": [
+      {
+        "ext": "proteonator",
+        "name": "Proteonator project",
+        "description": "Portable Proteonator molecular and sequence project",
+        "role": "Editor",
+        "icon": "assets/icon.ico"
+      }
+    ]
   },
   "homepage": "https://github.com/fishhrbio/Proteonator",
   "repository": {

@@ -1,9 +1,9 @@
 # Getting started
 
-Install the Windows x64 package from Releases, then open Proteonator. Local examples work without an internet connection. No separate Python setup is needed. The Windows package is unsigned; verify the published SHA-256 before deciding whether to run a downloaded file.
+Install the Windows 11 x64 package from the release page, choose the current-user destination and open Proteonator from Start or the desktop shortcut. The scientific runtime and offline help are included. The installer is unsigned; release checksums accompany the download. Other native platforms are not verified packages.
 
-Open PDB/mmCIF coordinates or choose an example. Choose the coordinate model and biological assembly before creating scenarios. Click a residue in the molecule or linked sequence. Drag to rotate, wheel to zoom, right-drag to pan; F fits the molecule. Keyboard view controls are arrows, Shift+arrows and +/−.
+The initial barnase–barstar example opens locally. Choose Molecule for coordinates or New construct project for sequence-only work. Open project restores embedded data; Recent projects shows local previews and Recover autosave opens a recovered copy.
 
-For a first PTM, choose Crambin · 1CRN, select a serine, open PTM and construct phosphorylation. Inspect the changed atoms and geometric comparison. Save the portable project. [[PTM scenarios]] explains the optional local-response calculation and its limits.
+Drag to orbit, wheel to zoom and right-drag to pan. Arrow keys rotate, Shift+arrows pan, +/− zoom and F fits. Ctrl+K opens Commands; Ctrl+S saves. Text fields retain normal editing shortcuts. Settings provides Midnight, Liquid Glass and Painted Pixels, standard typography, contrast/transparency controls and layout presets.
 
-Settings switches Midnight, Liquid Glass and Painted Pixels without changing the scientific state. The same dialog contains shortcut mapping, toolbar visibility, panel sizes, graphics and accessibility preferences. Command search exposes actions even if their toolbar button is hidden. Help opens the offline guide.
+Core work is offline. Reference retrieval and published-version checking happen only when explicitly selected. Read [[Construct-and-maturation]], [[Molecular-inspection]] and [[Projects-and-scientific-interpretation]] before interpreting derived results.

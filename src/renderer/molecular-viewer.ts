@@ -1,3 +1,7 @@
+import {Task} from 'molstar/lib/mol-task';
+import {InteractionsRepresentationProvider} from 'molstar/lib/mol-model-props/computed/representations/interactions';
+import {InteractionsProvider} from 'molstar/lib/mol-model-props/computed/interactions';
+import {ParamDefinition} from 'molstar/lib/mol-util/param-definition';
 import {PluginContext} from 'molstar/lib/mol-plugin/context';
 import {DefaultPluginSpec} from 'molstar/lib/mol-plugin/spec';
 import {StructureElement} from 'molstar/lib/mol-model/structure';
@@ -9,6 +13,7 @@ import {setSubtreeVisibility} from 'molstar/lib/mol-plugin/behavior/static/state
 import {StateTransforms} from 'molstar/lib/mol-plugin-state/transforms';
 import {createVolumeRepresentationParams} from 'molstar/lib/mol-plugin-state/helpers/volume-representation-params';
 import {Volume} from 'molstar/lib/mol-model/volume';
+import {createStructureRepresentationParams} from 'molstar/lib/mol-plugin-state/helpers/structure-representation-params';
 class LocalViewer {
  readonly plugin:PluginContext;
  private resize:ResizeObserver;
@@ -16,12 +21,23 @@ class LocalViewer {
  private constructor(plugin:PluginContext,parent:HTMLElement){this.plugin=plugin;this.resize=new ResizeObserver(()=>this.handleResize());this.resize.observe(parent);}
  static async create(id:string,_options:unknown){
   const parent=document.getElementById(id)! as HTMLDivElement;parent.classList.add('msp-plugin');const canvas=document.createElement('canvas');canvas.style.cssText='position:absolute;inset:0;width:100%;height:100%;display:block';parent.append(canvas);
-  const plugin=new PluginContext(DefaultPluginSpec());await plugin.init();if(!await plugin.initViewerAsync(canvas,parent))throw new Error('WebGL could not initialize. Check the graphics driver.');
+  const plugin=new PluginContext(DefaultPluginSpec());await plugin.init();if(plugin.representation.structure.registry.get('interactions').name!=='interactions')plugin.representation.structure.registry.add(InteractionsRepresentationProvider);if(!await plugin.initViewerAsync(canvas,parent))throw new Error('WebGL could not initialize. Check the graphics driver.');
   plugin.canvas3d!.setProps({transparentBackground:true,renderer:{backgroundColor:Color(0x0a1019)},camera:{helper:{axes:{name:'off',params:{}}}}} as any);
   const viewer=new LocalViewer(plugin,parent);LocalViewer.instances.push(viewer);return viewer;
  }
+ async prepareInteractions(structure:any){const props=ParamDefinition.getDefaultValues(InteractionsProvider.getParams(structure));const ionic:any=(InteractionsProvider.getParams(structure).providers as any).params.ionic;props.providers.ionic={name:'on',params:ParamDefinition.getDefaultValues(ionic.map('on').params)} as any;await this.plugin.runTask(Task.create('Classifying typed interactions',ctx=>InteractionsProvider.attach({runtime:ctx,assetManager:this.plugin.managers.asset},structure,props,true)));return props;}
  structureInteractivity(options:any){applyStructureInteractivity(this.plugin,options);}
  setVisibility(ref:string,hidden:boolean){setSubtreeVisibility(this.plugin.state.data,ref,hidden);}
+ async updateRepresentation(component:any,representation:any,options:any){
+  const params=createStructureRepresentationParams(this.plugin,component.cell.obj.data,options);
+  await this.plugin.build().to(representation).update(params).commit({revertOnError:true});
+ }
+ async updateVolume(roots:string[],settings:{iso:number;isoType:'relative'|'absolute';color:number;alpha:number;hidden:boolean}){
+  const state=this.plugin.state.data,owned=(ref:string)=>{let current=ref;while(current&&state.cells.has(current)){if(roots.includes(current))return true;const parent=state.cells.get(current)!.transform.parent;if(parent===current)break;current=parent;}return false;};
+  const update=this.plugin.build();let changed=false;
+  for(const [ref,cell]of state.cells){if(cell.transform.transformer.id!==StateTransforms.Representation.VolumeRepresentation3D.id||!owned(ref))continue;const volume=state.cells.get(cell.transform.parent)?.obj?.data as any;if(!volume?.grid)throw new Error('Map volume is unavailable.');update.to(ref).update(createVolumeRepresentationParams(this.plugin,volume,{type:'isosurface',typeParams:{alpha:settings.alpha,isoValue:Volume.adjustedIsoValue(volume,settings.iso,settings.isoType)},color:'uniform',colorParams:{value:Color(settings.color)}}));changed=true;}
+  if(changed)await update.commit({revertOnError:true});for(const ref of roots)this.setVisibility(ref,settings.hidden);
+ }
  async loadVolumeFromUrl(source:any,values:any,options:any){
   const before=new Set(this.plugin.state.data.cells.keys());
   try{

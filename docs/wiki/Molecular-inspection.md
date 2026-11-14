@@ -1,9 +1,13 @@
 # Molecular inspection
 
-The asymmetric unit/supplied model and deposited biological assemblies are separate choices. Assembly instances receive distinct chain identities. Proteins, nucleic acids, ligands, ions, heme, water and glycans can be inspected in the same scene. Component controls change visibility, representation and opacity. Source/dictionary connectivity and inferred display bonds have different evidential limits; verify unusual chemistry or coordination.
+Open PDB/mmCIF or a bundled example. Choose the deposited coordinate model and assembly. Assembly chain copies remain distinct, and scenario branches remain attached to their exact source/model/assembly.
 
-The linked sequence and atom list provide exact identities and keyboard selection. Distances, angles and torsions use the current displayed state. Neighborhood selects residues/components within 5 Å. Named selections and notes help organize a session. A note changes no atoms.
+Inspect protein/nucleic components, ligands, ions, waters and glycans. Change styles, opacity, clipping and lighting without changing coordinates. B-factor coloring is not automatically prediction confidence.
 
-Open supplied comparison coordinates for linked views. Exact Cα identities or a sequence alignment can propose correspondence; review it before fitting. The fit uses a proper rigid SVD transform with no reflection or scaling. Low RMSD is not evidence of shared function or PTM causality.
+Select in the linked sequence or viewport. Shift selects ranges; queries use chain, exact author positions/insertion codes, residue names and component types. Set operations, adjustable distance neighborhoods, named selections, isolation and saved views support repeated work. Author numbering and construct positions are distinct until reviewed correspondence exists.
 
-Local CCP4/MRC and single-dataset density Cube maps display at 1.5 relative sigma. Cube input requires positive grid counts in Bohr and at most 32 million values; orbital and Angstrom-grid Cube inputs require conversion. Confirm the original map's coordinate frame, units and origin. No automatic map registration or validation occurs. Map bytes are embedded in saved projects.
+Contact inspection retains the inclusive2–8 Å cutoff, full atom-pair rows and separate residue summaries. Sort/filter/focus rows and export every filtered row. Typed interactions use explicit Mol* geometric rules/settings and remain hypotheses rather than affinity measurements.
+
+Measurements retain exact atom identities and units. Name, hide/delete and reposition labels; unavailable atoms remain unavailable rather than silently disappearing. Export the full CSV. Map controls retain original CCP4/MRC/Cube bytes and frame while changing visibility, relative/absolute contour, color and opacity. No registration or fitting is implied.
+
+Diagnostics focus alternate sites, missing backbone, peptide breaks and chemistry-review items. Missing biological sequence requires a source reference; author-number gaps alone do not prove missing residues.

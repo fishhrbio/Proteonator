@@ -1,4 +1,7 @@
-# Preserve the exact bytes used by source-coordinate and release manifests.
-* -text
+# Preserve exact source/data bytes; native Windows CRLF is intentional.
+* -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+fixtures/** -whitespace
+data/components/** -whitespace
+licenses/** -whitespace
 *.png binary
 *.ico binary

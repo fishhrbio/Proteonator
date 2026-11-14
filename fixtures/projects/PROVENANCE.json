@@ -1,0 +1,23 @@
+[
+  {
+    "path": "fixtures/projects/proview-1.0.proview",
+    "bytes": 5629430,
+    "sha256": "a681fab7bb77bacaf03aa49d434782049820b30e1c0fea80a6d0db7c50d91da0",
+    "origin": "Earlier released application; public PDB scientific test data only",
+    "schemaVersion": "2.0.0"
+  },
+  {
+    "path": "fixtures/projects/proteonator-1.1.proteonator",
+    "bytes": 615580,
+    "sha256": "c30e8586d15568c73a09d1eebb3b33d7b357100a19e60ac3213b919af0ddc4ad",
+    "origin": "Earlier released application; public PDB scientific test data only",
+    "schemaVersion": "3.0.0"
+  },
+  {
+    "path": "fixtures/projects/proteonator-1.1-local-response.proteonator",
+    "bytes": 181692,
+    "sha256": "002e3aa004cd2d4586d1eee7cc8bc0d22d947763267c45fc70ef8e73d2953654",
+    "origin": "Earlier released application; public PDB scientific test data only",
+    "schemaVersion": "3.0.0"
+  }
+]

@@ -1,0 +1,29 @@
+Microsoft Visual C++ app-local runtime
+
+Copyright Microsoft Corporation. Microsoft Software License Terms apply. These files are selected from the installed Visual Studio Redistributable directory. Distribution remains subject to the Visual Studio license terms and the included Redist list.
+
+https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files
+https://visualstudio.microsoft.com/license-terms/
+
+{
+  "component": "Microsoft Visual C++ app-local x64 Redistributable",
+  "source": "Installed Visual Studio licensed Redistributable directory",
+  "files": [
+    {
+      "name": "msvcp140.dll",
+      "version": "14.52.37029.0",
+      "sha256": "59d325227321d52b9a523ea401ce6787a5d59f78229a0ff3a6f124e5d3445685"
+    },
+    {
+      "name": "vcruntime140.dll",
+      "version": "14.52.37029.0",
+      "sha256": "eb1ee979bf02324712346e5bdbfc59c785388bc50d18cc2688aae4b0734915a0"
+    },
+    {
+      "name": "vcruntime140_1.dll",
+      "version": "14.52.37029.0",
+      "sha256": "a14b4a42a2c6df04d6d53a8340816023d953406f7f3d94996c7cab30c414ff63"
+    }
+  ],
+  "terms": "Microsoft Software License Terms; see bundled notices and https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files"
+}

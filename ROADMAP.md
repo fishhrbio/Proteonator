@@ -1,28 +1,24 @@
 # Proteonator roadmap
 
-Proteonator will continue to evolve around a practical question: how can a molecular workspace make supported PTM chemistry and its structural context easier to inspect, compare and communicate?
+Proteonator focuses on connecting source identity, proposed chemistry, supplied structures and scientific evidence in a practical local workspace. Suggestions and reproducible issues are welcome; this roadmap remains open to updates.
 
-## Current release: 1.1
+## Current release: 1.2
 
-Complete molecular inspection, supported PTM construction, portable scenarios, a bounded local-minimization method, gene/isoform context and three interchangeable skins. See the [changelog](CHANGELOG.md) and [scientific scope](docs/SCIENCE.md).
+Construct and maturation states, coding RNA/DNA, source CDS links, local RNA secondary structure, imported biological evidence, expanded bounded chemistry, reviewed comparison, registered frames, richer exports, recovery and the emerald fedora identity. See the [changelog](CHANGELOG.md) and [scientific scope](docs/SCIENCE.md).
 
-## Next priorities
+## Further improvements
 
-- More responsive large-scene inspection, incremental scenario updates and improved component organization.
-- More residue chemistry, with explicit protonation states and independently checked compatible parameters before adding local response.
-- Better sequence/feature tracks, richer transcript/isoform comparisons and more coverage of engineered constructs and ambiguous mappings.
-- Improved map controls, selection labels, measurement editing and publication-oriented figure layouts.
-- More helpful structure-preparation diagnostics, without silently removing chemically important partners or inventing missing structure.
-- Signed Windows distribution when a publisher credential is available, and additional native platforms after full installer and compute validation.
+- Broader native RNA-family analysis and database management after Windows runtime, database-size, offline and redistribution validation; current releases import actual external results.
+- Additional residue/terminal chemistry only with explicit atom inventories, stereochemistry and compatible parameters.
+- More trajectory interchange formats and region-aware frame analysis with independently tested topology/time/unit registration.
+- Broader sequence/feature/domain and transcript mapping coverage, while retaining ambiguity and engineered/native distinctions.
+- More efficient large-source imports, GPU/resource measurements and accessible presentation/interaction options.
+- Publisher signing, evaluated update delivery and additional native platforms after their complete installer/scientific-runtime checks.
 
-## Scientific capabilities under consideration
+## Scientific methods
 
-- Imported trajectories and experimentally characterized modified/unmodified structure pairs, including clear metadata about constructs, partners and experimental conditions.
-- Reproducible conformational sampling with appropriate environments, parameter validation, convergence analysis and uncertainty.
-- Method-specific interaction and binding calculations with appropriate bound/unbound protocols and external benchmarks.
+Method-specific conformational and binding analyses require validated preparation, environments, reference states, sampling, convergence and external comparisons. No universal PTM-to-fold/affinity prediction, expression-yield ranking or arbitrary unparameterized chemistry is promised. A presentation movie or local minimum does not substitute for those methods.
 
-These capabilities require scientific validation beyond a visual animation or a short minimization. No release date or universal PTM-to-fold/affinity prediction is promised. Features should make evidence and uncertainty easier to understand.
+## Share feedback
 
-## Suggestions
-
-Ideas, reproducible issues, representative public structures and accessibility feedback are welcome in the repository's Issues page. Include the application version, operating system, a public accession or shareable example, and the expected versus observed behavior. Avoid attaching private or sensitive coordinate data. This roadmap remains open to further updates.
+Use the repository's Issues page for suggestions or reproducible problems. Include the version, operating system, expected/observed behavior and a public or shareable example where possible. Keep private project data private. Public structure depositors and scientific methods retain their credit.

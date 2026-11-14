@@ -1,11 +1,11 @@
 # Projects and scientific interpretation
 
-Save a `.proteonator` project to retain source snapshots, scenarios and calculation provenance, map bytes, notes, measurements, named selections, reviewed comparison pairs, cached biological context and scene settings. Earlier `.proview`/`.ptmw` projects import into a new workspace without modifying the old file. Hash mismatches reject corrupted snapshots. Older camera formats may require a new fitted view.
+Save a portable `.proteonator` file with immutable sources, hashes, sequence/chemistry states, coding candidates, correspondence, evidence, scenarios, maps, frames, measurements, views and methods. Compression has bounded expanded size. Earlier formats open into new copies; historical results keep their original methods.
 
-Export current coordinates as mmCIF, reports as JSON and captioned figures as PNG. A figure or coordinate file alone does not retain every interpretation limit; share the report or portable project alongside it.
+Autosave waits for operations to finish and retains two bounded generations. Recover opens a copy; an unreadable latest snapshot falls back to the earlier valid copy with an explicit message. Save As preserves it. Saved projects are not automatically overwritten by recovery. Recent previews/preferences are local convenience data and cannot replace project integrity checks.
 
-Construction is a chemical hypothesis; local minimization is a nearby configuration under the selected preparation and restraints. Neither samples equilibrium folding nor measures affinity. Geometric contacts and overlaps are descriptors. Experimental comparison states can differ in constructs, ligands and conditions. Biological context depends on curated evidence and mapping coverage.
+A constructed state is a hypothesis. A desired product formula is not evidence of manufacturing success. A contact is proximity, a local minimum is not an equilibrium ensemble, and a camera movie is not molecular dynamics. Raw energy differences between differently composed systems are not affinity.
 
-The source/expanded-assembly atom guard is 100,000; local relaxation has a separate 5,000-atom pre-hydrogen guard. Coordinate files are limited to 32 MiB, maps to 128 MiB each and projects to 200 MiB. Windows 11 x64 is the verified platform; other native installers and publisher signing are not supplied for 1.1.
+Back-translation cannot recover a native transcript or historical tRNA. RNA folding does not determine RNA family or expression yield. An imported annotation retains its original evidence scope; it does not become experimental proof through display.
 
-Full [scientific methods](https://github.com/fishhrbio/Proteonator/blob/main/docs/SCIENCE.md), [credits and licenses](https://github.com/fishhrbio/Proteonator/blob/main/THIRD_PARTY_NOTICES.md), and the [open roadmap](https://github.com/fishhrbio/Proteonator/blob/main/ROADMAP.md) are in the repository.
+For complete units, guards, algorithm/settings, chemistry scope and references, read [Scientific methods](https://github.com/fishhrbio/Proteonator/blob/main/docs/SCIENCE.md). Original code is MIT; bundled components retain their own terms, including ViennaRNA/NAVIEW restrictions. No institutional endorsement is implied.
