@@ -1,0 +1,104 @@
+name: Native document and compatibility checks
+on:
+  push:
+    branches: [codex/native-platforms]
+    paths: [.github/workflows/native-compatibility.yml, scripts/verify-native-document.mjs]
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  packages-ready:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 55
+    steps:
+      - name: Wait for the native packages and their full checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run watch 43556365780 --repo fishhrbio/Proteonator --exit-status --interval 30
+  compatibility:
+    needs: packages-ready
+    name: ${{ matrix.id }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {id: mac-15-arm64-document, runner: macos-15, artifact: mac-arm64, arch: arm64, full: false}
+          - {id: mac-15-x64-document, runner: macos-15-intel, artifact: mac-x64, arch: x64, full: false}
+          - {id: mac-26-arm64, runner: macos-26, artifact: mac-arm64, arch: arm64, full: true}
+          - {id: mac-26-x64, runner: macos-26-intel, artifact: mac-x64, arch: x64, full: true}
+          - {id: linux-22-document, runner: ubuntu-22.04, artifact: linux-x64, arch: x64, full: false}
+          - {id: linux-24-document, runner: ubuntu-24.04, artifact: linux-x64, arch: x64, full: false}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 40
+    defaults:
+      run:
+        shell: bash
+    env:
+      PROTEONATOR_VERIFY_SOFTWARE_GL: "1"
+      PROTEONATOR_VERIFY_LABEL: native-result
+      PROTEONATOR_TARGET_ARCH: ${{ matrix.arch }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.25.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pnpm install --frozen-lockfile && pnpm setup:electron
+      - uses: actions/download-artifact@v4
+        with:
+          name: package-${{ matrix.artifact }}
+          path: release
+          run-id: 43556365780
+          github-token: ${{ github.token }}
+      - name: Install Linux desktop libraries
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          if [ "${{ matrix.runner }}" = "ubuntu-22.04" ]; then
+            sudo apt-get install -y xvfb dbus-x11 libgtk-3-0 libnss3 libxss1 libxtst6 libgbm1 libasound2 xdg-utils desktop-file-utils libglib2.0-bin
+          else
+            sudo apt-get install -y xvfb dbus-x11 libgtk-3-0t64 libnss3 libxss1 libxtst6 libgbm1 libasound2t64 xdg-utils desktop-file-utils libglib2.0-bin
+          fi
+      - run: python scripts/native-package.py install
+      - name: Select native Mac graphics
+        if: runner.os == 'macOS'
+        run: node scripts/probe-native-graphics.mjs
+      - name: Verify installed Mac integration and document opening
+        if: runner.os == 'macOS'
+        run: |
+          node scripts/verify-native-integration.mjs
+          node scripts/verify-native-document.mjs
+          node scripts/verify-offline-help.mjs
+      - name: Verify Linux integration and native document opening
+        if: runner.os == 'Linux'
+        run: |
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-document.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-offline-help.mjs
+      - name: Run all application suites on macOS 26
+        if: matrix.full
+        run: |
+          node scripts/verify-release.mjs
+          python scripts/verify-export-archives.py
+      - run: python scripts/native-package.py finish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-${{ matrix.id }}
+          path: |
+            work/native-result/
+            work/native-package/lifecycle.json
+            work/native-package/integration-result.json
+            work/native-package/native-workspace.png
+            work/native-document/result.json
+            work/graphics-probe/result.json
+            work/offline-help/result.json
+            work/export-archive-verification.json
+          retention-days: 14
