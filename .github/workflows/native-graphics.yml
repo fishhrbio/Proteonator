@@ -2,6 +2,7 @@ name: Native Mac graphics
 on:
   push:
     branches: [codex/native-platforms]
+    paths: [.github/workflows/native-graphics.yml, scripts/native-environment.mjs, scripts/probe-native-graphics.mjs, scripts/prepare-mac-graphics.py, scripts/graphics-probe-main.cjs]
   workflow_dispatch:
 permissions:
   contents: read

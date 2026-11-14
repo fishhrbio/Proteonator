@@ -4,6 +4,10 @@ on:
     branches: [codex/native-platforms]
     paths: [.github/workflows/native-compatibility.yml, scripts/verify-native-document.mjs]
   workflow_dispatch:
+    inputs:
+      package_run_id:
+        description: Successful native package run to verify on macOS 26
+        required: true
 permissions:
   contents: read
   actions: read
@@ -11,11 +15,25 @@ jobs:
   packages-ready:
     runs-on: ubuntu-24.04
     timeout-minutes: 55
+    outputs:
+      run_id: ${{ steps.packages.outputs.run_id }}
     steps:
       - name: Wait for the native packages and their full checks
+        id: packages
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh run watch 43556365780 --repo fishhrbio/Proteonator --exit-status --interval 30
+          PACKAGE_RUN_ID: ${{ inputs.package_run_id }}
+        run: |
+          if [ -z "$PACKAGE_RUN_ID" ]; then
+            for attempt in $(seq 1 24); do
+              PACKAGE_RUN_ID=$(gh api 'repos/fishhrbio/Proteonator/actions/workflows/native-platforms.yml/runs?branch=codex%2Fnative-platforms&per_page=20' --jq ".workflow_runs[] | select(.head_sha == \"$GITHUB_SHA\") | .id" | head -1)
+              if [ -n "$PACKAGE_RUN_ID" ]; then break; fi
+              sleep 5
+            done
+          fi
+          test -n "$PACKAGE_RUN_ID"
+          echo "run_id=$PACKAGE_RUN_ID" >> "$GITHUB_OUTPUT"
+          gh run watch "$PACKAGE_RUN_ID" --repo fishhrbio/Proteonator --exit-status --interval 30
   compatibility:
     needs: packages-ready
     name: ${{ matrix.id }}
@@ -23,12 +41,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - {id: mac-15-arm64-document, runner: macos-15, artifact: mac-arm64, arch: arm64, full: false}
-          - {id: mac-15-x64-document, runner: macos-15-intel, artifact: mac-x64, arch: x64, full: false}
           - {id: mac-26-arm64, runner: macos-26, artifact: mac-arm64, arch: arm64, full: true}
           - {id: mac-26-x64, runner: macos-26-intel, artifact: mac-x64, arch: x64, full: true}
-          - {id: linux-22-document, runner: ubuntu-22.04, artifact: linux-x64, arch: x64, full: false}
-          - {id: linux-24-document, runner: ubuntu-24.04, artifact: linux-x64, arch: x64, full: false}
     runs-on: ${{ matrix.runner }}
     timeout-minutes: 40
     defaults:
@@ -55,7 +69,7 @@ jobs:
         with:
           name: package-${{ matrix.artifact }}
           path: release
-          run-id: 43556365780
+          run-id: ${{ needs.packages-ready.outputs.run_id }}
           github-token: ${{ github.token }}
       - name: Install Linux desktop libraries
         if: runner.os == 'Linux'
@@ -85,7 +99,7 @@ jobs:
       - name: Run all application suites on macOS 26
         if: matrix.full
         run: |
-          node scripts/verify-release.mjs
+          node scripts/verify-native-release.mjs
           python scripts/verify-export-archives.py
       - run: python scripts/native-package.py finish
       - uses: actions/upload-artifact@v4

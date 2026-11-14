@@ -2,6 +2,7 @@ name: Native platform packages
 on:
   push:
     branches: [codex/native-platforms]
+    paths: ['src/**', 'compute/**', 'data/**', 'fixtures/**', 'assets/**', 'licenses/**', 'scripts/**', 'package.json', 'pnpm-lock.yaml', 'requirements-compute.txt', 'THIRD_PARTY_NOTICES.md', 'docs/USER_GUIDE.*', 'docs/SCIENCE.*', '.github/workflows/native-platforms.yml', '.github/workflows/native-compatibility.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -87,14 +88,16 @@ jobs:
         if: matrix.os == 'mac'
         run: |
           node scripts/verify-native-integration.mjs
-          node scripts/verify-release.mjs
+          node scripts/verify-native-release.mjs
+          node scripts/verify-native-document.mjs
           node scripts/verify-offline-help.mjs
           python scripts/verify-export-archives.py
       - name: Test installed Linux application with sandbox enabled
         if: matrix.os == 'linux'
         run: |
           xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
-          xvfb-run -a dbus-run-session -- node scripts/verify-release.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-release.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-document.mjs
           xvfb-run -a dbus-run-session -- node scripts/verify-offline-help.mjs
           python scripts/verify-export-archives.py
       - name: Reinstall and uninstall while retaining projects and settings
@@ -125,6 +128,7 @@ jobs:
             work/mac-graphics/inventory.json
             work/offline-help/result.json
             work/export-archive-verification.json
+            work/native-document/result.json
           retention-days: 14
   ubuntu-24:
     name: linux-x64-ubuntu-24
@@ -160,7 +164,8 @@ jobs:
       - name: Verify the same DEB on Ubuntu 24.04
         run: |
           xvfb-run -a dbus-run-session -- node scripts/verify-native-integration.mjs
-          xvfb-run -a dbus-run-session -- node scripts/verify-release.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-release.mjs
+          xvfb-run -a dbus-run-session -- node scripts/verify-native-document.mjs
           xvfb-run -a dbus-run-session -- node scripts/verify-offline-help.mjs
           python scripts/verify-export-archives.py
           python scripts/native-package.py finish
@@ -175,4 +180,5 @@ jobs:
             work/native-package/native-workspace.png
             work/offline-help/result.json
             work/export-archive-verification.json
+            work/native-document/result.json
           retention-days: 14
