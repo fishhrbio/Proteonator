@@ -6,10 +6,10 @@ const file=path.join(out,'system open é.proteonator');await copyFile(path.join(
 const original=createHash('sha256').update(await readFile(file)).digest('hex');
 const env={...process.env,PATH:systemPath};for(const key of ['ELECTRON_RUN_AS_NODE','PYTHONPATH','PYTHONHOME','PROTEONATOR_PYTHON'])delete env[key];
 const profile=path.join(out,'config');if(process.platform==='linux')env.XDG_CONFIG_HOME=profile;
-const app=await electron.launch({executablePath:executable,chromiumSandbox:true,args:[...softwareGraphicsArgs,'--proview-verify-hidden',...(process.platform==='darwin'?['--user-data-dir='+profile]:[])],env});
+const app=await electron.launch({executablePath:executable,chromiumSandbox:true,args:[...softwareGraphicsArgs,...(process.platform==='darwin'?['--user-data-dir='+profile]:[])],env});
 const report={status:'running',platform:process.platform,checks:[],errors:[]};
 try{
- const page=await app.firstWindow();page.on('pageerror',e=>report.errors.push(e.stack));await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Proteonator is ready'),{},{timeout:90000});
+ const page=await app.firstWindow();page.on('pageerror',e=>report.errors.push(e.stack));await page.waitForFunction(()=>document.querySelector('#status').textContent.includes('Proteonator is ready'),{},{timeout:90000});report.normalLaunch=await app.evaluate(({app})=>({userData:app.getPath('userData'),arguments:process.argv}));
  const options={env,timeout:30000,encoding:'utf8'};
  if(process.platform==='darwin'){
   const bundle=path.resolve(path.dirname(executable),'../..');
