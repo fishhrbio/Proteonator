@@ -2,6 +2,8 @@
 
 ## 1.2.1
 
+- Fixed camera-movie timing on slow graphics hardware: every frame now has an explicit presentation timestamp, so rendering time cannot stretch the selected movie duration.
+
 - Added separate macOS disk images for Apple Silicon and Intel, with native scientific runtimes, fedora icons, document associations and Mac menu/keyboard conventions.
 - Added an Ubuntu x64 Debian package with native scientific libraries, an applications-menu entry, project association and sandbox-preserving installation.
 - Made project arguments, file URLs, runtime discovery and third-party notice collection portable across Windows, macOS and Linux.
